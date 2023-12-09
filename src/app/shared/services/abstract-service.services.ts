@@ -6,14 +6,14 @@ export abstract class AbstractService {
     private serviceUrl: string;
 
     constructor(serviceUrl: string) {
-        this.serviceUrl = serviceUrl; 
-     }
+        this.serviceUrl = !!serviceUrl ? serviceUrl : '';
+    }
 
     getBaseUrl(): string {
         return this.baseUrl;
     }
 
     getResourceUrl(): string {
-        return `${this.baseUrl}/${this.serviceUrl}`;
+        return `${this.baseUrl}${this.serviceUrl}`;
     }
 }
