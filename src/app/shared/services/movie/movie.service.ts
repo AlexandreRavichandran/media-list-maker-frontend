@@ -19,7 +19,7 @@ export class MovieService extends AbstractService {
     let params: HttpParams = new HttpParams();
 
     movieIds.forEach(movieId => {
-      params = params.append("movieIds", movieId);
+      params = params.append('movieIds', movieId);
     });
 
     return this.http.get<Movie[]>(`${this.getResourceUrl()}`, { params });
@@ -43,4 +43,7 @@ export class MovieService extends AbstractService {
 
   }
 
+  public getRandomIllustrationPicture(): Observable<Blob> {
+    return this.http.get<Blob>(`${this.getResourceUrl()}/pictures/random`);
+  }
 }
