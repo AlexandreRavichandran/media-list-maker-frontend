@@ -85,4 +85,22 @@ describe('Testing Auth service', () => {
 
   });
 
+  it('should remove token from session when logout', () => {
+    
+    sessionStorage.setItem('token', 'testtoken');
+
+    service.logout();
+
+    expect(sessionStorage.getItem('token')).toBeNull();
+
+  });
+
+  it('should return user token', () => {
+    
+    sessionStorage.setItem('token', 'testtoken');
+
+    expect(service.getAuthenticatedUserToken()).toEqual('testtoken');
+
+  });
+
 });

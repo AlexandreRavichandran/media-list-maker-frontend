@@ -23,4 +23,11 @@ export class AuthService extends AbstractService {
     return this.http.post<AuthResponse>(`${this.getResourceUrl()}/register`, user);
   }
 
+  public getAuthenticatedUserToken(): string | null {
+    return sessionStorage.getItem('token');
+  }
+
+  public logout(): void {
+    return sessionStorage.removeItem('token');
+  }
 }
