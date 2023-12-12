@@ -5,6 +5,8 @@ import { AuthRequest } from '../../models/auth/auth-request';
 import { AuthResponse } from '../../models/auth/auth-response';
 import { Observable } from 'rxjs';
 import { AppUser } from '../../models/appuser/appuser';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { isPasswordConfirmationValid } from '../../validator/core-validators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +31,24 @@ export class AuthService extends AbstractService {
 
   public logout(): void {
     return sessionStorage.removeItem('token');
+  }
+
+  public generateLoginForm(): FormGroup {
+
+    return new FormGroup({
+      username: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required)
+    });
+
+  }
+
+  public generateRegisterForm(): FormGroup {
+
+    return new FormGroup({
+      username: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
+      passwordConfirmation: new FormControl(null, [Validators.required, isPasswordConfirmationValid])
+    });
+
   }
 }

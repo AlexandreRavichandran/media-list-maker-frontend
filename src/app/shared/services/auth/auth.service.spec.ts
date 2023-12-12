@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AuthResponse } from '../../models/auth/auth-response';
 import { AuthRequest } from '../../models/auth/auth-request';
 import { AppUser } from '../../models/appuser/appuser';
+import { FormGroup } from '@angular/forms';
 
 describe('Testing Auth service', () => {
 
@@ -86,7 +87,7 @@ describe('Testing Auth service', () => {
   });
 
   it('should remove token from session when logout', () => {
-    
+
     sessionStorage.setItem('token', 'testtoken');
 
     service.logout();
@@ -96,10 +97,29 @@ describe('Testing Auth service', () => {
   });
 
   it('should return user token', () => {
-    
+
     sessionStorage.setItem('token', 'testtoken');
 
     expect(service.getAuthenticatedUserToken()).toEqual('testtoken');
+
+  });
+
+  it('should return login form group with valid fields', () => {
+
+    const formGroup: FormGroup = service.generateLoginForm();
+
+    expect(formGroup.contains('username')).toBeTrue();
+    expect(formGroup.contains('password')).toBeTrue();
+
+  });
+
+  it('should return register form group with valid fields', () => {
+
+    const formGroup: FormGroup = service.generateRegisterForm();
+
+    expect(formGroup.contains('username')).toBeTrue();
+    expect(formGroup.contains('password')).toBeTrue();
+    expect(formGroup.contains('passwordConfirmation')).toBeTrue();
 
   });
 
