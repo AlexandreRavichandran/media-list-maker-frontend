@@ -1,0 +1,44 @@
+.login__form__label {
+    color: white;
+    font-weight: 400;
+}
+
+.mat-form-field {
+    width: 400px;
+    font-size: 20px;
+    color: white;
+}
+
+::ng-deep .login__form .mat-form-field-underline {
+    background-color: white !important;
+}
+
+::ng-deep .login__form .mat-form-field-ripple {
+    background-color: white !important;
+}
+
+.login__button {
+    font-size: 20px;
+    background-color: #240089;
+    padding: 9px 33px;
+    color: white;
+    border-radius: 11px;
+    border: 1px solid #240089;
+
+    &:hover {
+        background-color: #18015c;
+        border: 1px solid white;
+    }
+
+    &:disabled {
+        background-color: gray;
+        border: 1px solid gray;
+    }
+}
+
+.login__form__illustration {
+    min-width: 1096px;
+    border: 2px solid #000;
+    height: 940px;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
+}
