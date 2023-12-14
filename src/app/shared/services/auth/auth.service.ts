@@ -47,8 +47,8 @@ export class AuthService extends AbstractService {
     return new FormGroup({
       username: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
-      passwordConfirmation: new FormControl(null, [Validators.required, isPasswordConfirmationValid])
-    });
+      passwordConfirmation: new FormControl(null, [Validators.required])
+    }, { validators: isPasswordConfirmationValid });
 
   }
 }

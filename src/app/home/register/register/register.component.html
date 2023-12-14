@@ -1,0 +1,30 @@
+<div class="grid grid-cols-12">
+    <div class="col-span-7 flex justify-start">
+        <img class="registration__form__illustration" src="http://localhost:8080/api/musics/pictures/random"
+            alt="Music illustration">
+    </div>
+    <div class="col-span-5 flex flex-col justify-around items-center">
+        <div>
+            <img src="https://place-hold.it/200x200" alt="">
+        </div>
+        <form class="flex flex-col registration__form" [formGroup]="registerForm"
+            (ngSubmit)="this.attemptRegistration()">
+            <mat-form-field>
+                <mat-label class="registration__form__label">Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+            <mat-form-field class="mt-6">
+                <mat-label class="registration__form__label">Password</mat-label>
+                <input [type]="'password'" matInput formControlName="password">
+            </mat-form-field>
+            <mat-form-field class="mt-6">
+                <mat-label class="registration__form__label">Confirm password</mat-label>
+                <input [type]="'password'" matInput formControlName="passwordConfirmation">
+            </mat-form-field>
+            <div class="flex justify-end mt-5">
+                <button [disabled]="!this.isFormValid()" class="registration__button">REGISTER</button>
+            </div>
+        </form>
+        <div></div>
+    </div>
+</div>

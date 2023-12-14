@@ -6,43 +6,41 @@ import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent {
+export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  loginForm: FormGroup = this.authService.generateLoginForm();
+  registerForm: FormGroup = this.authService.generateRegisterForm();
   apiError: ApiError | null = null;
   isLoading: boolean = false;
 
-  attemptAuth(): void {
+  isFormValid(): boolean {
+    return this.registerForm.valid;
+  }
+
+  attemptRegistration(): void {
 
     if (this.isFormValid() === false) {
       return;
     }
 
     this.isLoading = true;
-    
-    this.authService.login(this.loginForm.value).subscribe({
 
+    this.authService.register(this.registerForm.value).subscribe({
       next: (token: AuthResponse) => {
         sessionStorage.setItem('token', token.token);
         this.isLoading = false;
         this.router.navigate(['user']);
       },
       error: (error: ApiError) => {
-        this.apiError = error;
         this.isLoading = false;
+        this.apiError = error;
       }
-
     });
-
   }
 
-  isFormValid(): boolean {
-    return this.loginForm.valid;
-  }
 }
