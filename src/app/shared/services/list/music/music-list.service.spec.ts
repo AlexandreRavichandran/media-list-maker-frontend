@@ -1,23 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MovieListService } from './movie-list.service';
+import { MusicListService } from './music-list.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { MovieListItem } from 'src/app/shared/models/list/movie-list-item';
+import { MusicListItem } from 'src/app/shared/models/list/music-list-item';
 
-describe('Testing Movie List service', () => {
+describe('Testing Music List service', () => {
 
-  let service: MovieListService;
+  let service: MusicListService;
   let environmentUrl: string = environment.apiUrl;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MovieListService]
+      providers: [MusicListService]
     });
 
-    service = TestBed.inject(MovieListService);
+    service = TestBed.inject(MusicListService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -31,26 +31,26 @@ describe('Testing Movie List service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return user movie list', () => {
+  it('should return user music list', () => {
 
-    const datas: MovieListItem[] = [
+    const datas: MusicListItem[] = [
       {
         id: 1,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 1
       },
       {
         id: 2,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 2
       },
       {
         id: 3,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 3
@@ -62,7 +62,7 @@ describe('Testing Movie List service', () => {
         expect(datas).toEqual(datas);
       });
 
-    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies');
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics');
 
     expect(request.request.method).toEqual('GET');
 
@@ -70,26 +70,26 @@ describe('Testing Movie List service', () => {
 
   });
 
-  it('should return users latest added movie list', () => {
+  it('should return user latest added music list', () => {
 
-    const datas: MovieListItem[] = [
+    const datas: MusicListItem[] = [
       {
         id: 1,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 1
       },
       {
         id: 2,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 2
       },
       {
         id: 3,
-        movieId: 1,
+        musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 3
@@ -101,7 +101,7 @@ describe('Testing Movie List service', () => {
         expect(datas).toEqual(datas)
       });
 
-    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies/latest');
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics/latest');
 
     expect(request.request.method).toEqual('GET');
 
@@ -111,9 +111,9 @@ describe('Testing Movie List service', () => {
 
   it('should add movie list item in list', () => {
 
-    const data: MovieListItem = {
+    const data: MusicListItem = {
       id: 1,
-      movieId: 1,
+      musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
       sortingNumber: 1
@@ -124,7 +124,7 @@ describe('Testing Movie List service', () => {
         expect(data).toEqual(data);
       });
 
-    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies');
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics');
 
     expect(request.request.method).toEqual('POST');
 
@@ -134,9 +134,9 @@ describe('Testing Movie List service', () => {
 
   it('should delete movie in list by id', () => {
 
-    const data: MovieListItem = {
+    const data: MusicListItem = {
       id: 1,
-      movieId: 1,
+      musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
       sortingNumber: 1
@@ -147,12 +147,11 @@ describe('Testing Movie List service', () => {
         expect(data).toEqual(data);
       });
 
-    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies/1');
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics/1');
 
     expect(request.request.method).toEqual('DELETE');
 
     request.flush(data);
-
 
   });
 
