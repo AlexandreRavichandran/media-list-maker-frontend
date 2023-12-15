@@ -52,7 +52,7 @@ describe('Testing Movie service', () => {
     service.browseByIds([1, 2])
       .subscribe(datas => {
         expect(datas).toEqual(datas);
-      })
+      });
 
     const request = httpTestingController.expectOne(environmentUrl + '/movies?movieIds=1&movieIds=2');
 
@@ -77,7 +77,7 @@ describe('Testing Movie service', () => {
     service.readByApiCode('XXX1')
       .subscribe(datas => {
         expect(datas).toEqual(data);
-      })
+      });
 
     const request = httpTestingController.expectOne(environmentUrl + '/movies/apicodes/XXX1');
 
@@ -101,7 +101,7 @@ describe('Testing Movie service', () => {
     service.readById(1)
       .subscribe(datas => {
         expect(datas).toEqual(data);
-      })
+      });
 
     const request = httpTestingController.expectOne(environmentUrl + '/movies/1');
 
@@ -126,7 +126,7 @@ describe('Testing Movie service', () => {
 
       .subscribe(datas => {
         expect(datas).toEqual(datas);
-      })
+      });
 
     const request = httpTestingController.expectOne(environmentUrl + '/movies/apicodes/XXX1');
 
