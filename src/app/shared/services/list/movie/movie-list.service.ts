@@ -3,7 +3,7 @@ import { AbstractService } from '../../abstract-service.services';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceConstants } from 'src/app/shared/constants/api-service-constants';
 import { Observable } from 'rxjs';
-import { MovieListItem } from 'src/app/shared/models/list/movie-list-item';
+import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
 
 @Injectable({
   providedIn: 'root'

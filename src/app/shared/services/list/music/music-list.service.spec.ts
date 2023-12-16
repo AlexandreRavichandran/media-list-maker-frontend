@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { MusicListService } from './music-list.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { MusicListItem } from 'src/app/shared/models/list/music-list-item';
+import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 
 describe('Testing Music List service', () => {
 

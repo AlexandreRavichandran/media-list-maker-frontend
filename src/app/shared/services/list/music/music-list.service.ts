@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '../../abstract-service.services';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceConstants } from 'src/app/shared/constants/api-service-constants';
-import { MusicListItem } from 'src/app/shared/models/list/music-list-item';
+import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { Observable } from 'rxjs';
 
 @Injectable({

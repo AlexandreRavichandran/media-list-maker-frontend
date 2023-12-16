@@ -1,3 +1,5 @@
+import { Movie } from "../../movie/movie";
+
 export interface MovieListItem {
 
     id: number;
@@ -5,5 +7,5 @@ export interface MovieListItem {
     appUserId: number;
     sortingNumber: number;
     addedAt: Date;
-    
+    movieDetails: Movie | undefined;
 }
