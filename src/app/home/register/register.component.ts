@@ -34,7 +34,7 @@ export class RegisterComponent {
       next: (token: AuthResponse) => {
         sessionStorage.setItem('token', token.token);
         this.isLoading = false;
-        this.router.navigate(['user']);
+        this.router.navigate(['me']);
       },
       error: (error: ApiError) => {
         this.isLoading = false;

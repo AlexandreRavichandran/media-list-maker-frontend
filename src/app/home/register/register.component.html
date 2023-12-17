@@ -7,7 +7,7 @@
         <div>
             <img src="https://place-hold.it/200x200" alt="">
         </div>
-        <form class="flex flex-col registration__form" [formGroup]="registerForm"
+        <form class="flex flex-col register__form__illustration" [formGroup]="registerForm"
             (ngSubmit)="this.attemptRegistration()">
             <mat-form-field>
                 <mat-label class="registration__form__label">Username</mat-label>
@@ -22,7 +22,7 @@
                 <input [type]="'password'" matInput formControlName="passwordConfirmation">
             </mat-form-field>
             <div class="flex justify-end mt-5">
-                <button [disabled]="!this.isFormValid()" class="registration__button">REGISTER</button>
+                <button [disabled]="!this.isFormValid()" class="register__button">REGISTER</button>
             </div>
         </form>
         <div></div>

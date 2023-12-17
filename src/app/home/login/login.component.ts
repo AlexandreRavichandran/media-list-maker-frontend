@@ -25,16 +25,17 @@ export class LoginComponent {
     }
 
     this.isLoading = true;
-    
+
     this.authService.login(this.loginForm.value).subscribe({
 
       next: (token: AuthResponse) => {
         sessionStorage.setItem('token', token.token);
         this.isLoading = false;
-        this.router.navigate(['user']);
+        this.router.navigate(['me']);
       },
       error: (error: ApiError) => {
         this.apiError = error;
+        sessionStorage.removeItem('token');
         this.isLoading = false;
       }
 
