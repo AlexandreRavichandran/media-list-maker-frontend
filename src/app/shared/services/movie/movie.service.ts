@@ -3,7 +3,7 @@ import { AbstractService } from '../abstract-service.services';
 import { ApiServiceConstants } from '../../constants/api-service-constants';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../../models/movie/movie';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,9 @@ export class MovieService extends AbstractService {
 
   }
 
-  public getRandomIllustrationPicture(): Observable<Blob> {
-    return this.http.get<Blob>(`${this.getResourceUrl()}/pictures/random`);
+  public getRandomIllustrationPictureUrl(): Observable<string> {
+
+    return of(`${this.getResourceUrl()}/pictures/random`);
+
   }
 }

@@ -9,20 +9,24 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
 import { of, throwError } from 'rxjs';
 import { ApiError } from 'src/app/shared/error/api-error';
+import { MovieService } from 'src/app/shared/services/movie/movie.service';
 
 describe('Testing Login component', () => {
 
+  const MOCK_PICTURE_URL: string = 'https://picsum.photos/200/300';
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let mockAuthService: jasmine.SpyObj<AuthService>;
+  let mockMovieService: jasmine.SpyObj<MovieService>;
 
   beforeEach(async () => {
 
     mockAuthService = jasmine.createSpyObj('AuthService', ['generateLoginForm', 'login']);
+    mockMovieService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl'])
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [AppModule],
-      providers: [{ provide: AuthService, useValue: mockAuthService }],
+      providers: [{ provide: AuthService, useValue: mockAuthService }, { provide: MovieService, useValue: mockMovieService }],
       teardown: { destroyAfterEach: false }
     })
       .compileComponents();
@@ -39,6 +43,8 @@ describe('Testing Login component', () => {
       username: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
     });
+
+    mockMovieService.getRandomIllustrationPictureUrl.and.returnValue(of(MOCK_PICTURE_URL));
 
   });
 
