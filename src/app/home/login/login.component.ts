@@ -13,18 +13,18 @@ import { MovieService } from 'src/app/shared/services/movie/movie.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginForm: FormGroup = this.authService.generateLoginForm();
-  randomMoviePictureUrl$!: Observable<string>;
+  randomMoviePictureUrl$: Observable<string> = this.movieService.getRandomIllustrationPictureUrl();
   apiError: ApiError | null = null;
   isLoading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private movieService: MovieService) { }
-
-  ngOnInit(): void {
-    this.generateRandomMoviePictureUrl();
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private movieService: MovieService
+  ) { }
 
   attemptAuth(): void {
 
@@ -49,10 +49,6 @@ export class LoginComponent implements OnInit {
 
   isFormValid(): boolean {
     return this.loginForm.valid;
-  }
-
-  private generateRandomMoviePictureUrl(): void {
-    this.randomMoviePictureUrl$ = this.movieService.getRandomIllustrationPictureUrl();
   }
 
   private handleAuthSuccessful(authResponse: AuthResponse): void {

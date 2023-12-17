@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '../abstract-service.services';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiServiceConstants } from '../../constants/api-service-constants';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Music } from '../../models/music/music';
 
 @Injectable({
@@ -49,7 +49,7 @@ export class MusicService extends AbstractService {
 
   }
 
-  public getRandomIllustrationPicture(): Observable<Blob> {
-    return this.http.get<Blob>(`${this.getResourceUrl()}/pictures/random`);
+  public getRandomIllustrationPictureUrl(): Observable<string> {
+    return of(`${this.getResourceUrl()}/pictures/random`);
   }
 }

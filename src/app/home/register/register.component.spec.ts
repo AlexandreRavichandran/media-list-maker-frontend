@@ -10,20 +10,26 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
 import { of, throwError } from 'rxjs';
 import { ApiError } from 'src/app/shared/error/api-error';
+import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
+import { MusicService } from 'src/app/shared/services/music/music.service';
 
 describe('Testing Register component', () => {
+
+  const MOCK_PICTURE_URL: string = 'https://picsum.photos/200/300';
 
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
   let mockAuthService: jasmine.SpyObj<AuthService>;
+  let mockMusicService: jasmine.SpyObj<MusicService>;
 
   beforeEach(async () => {
 
     mockAuthService = jasmine.createSpyObj('AuthService', ['generateRegisterForm', 'register']);
+    mockMusicService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl']);
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       imports: [AppModule],
-      providers: [{ provide: AuthService, useValue: mockAuthService }],
+      providers: [{ provide: AuthService, useValue: mockAuthService }, { provide: MusicListService, useValue: mockMusicService }],
       teardown: { destroyAfterEach: false }
     })
       .compileComponents();
@@ -41,6 +47,8 @@ describe('Testing Register component', () => {
       password: new FormControl(null, Validators.required),
       passwordConfirmation: new FormControl(null, [Validators.required])
     }, { validators: isPasswordConfirmationValid });
+
+    mockMusicService.getRandomIllustrationPictureUrl.and.returnValue(of(MOCK_PICTURE_URL));
 
   });
 
