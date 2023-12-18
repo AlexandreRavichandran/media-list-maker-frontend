@@ -4,17 +4,24 @@ import { MusicListService } from './music-list.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
+import { MusicService } from '../../music/music.service';
+import { Music } from 'src/app/shared/models/music/music';
+import { of } from 'rxjs';
 
 describe('Testing Music List service', () => {
 
   let service: MusicListService;
   let environmentUrl: string = environment.apiUrl;
   let httpTestingController: HttpTestingController;
+  let mockMusicService: jasmine.SpyObj<MusicService>;
 
   beforeEach(() => {
+
+    mockMusicService = jasmine.createSpyObj('MusicService', ['browseByIds']);
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MusicListService]
+      providers: [MusicListService, { provide: MusicService, useValue: mockMusicService }]
     });
 
     service = TestBed.inject(MusicListService);
@@ -43,14 +50,14 @@ describe('Testing Music List service', () => {
       },
       {
         id: 2,
-        musicId: 1,
+        musicId: 2,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 2
       },
       {
         id: 3,
-        musicId: 1,
+        musicId: 3,
         appUserId: 1,
         addedAt: new Date(),
         sortingNumber: 3
@@ -96,6 +103,38 @@ describe('Testing Music List service', () => {
       }
     ];
 
+    const mockMusicList: Music[] = [
+      {
+        id: 1,
+        type: 1,
+        artistName: "Artist",
+        title: "title 1",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 2,
+        type: 1,
+        artistName: "Artist",
+        title: "title 2",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 3,
+        type: 1,
+        artistName: "Artist",
+        title: "title 3",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      }
+    ];
+
+    const musicSpy = mockMusicService.browseByIds.and.returnValue(of(mockMusicList));
+
     service.browseLatest()
       .subscribe(datas => {
         expect(datas).toEqual(datas)
@@ -106,6 +145,8 @@ describe('Testing Music List service', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(datas);
+
+    expect(musicSpy).toHaveBeenCalled();
 
   });
 

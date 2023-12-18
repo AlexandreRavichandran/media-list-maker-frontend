@@ -7,5 +7,5 @@ export interface MovieListItem {
     appUserId: number;
     sortingNumber: number;
     addedAt: Date;
-    movieDetails: Movie | undefined;
+    movieDetail: Movie | undefined;
 }
