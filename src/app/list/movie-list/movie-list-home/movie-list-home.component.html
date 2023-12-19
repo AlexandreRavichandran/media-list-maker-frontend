@@ -1,0 +1,23 @@
+<div class="list__movies">
+    <p class="list__movies__title">Recently added movies</p>
+    <div *ngIf="this.userMovieList$ | async as movieList">
+        <div *ngIf="movieList.length !== 0">
+            <div class="list__movies__section">
+                <mlm-movie-list-item class="movie__item" *ngFor="let movieItem of movieList"
+                    [movieItem]="movieItem"></mlm-movie-list-item>
+            </div>
+            <div class="flex justify-end">
+                <button class="movie__show__all__button">Show all</button>
+            </div>
+        </div>
+        <div *ngIf="movieList.length === 0" class="list__movie__empty__section flex flex-col justify-center">
+            <div class="empty__section__container">
+                <p class="empty__section__label">It seems like you don't have any movie in your list !</p>
+                <div class="flex flex justify-center">
+                    <button class="empty__section__button" routerLink="/search">Add movies</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

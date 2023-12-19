@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ListHomeComponent } from "./list-home/list-home.component";
 
 const routes: Routes = [
-    { path: '' },
+    { path: '', component: ListHomeComponent },
     { path: 'list/movies' },
     { path: 'list/musics' }
 ];

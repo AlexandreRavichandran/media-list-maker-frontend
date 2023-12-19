@@ -1,0 +1,26 @@
+.item__movie__section {
+    color: white;
+
+    .item__movie__addedAt {
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .item__movie__card {
+        background-color: #080C24;
+
+        border-radius: 5px;
+        margin-bottom: 16px;
+        height: 90px;
+
+        .movie__picture {
+            display: block;
+            width: 62px;
+            height: 90px;
+        }
+
+        .movie__name {
+            margin: 0;
+        }
+    }
+}
