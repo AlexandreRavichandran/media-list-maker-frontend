@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '../../abstract-service.services';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceConstants } from 'src/app/shared/constants/api-service-constants';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
 import { MovieService } from '../../movie/movie.service';
 
@@ -22,6 +22,11 @@ export class MovieListService extends AbstractService {
   public browseLatest(): Observable<MovieListItem[]> {
     return this.http.get<MovieListItem[]>(`${this.getResourceUrl()}/latest`).pipe(
       switchMap((movieListItems: MovieListItem[]) => {
+
+        if (movieListItems.length === 0) {
+          return of([]);
+        }
+        
         const movieIds: number[] = movieListItems.map(movieListItem => movieListItem.movieId);
         return this.movieService.browseByIds(movieIds).pipe(
           map(movieDetailList => {

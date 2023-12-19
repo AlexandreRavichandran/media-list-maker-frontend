@@ -135,4 +135,15 @@ describe('Testing Movie service', () => {
 
   });
 
+  it('should return random picture url', () => {
+
+    service
+    .getRandomIllustrationPictureUrl()
+    .subscribe(url => {
+      expect(url).toEqual(environmentUrl + '/movies/pictures/random')
+    });
+
+
+  });
+
 });

@@ -3,7 +3,7 @@ import { AbstractService } from '../../abstract-service.services';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceConstants } from 'src/app/shared/constants/api-service-constants';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { MusicService } from '../../music/music.service';
 
 @Injectable({
@@ -22,6 +22,11 @@ export class MusicListService extends AbstractService {
   public browseLatest(): Observable<MusicListItem[]> {
     return this.http.get<MusicListItem[]>(`${this.getResourceUrl()}/latest`).pipe(
       switchMap((musicListItems: MusicListItem[]) => {
+
+        if (musicListItems.length === 0) {
+          return of([]);
+        }
+        
         const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
         return this.musicService.browseByIds(musicIds).pipe(
           map(musicDetailList => {

@@ -150,6 +150,27 @@ describe('Testing Music List service', () => {
 
   });
 
+  it('should return empty array if no user latest added music list', () => {
+
+    const datas: MusicListItem[] = [];
+
+    service.browseLatest()
+      .subscribe(datas => {
+        expect(datas).toEqual(datas)
+      });
+
+    const musicSpy = mockMusicService.browseByIds.and.returnValue(of([]));
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics/latest');
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+
+    expect(musicSpy).toHaveBeenCalledTimes(0);
+
+  });
+
   it('should add movie list item in list', () => {
 
     const data: MusicListItem = {

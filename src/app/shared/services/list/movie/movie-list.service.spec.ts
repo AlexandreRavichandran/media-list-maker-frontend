@@ -151,6 +151,26 @@ describe('Testing Movie List service', () => {
     expect(movieSpy).toHaveBeenCalled();
   });
 
+  it('should return users latest added movie list', () => {
+
+    const datas: MovieListItem[] = [];
+
+    const movieSpy = mockMovieService.browseByIds.and.returnValue(of([]));
+
+    service.browseLatest()
+      .subscribe(datas => {
+        expect(datas).toEqual(datas)
+      });
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies/latest');
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+
+    expect(movieSpy).toHaveBeenCalledTimes(0);
+  });
+
   it('should add movie list item in list', () => {
 
     const data: MovieListItem = {
