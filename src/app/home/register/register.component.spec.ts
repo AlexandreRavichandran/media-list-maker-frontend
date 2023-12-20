@@ -24,7 +24,7 @@ describe('Testing Register component', () => {
 
   beforeEach(async () => {
 
-    mockAuthService = jasmine.createSpyObj('AuthService', ['generateRegisterForm', 'register']);
+    mockAuthService = jasmine.createSpyObj('AuthService', ['generateRegisterForm', 'register', 'getAuthenticatedUserToken']);
     mockMusicService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl']);
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],

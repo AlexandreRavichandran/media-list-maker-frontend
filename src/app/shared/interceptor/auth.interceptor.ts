@@ -3,7 +3,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -17,9 +18,14 @@ export class AuthInterceptor implements HttpInterceptor {
     const token: string | null = sessionStorage.getItem('token');
 
     if (!!token) {
-      const customRequest: HttpRequest<unknown> = request.clone({
-        setHeaders: { Authorization: 'Bearer ' + token }
-      });
+
+      const headers: HttpHeaders = new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+
+      })
+
+      const customRequest: HttpRequest<unknown> = request.clone({ headers });
 
       console.log(customRequest);
       return next.handle(customRequest);

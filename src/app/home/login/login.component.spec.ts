@@ -21,7 +21,7 @@ describe('Testing Login component', () => {
 
   beforeEach(async () => {
 
-    mockAuthService = jasmine.createSpyObj('AuthService', ['generateLoginForm', 'login']);
+    mockAuthService = jasmine.createSpyObj('AuthService', ['generateLoginForm', 'login', 'getAuthenticatedUserToken']);
     mockMovieService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl'])
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
