@@ -1,0 +1,35 @@
+<div class="container mx-auto">
+    <ul class="menu__list flex flex-row justify-end">
+        <li routerLink="/search" class="menu__list__item">Search</li>
+        <li routerLink="/me" class="menu__list__item">My lists</li>
+    </ul>
+</div>
+
+<div class="jumbotron container mx-auto">
+    <p class="jumbotron__intro">Welcome back Alexandre</p>
+</div>
+
+
+<div class="list__section grid grid-cols-12 m-auto">
+    <div class="col-span-4 mr-4">
+        <mlm-movie-list-home></mlm-movie-list-home>
+    </div>
+
+    <div class="col-span-4 section__recommandation flex flex-col justify-around">
+        <div class="recommand__movie flex flex-col justify-center">
+            <p class="recommand__movie__label">No ideas of movies to watch ?..</p>
+            <div class="flex justify-center">
+                <button class="recommand__movie__button">Recommand me a movie</button>
+            </div>
+        </div>
+        <div class="recommand__music flex flex-col justify-center">
+            <p class="recommand__music__label">What about some music ?..</p>
+            <div class="flex justify-center">
+                <button class="recommand__music__button">Recommand me a music</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-4 list__musics ml-4">
+        <mlm-music-list-home></mlm-music-list-home>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+* {
+    color: white;
+}
+
+.menu__list {
+    margin-top: 40px;
+    font-size: 25px;
+
+    .menu__list__item {
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}
+
+.jumbotron {
+    margin-top: 100px;
+
+    .jumbotron__intro {
+        margin-left: 125px;
+        font-size: 35px;
+    }
+}
+
+.list__section {
+    margin-top: 108px;
+    width: 1300px;
+    min-height: 700px;
+
+    .list__movies {
+        font-size: 20px;
+    }
+
+    .list__musics {
+        font-size: 20px;
+    }
+
+    .section__recommandation {
+        height: 400px;
+
+        .recommand__movie {
+            .recommand__movie__label {
+                font-size: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .recommand__movie__button {
+                width: 300px;
+                font-size: 20px;
+                background-color: #240089;
+                padding: 9px 33px;
+                color: white;
+                border-radius: 11px;
+                border: 1px solid #240089;
+
+                &:hover {
+                    background-color: #18015c;
+                    border: 1px solid #18015c;
+                }
+            }
+        }
+
+        .recommand__music {
+            .recommand__music__label {
+                font-size: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .recommand__music__button {
+                width: 300px;
+                font-size: 20px;
+                background-color: #890000;
+                padding: 9px 33px;
+                color: white;
+                border-radius: 11px;
+                border: 1px solid #890000;
+
+                &:hover {
+                    background-color: #550101;
+                    border: 1px solid #550101;
+                }
+            }
+        }
+
+    }
+}
