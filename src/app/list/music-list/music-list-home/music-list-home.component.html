@@ -1,0 +1,23 @@
+<div class="list__musics">
+    <p class="list__musics__title">Recently added musics</p>
+    <div *ngIf="this.userMusicList$ | async as musicList">
+        <div *ngIf="musicList.length !== 0">
+            <div class="list__musics__section">
+                <mlm-music-list-item class="music__item" *ngFor="let musicItem of musicList"
+                    [musicItem]="musicItem"></mlm-music-list-item>
+            </div>
+            <div class="flex justify-end">
+                <button routerLink="/list/musics" class="music__show__all__button">Show all</button>
+            </div>
+        </div>
+        <div *ngIf="musicList.length === 0" class="list__music__empty__section flex flex-col justify-center">
+            <div class="empty__section__container">
+                <p class="empty__section__label">It seems like you don't have any music in your list !</p>
+                <div class="flex flex justify-center">
+                    <button class="empty__section__button" routerLink="/search">Add musics</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

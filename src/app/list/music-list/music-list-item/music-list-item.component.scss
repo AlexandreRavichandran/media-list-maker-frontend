@@ -1,0 +1,27 @@
+.item__music__section {
+    color: white;
+
+    .item__music__addedAt {
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .item__music__card {
+        background-color: #2E0606;
+
+        border-radius: 5px;
+        margin-bottom: 16px;
+        height: 90px;
+
+        .music__picture {
+            display: block;
+            width: 90px;
+            height: 90px;
+        }
+
+        .music__name {
+            margin: 0;
+            font-size: 20px;
+        }
+    }
+}

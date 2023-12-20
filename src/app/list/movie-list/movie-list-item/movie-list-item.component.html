@@ -1,6 +1,6 @@
 <div class="item__movie__section container mx-auto">
     <div class="flex flex justify-end">
-        <p class="item__movie__addedAt">Added {{this.movieItem.addedAt }}</p>
+        <p class="item__movie__addedAt">Added {{this.movieItem.addedAt | timeAgo }}</p>
     </div>
     <div class="item__movie__card grid grid-cols-12">
         <div class="col-span-2">

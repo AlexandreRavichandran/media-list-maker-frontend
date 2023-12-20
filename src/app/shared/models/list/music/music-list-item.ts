@@ -1,3 +1,5 @@
+import { Music } from "../../music/music";
+
 export interface MusicListItem {
 
     id: number;
@@ -5,5 +7,5 @@ export interface MusicListItem {
     appUserId: number;
     sortingNumber: number;
     addedAt: Date;
-    
+    musicDetail: Music | undefined;
 }

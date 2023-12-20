@@ -46,21 +46,24 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1
+        sortingNumber: 1,
+        musicDetail: undefined
       },
       {
         id: 2,
         musicId: 2,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2
+        sortingNumber: 2,
+        musicDetail: undefined
       },
       {
         id: 3,
         musicId: 3,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3
+        sortingNumber: 3,
+        musicDetail: undefined
       }
     ];
 
@@ -85,21 +88,24 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1
+        sortingNumber: 1,
+        musicDetail: undefined
       },
       {
         id: 2,
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2
+        sortingNumber: 2,
+        musicDetail: undefined
       },
       {
         id: 3,
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3
+        sortingNumber: 3,
+        musicDetail: undefined
       }
     ];
 
@@ -178,7 +184,8 @@ describe('Testing Music List service', () => {
       musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1
+      sortingNumber: 1,
+      musicDetail: undefined
     };
 
     service.add('XXX1')
@@ -201,7 +208,8 @@ describe('Testing Music List service', () => {
       musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1
+      sortingNumber: 1,
+      musicDetail: undefined
     };
 
     service.deleteById(1)

@@ -1,0 +1,57 @@
+.list__musics {
+
+    .list__musics__title {
+        text-align: center;
+        font-size: 26px;
+    }
+
+    .list__musics__section,
+    .list__music__empty__section {
+        margin-top: 40px;
+        height: 386px;
+
+        .empty__section__container {
+            padding: 20px 6px;
+            border-radius: 11px;
+            background-color: #03030c;
+
+            .empty__section__label {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+
+            .empty__section__button {
+
+                font-size: 15px;
+                background-color: #240089;
+                padding: 6px 26px;
+                color: white;
+                border-radius: 7px;
+                border: 1px solid #240089;
+
+                &:hover {
+                    background-color: #18015c;
+                    border: 1px solid white;
+                }
+
+            }
+        }
+    }
+
+    .music__show__all__button {
+
+        font-size: 15px;
+        background-color: #890000;
+        padding: 6px 26px;
+        color: white;
+        border-radius: 7px;
+        border: 1px solid #890000;
+
+        &:hover {
+            background-color: #680000;
+            border: 1px solid white;
+        }
+
+    }
+}
