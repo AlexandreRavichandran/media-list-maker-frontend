@@ -7,7 +7,7 @@
                     [movieItem]="movieItem"></mlm-movie-list-item>
             </div>
             <div class="flex justify-end">
-                <button class="movie__show__all__button">Show all</button>
+                <button routerLink="/list/movies" class="movie__show__all__button">Show all</button>
             </div>
         </div>
         <div *ngIf="movieList.length === 0" class="list__movie__empty__section flex flex-col justify-center">

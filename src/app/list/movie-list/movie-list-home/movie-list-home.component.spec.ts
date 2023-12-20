@@ -4,8 +4,9 @@ import { MovieListHomeComponent } from './movie-list-home.component';
 import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
 import { of } from 'rxjs';
 import { DebugElement } from '@angular/core';
-import { AppModule } from 'src/app/app.module';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
+import { ListModule } from '../../list.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Testing movie list home component', () => {
 
@@ -18,7 +19,7 @@ describe('Testing movie list home component', () => {
     mockMovieListService = jasmine.createSpyObj('MovieListService', ['browseLatest']);
     await TestBed.configureTestingModule({
       declarations: [MovieListHomeComponent],
-      imports: [AppModule],
+      imports: [ListModule, RouterTestingModule],
       providers: [{ provide: MovieListService, useValue: mockMovieListService }]
     })
       .compileComponents();
@@ -81,7 +82,7 @@ describe('Testing movie list home component', () => {
 
   });
 
-  it('should display empty movie list section if latest movie list is empty', fakeAsync(() => {
+  it('should display empty movie list section if latest movie list is empty', () => {
 
     component.userMovieList$ = of([]);
 
@@ -93,6 +94,6 @@ describe('Testing movie list home component', () => {
     expect(movieSection).toBeNull();
     expect(emptyMovieSection).toBeTruthy();
 
-  }))
+  });
 
 });

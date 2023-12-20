@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CustomDateFormatPipe } from './pipes/custom-date-format.pipe';
+import { CustomDateFormatPipe } from './pipes/custom-date-format/custom-date-format.pipe';
+import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
 
 @NgModule({
   declarations: [
-    CustomDateFormatPipe
+    CustomDateFormatPipe,
+    TimeAgoPipe,
   ],
   imports: [
     CommonModule,
@@ -14,6 +16,7 @@ import { CustomDateFormatPipe } from './pipes/custom-date-format.pipe';
   ],
   exports: [
     CustomDateFormatPipe,
+    TimeAgoPipe,
     MatFormFieldModule,
     MatInputModule
   ]
