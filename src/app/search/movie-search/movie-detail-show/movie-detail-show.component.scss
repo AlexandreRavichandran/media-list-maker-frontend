@@ -1,0 +1,112 @@
+.menu__list {
+    margin-top: 40px;
+    font-size: 25px;
+    color: white;
+
+    .menu__list__item {
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}
+
+.movie__section {
+    margin-top: 80px;
+    color: white;
+
+    .movie__picture {
+        width: 384px;
+        width: 534px;
+        border-radius: 5px;
+    }
+
+    .movie__details {
+        padding-left: 15px;
+        padding-top: 20px;
+
+        .movie__title {
+            font-size: 40px;
+        }
+
+        .movie__genres {
+            margin-top: 25px;
+
+            .genres__item {
+                padding: 2px 30px;
+                border-radius: 19px;
+                background-color: #6A006C;
+                color: white;
+                margin-right: 10px;
+            }
+        }
+
+        .movie__in__list {
+
+            .movie__add__button {
+                font-size: 25px;
+                padding: 15px 30px;
+                border-radius: 11px;
+                background-color: #240089;
+                border: 1px solid #240089;
+
+                &:hover {
+                    background-color: #19005d;
+                    border: 1px solid white;
+                }
+            }
+
+            .movie__already__in__list {
+                font-size: 15px;
+                padding: 15px 18px;
+                border-radius: 11px;
+                background-color: #1C1925;
+                border: 1px solid #1C1925;
+            }
+            
+        }
+
+
+
+        .movie__duration {
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .movie__director {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .movie__actors {
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        .movie__synopsis {
+            margin-top: 30px;
+            line-height: 30px;
+            font-size: 18px;
+            width: 1043px;
+        }
+
+        .movie__ratings {
+            margin-top: 25px;
+            width: 1043px;
+        }
+    }
+}

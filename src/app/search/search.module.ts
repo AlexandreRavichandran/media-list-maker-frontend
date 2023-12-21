@@ -1,10 +1,15 @@
 import { NgModule } from "@angular/core";
 import { SearchRoutingModule } from "./search-routing.module";
+import { MovieDetailShowComponent } from './movie-search/movie-detail-show/movie-detail-show.component';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
-    declarations: [],
+    declarations: [
+    MovieDetailShowComponent
+  ],
     imports: [
-        SearchRoutingModule
+        SearchRoutingModule,
+        SharedModule
     ],
     providers: []
 })
