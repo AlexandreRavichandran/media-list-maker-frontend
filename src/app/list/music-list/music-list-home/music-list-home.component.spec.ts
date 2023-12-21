@@ -8,7 +8,7 @@ import { MusicListService } from 'src/app/shared/services/list/music/music-list.
 import { ListModule } from '../../list.module';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('MusicListHomeComponent', () => {
+describe('Testing Music list item component', () => {
 
   let component: MusicListHomeComponent;
   let fixture: ComponentFixture<MusicListHomeComponent>;

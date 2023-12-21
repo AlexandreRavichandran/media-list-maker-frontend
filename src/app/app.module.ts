@@ -20,7 +20,6 @@ import { RegisterComponent } from './home/register/register.component';
     SharedModule,
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],

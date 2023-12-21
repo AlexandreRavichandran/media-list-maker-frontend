@@ -4,7 +4,7 @@ import { MusicListItemComponent } from './music-list-item.component';
 import { ListModule } from '../../list.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-describe('MusicListItemComponent', () => {
+describe('Testing Music list item component', () => {
   let component: MusicListItemComponent;
   let fixture: ComponentFixture<MusicListItemComponent>;
 

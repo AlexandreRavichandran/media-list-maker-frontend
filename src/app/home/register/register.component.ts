@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MusicService } from 'src/app/shared/services/music/music.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'mlm-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })

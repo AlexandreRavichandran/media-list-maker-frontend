@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MovieService } from 'src/app/shared/services/movie/movie.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'mlm-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

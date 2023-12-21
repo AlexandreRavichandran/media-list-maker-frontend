@@ -4,7 +4,7 @@ import { MovieListItemComponent } from './movie-list-item.component';
 import { ListModule } from '../../list.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-describe('MovieListItemComponent', () => {
+describe('Testing Movie list item component', () => {
   let component: MovieListItemComponent;
   let fixture: ComponentFixture<MovieListItemComponent>;
 
