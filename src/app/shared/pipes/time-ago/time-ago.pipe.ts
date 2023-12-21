@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -19,7 +18,9 @@ export class TimeAgoPipe implements PipeTransform {
 
     const seconds: number = this.getDifferenceComparedToTodayInSeconds(date);
 
-    return this.guessTimeAgoBySeconds(seconds) + ' ago';
+    return this.guessTimeAgoBySeconds(seconds) === '' ?
+      null
+      : this.guessTimeAgoBySeconds(seconds) + ' ago';
 
   }
 
@@ -27,7 +28,7 @@ export class TimeAgoPipe implements PipeTransform {
 
     const today: number = new Date().getTime();
     const date: number = new Date(dateToCompare).getTime();
-    
+
     return Math.round((today - date) / 1000);
 
   }
