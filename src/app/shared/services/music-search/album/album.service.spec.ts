@@ -77,7 +77,7 @@ describe('Testing Album search service', () => {
       apiCode: 'XXX1',
       title: 'Album 1',
       pictureUrl: 'Picture url',
-      releaseDate: '05/12/2021',
+      releasedAt: '05/12/2021',
       artist: {
         id: 'YY1',
         name: 'Artist 1'
@@ -112,7 +112,7 @@ describe('Testing Album search service', () => {
   it('should return album tracklist by api code', () => {
 
     const datas: TrackList = {
-      totalDuration: "30m",
+      totalDurationInEpochMilli: "30m",
       albumPopularityRate: 0.60,
       songList: [
         {

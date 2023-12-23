@@ -1,0 +1,11 @@
+<div *ngFor="let rating of this.movieRatingList" [ngSwitch]="this.rating.source" class="logo">
+    <div *ngSwitchCase="movieRatingConstants.MOVIE_RATING_ROTTEN_TOMATOES">
+        <mlm-rotten-tomatoes-rating-template [rating]="this.rating"></mlm-rotten-tomatoes-rating-template>
+    </div>
+    <div *ngSwitchCase="movieRatingConstants.MOVIE_RATING_METACRITIC">
+        <mlm-metacritic-rating-template [rating]="this.rating"></mlm-metacritic-rating-template>
+    </div>
+    <div *ngSwitchCase="movieRatingConstants.MOVIE_RATING_IMDB">
+        <mlm-imdb-rating-template [rating]="this.rating"></mlm-imdb-rating-template>
+    </div>
+</div>

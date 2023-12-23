@@ -6,7 +6,7 @@ export interface AlbumDetails {
     apiCode: string
     title: string;
     pictureUrl: string;
-    releaseDate: string;
+    releasedAt: string;
     artist: ArtistDetails;
     genreList: Genre[];
     isAlreadyInList: boolean;

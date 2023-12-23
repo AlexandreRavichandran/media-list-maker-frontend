@@ -2,7 +2,7 @@ import { SongDetails } from "../song/song-details";
 
 export interface TrackList {
 
-    totalDuration: string;
+    totalDurationInEpochMilli: string;
     albumPopularityRate: number;
     songList: SongDetails[];
 

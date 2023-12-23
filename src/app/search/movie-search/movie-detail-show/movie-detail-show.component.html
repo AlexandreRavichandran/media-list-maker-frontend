@@ -28,7 +28,7 @@
                             <p class="movie__already__in__list">Already in your list</p>
                         </div>
                         <div *ngIf="!this.movieDetail.isAlreadyInList">
-                            <button class="movie__add__button">Add to list</button>
+                            <button class="movie__add__button" (click)="this.onAddToList(this.movieDetail.apiCode)" >Add to list</button>
                         </div>
                         <div>
                             <p class="movie__duration">Duration: {{this.toHourMinute(this.movieDetail.duration)}}</p>
@@ -40,6 +40,8 @@
             <div>
                 <p class="movie__synopsis">{{this.movieDetail.synopsis}}</p>
                 <div class="movie__ratings">
+                    <mlm-movie-rating class="flex justify-around"
+                        [movieRatingList]="this.movieDetail.ratings"></mlm-movie-rating>
                 </div>
             </div>
         </div>

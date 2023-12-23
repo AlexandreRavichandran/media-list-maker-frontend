@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { MovieDetails } from 'src/app/shared/models/movie/search/movie-details';
+import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
 import { MovieSearchService } from 'src/app/shared/services/movie-search/movie-search.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class MovieDetailShowComponent implements OnInit {
 
   constructor(
     private movieSearchService: MovieSearchService,
+    private movieListService: MovieListService,
     private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
@@ -40,4 +42,25 @@ export class MovieDetailShowComponent implements OnInit {
     return totalHour + 'h' + remaningMinutes + 'min';
   }
 
+  onAddToList(apiCode: string): void {
+
+    this.movieListService.add(apiCode)
+      .pipe(
+        map(response => {
+          console.log(response);
+
+          this.movieDetail$ = this.movieDetail$.pipe(
+            map(detail => ({ ...detail, isAlreadyInList: true }))
+          );
+
+          return response;
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(null);
+        })
+      )
+      .subscribe();
+
+  }
 }
