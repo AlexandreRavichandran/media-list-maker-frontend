@@ -6,7 +6,7 @@ import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.
 import { MovieSearchService } from 'src/app/shared/services/movie-search/movie-search.service';
 
 @Component({
-  selector: 'app-movie-detail-show',
+  selector: 'mlm-movie-detail-show',
   templateUrl: './movie-detail-show.component.html',
   styleUrls: ['./movie-detail-show.component.scss']
 })

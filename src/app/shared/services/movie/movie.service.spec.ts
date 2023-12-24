@@ -111,30 +111,6 @@ describe('Testing Movie service', () => {
 
   });
 
-  it('should add movie by api code', () => {
-
-    const data: Movie =
-    {
-      id: 1,
-      title: 'Movie 1',
-      apiCode: 'XXX1',
-      pictureUrl: 'http://linkurl.jpg',
-      releasedAt: 2001
-    };
-
-    service.addByApiCode('XXX1')
-
-      .subscribe(datas => {
-        expect(datas).toEqual(datas);
-      });
-
-    const request = httpTestingController.expectOne(environmentUrl + '/movies/apicodes/XXX1');
-
-    expect(request.request.method).toEqual('POST');
-    request.flush(data);
-
-  });
-
   it('should return random picture url', () => {
 
     service

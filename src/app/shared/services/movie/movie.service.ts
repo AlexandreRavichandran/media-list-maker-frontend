@@ -37,12 +37,6 @@ export class MovieService extends AbstractService {
 
   }
 
-  public addByApiCode(movieApiCode: string): Observable<Movie> {
-
-    return this.http.post<Movie>(`${this.getResourceUrl()}/apicodes/${movieApiCode}`, null);
-
-  }
-
   public getRandomIllustrationPictureUrl(): Observable<string> {
 
     return of(`${this.getResourceUrl()}/pictures/random`);
