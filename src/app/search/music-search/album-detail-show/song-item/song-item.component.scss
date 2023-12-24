@@ -1,0 +1,52 @@
+.song__item__section {
+    border-bottom: 1px solid black;
+    padding: 20px;
+
+    .song__title {
+        margin-right: 10px;
+        font-size: 16px;
+        margin: 0;
+        align-self: center;
+    }
+
+    .song__duration {
+        align-self: center;
+        font-size: 16px;
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    &:hover {
+        background-color: #893939;
+        cursor: pointer;
+
+        .song__listen__icon {
+            color: white;
+
+        }
+
+        .song__title {
+            font-weight: 500;
+        }
+
+    }
+
+    .song__listen__icon {
+        font-size: 25px;
+        color: #f97474;
+    }
+
+    &.song__listening {
+        background-color: #4a1d1d;
+
+
+        .song__title {
+            font-weight: 500;
+        }
+
+        .song__listen__icon {
+            font-size: 25px;
+            color: white;
+        }
+    }
+}

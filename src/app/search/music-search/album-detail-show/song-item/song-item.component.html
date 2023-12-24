@@ -1,0 +1,9 @@
+<div (click)="this.onSelectSong()" class="flex justify-between song__item__section"
+    [class.song__listening]="this.isSongSelected">
+    <p class="song__title">{{this.song.trackNumber}}.{{this.song.title}}</p>
+    <div class="flex">
+        <p class="song__duration">{{this.song.duration | timestampToTime}}</p>
+        <mat-icon *ngIf="!this.isSongSelected" class="song__listen__icon button__play">play_circle_outline</mat-icon>
+        <mat-icon *ngIf="this.isSongSelected" class="song__listen__icon button__pause">pause_circle_outline</mat-icon>
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { MovieDetailShowComponent } from "./movie-search/movie-detail-show/movie-detail-show.component";
+import { AlbumDetailShowComponent } from "./music-search/album-detail-show/album-detail-show.component";
 
 const routes: Routes = [
     { path: '' },
-    { path: 'albums/:apicode' },
+    { path: 'albums/:apicode', component: AlbumDetailShowComponent },
     { path: 'songs/:apicode' },
     { path: 'movies/:apicode', component: MovieDetailShowComponent }
 ];

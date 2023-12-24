@@ -1,0 +1,47 @@
+<div class="container mx-auto">
+    <ul class="menu__list flex flex-row justify-end">
+        <li routerLink="/search" class="menu__list__item">Search</li>
+        <li routerLink="/me" class="menu__list__item">My lists</li>
+    </ul>
+</div>
+<div class="music__section container mx-auto">
+    <div class="grid grid-cols-12" *ngIf="this.albumDetail$ | async as albumDetail">
+        <div class="col-span-4">
+            <img class="music__picture" [src]="this.albumDetail.pictureUrl" alt="">
+        </div>
+        <div class="col-span-8 music__details" *ngIf="this.trackList$ | async as trackList">
+            <div class="grid grid-cols-12">
+                <div class="col-span-8 flex justify-start">
+                    <div>
+                        <p class="music__title">{{this.albumDetail.title}} ({{this.albumDetail.releasedAt}})</p>
+                        <div class="music__genres flex">
+                            <p *ngFor="let genreItem of this.albumDetail.genreList" class="genres__item">
+                                {{this.genreItem.name}}
+                            </p>
+                        </div>
+                        <p class="music__director">{{this.albumDetail.artist.name}}</p>
+                    </div>
+                </div>
+                <div class="col-span-4 flex justify-center">
+                    <div class="music__in__list">
+                        <div *ngIf="this.albumDetail.isAlreadyInList">
+                            <p class="music__already__in__list">Already in your list</p>
+                        </div>
+                        <div *ngIf="!this.albumDetail.isAlreadyInList">
+                            <button class="music__add__button" (click)="this.onAddToList(this.albumDetail.apiCode)">Add
+                                to list</button>
+                        </div>
+                        <div>
+                            <p class="music__duration">Duration:
+                                {{this.trackList.totalDurationInEpochMilli | timestampToTime}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <mlm-song-list [songList]="this.trackList.songList"></mlm-song-list>
+            </div>
+        </div>
+
+    </div>
+</div>

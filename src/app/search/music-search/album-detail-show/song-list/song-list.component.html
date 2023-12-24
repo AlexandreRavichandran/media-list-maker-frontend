@@ -1,0 +1,12 @@
+<div class="flex justify-center">
+    <div class="tracklist__section">
+        <mlm-song-item [isSongSelected]="this.song === (this.selectedSong$ | async)" *ngFor="let song of this.songList"
+            (onSelectSongEvent)="this.changeSelectedSong($event)" [song]="this.song">
+        </mlm-song-item>
+    </div>
+</div>
+<div *ngIf="this.selectedSong$ | async as selectedSong" class="flex flex-col items-center audio__section">
+    <p class="audio__name">{{this.selectedSong.trackNumber}}.{{this.selectedSong.title}}</p>
+    <audio class="audio__item" controlsList="nodownload" [src]="this.selectedSong.preview" controls="false" autoplay>
+    </audio>
+</div>

@@ -1,0 +1,39 @@
+.tracklist__section {
+    margin-top: 20px;
+    height: 265px;
+    width: 800px;
+    border-radius: 7px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.audio__section {
+    margin-top: 20px;
+
+    .audio__name {
+        font-size: 18px
+    }
+
+    .audio__item {
+        width: 594px;
+        background-color: white;
+    }
+
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f97474;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #890000;
+}
