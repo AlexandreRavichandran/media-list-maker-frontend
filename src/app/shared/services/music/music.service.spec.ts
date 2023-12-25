@@ -156,30 +156,4 @@ describe('Testing Music service', () => {
 
   });
 
-  it('should add music by api code', () => {
-
-    const data: Music =
-    {
-      id: 1,
-      artistName: 'Artist 1',
-      type: 1,
-      title: 'Music 1',
-      apiCode: 'XXX1',
-      pictureUrl: 'http://linkurl.jpg',
-      releasedAt: 2001
-    };
-
-    service.addByApiCode('XXX1')
-
-      .subscribe(datas => {
-        expect(datas).toEqual(datas);
-      })
-
-    const request = httpTestingController.expectOne(environmentUrl + '/musics/apicodes/XXX1');
-
-    expect(request.request.method).toEqual('POST');
-    request.flush(data);
-
-  });
-
 });

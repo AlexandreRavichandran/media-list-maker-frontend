@@ -156,7 +156,7 @@ describe('Testing Movie detail show component', () => {
       movieId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       movieDetail: undefined
     };
 
@@ -200,7 +200,7 @@ describe('Testing Movie detail show component', () => {
       movieId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       movieDetail: undefined
     };
 

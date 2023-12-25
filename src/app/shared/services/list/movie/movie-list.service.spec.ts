@@ -48,7 +48,7 @@ describe('Testing Movie List service', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         movieDetail: undefined
       },
       {
@@ -56,7 +56,7 @@ describe('Testing Movie List service', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         movieDetail: undefined
       },
       {
@@ -64,10 +64,54 @@ describe('Testing Movie List service', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         movieDetail: undefined
       }
     ];
+
+    const mockMovieList: Movie[] = [
+      {
+        id: 1,
+        title: "title 1",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 2,
+        title: "title 2",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 3,
+        title: "title 3",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      }
+    ];
+
+    const movieSpy = mockMovieService.browseByIds.and.returnValue(of(mockMovieList));
+
+    service.browse()
+      .subscribe(datas => {
+        expect(datas).toEqual(datas);
+      });
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies');
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+    expect(movieSpy).toHaveBeenCalled();
+
+  });
+
+  it('should return user movie list', () => {
+
+    const datas: MovieListItem[] = [];
 
     service.browse()
       .subscribe(datas => {
@@ -90,7 +134,7 @@ describe('Testing Movie List service', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         movieDetail: undefined
       },
       {
@@ -98,7 +142,7 @@ describe('Testing Movie List service', () => {
         movieId: 2,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         movieDetail: undefined
       },
       {
@@ -106,7 +150,7 @@ describe('Testing Movie List service', () => {
         movieId: 3,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         movieDetail: undefined
       }
     ];
@@ -178,7 +222,7 @@ describe('Testing Movie List service', () => {
       movieId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       movieDetail: undefined
     };
 
@@ -202,7 +246,7 @@ describe('Testing Movie List service', () => {
       movieId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       movieDetail: undefined
     };
 

@@ -26,7 +26,7 @@ export class MusicListService extends AbstractService {
         if (musicListItems.length === 0) {
           return of([]);
         }
-        
+
         const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
         return this.musicService.browseByIds(musicIds).pipe(
           map(musicDetailList => {
@@ -40,8 +40,8 @@ export class MusicListService extends AbstractService {
     );
   }
 
-  public add(musicApiCode: string): Observable<MusicListItem> {
-    return this.http.post<MusicListItem>(`${this.getResourceUrl()}`, { apiCode: musicApiCode });
+  public add(musicApiCode: string, type: number): Observable<MusicListItem> {
+    return this.http.post<MusicListItem>(`${this.getResourceUrl()}`, { apiCode: musicApiCode, type: type });
   }
 
   public deleteById(musicId: number): Observable<MusicListItem> {

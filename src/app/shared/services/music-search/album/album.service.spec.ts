@@ -112,7 +112,7 @@ describe('Testing Album search service', () => {
   it('should return album tracklist by api code', () => {
 
     const datas: TrackList = {
-      totalDurationInEpochMilli: "30m",
+      totalDurationInEpochMilli: 30,
       albumPopularityRate: 0.60,
       songList: [
         {

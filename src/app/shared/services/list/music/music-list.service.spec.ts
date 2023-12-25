@@ -7,6 +7,7 @@ import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item'
 import { MusicService } from '../../music/music.service';
 import { Music } from 'src/app/shared/models/music/music';
 import { of } from 'rxjs';
+import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
 
 describe('Testing Music List service', () => {
 
@@ -46,7 +47,7 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         musicDetail: undefined
       },
       {
@@ -54,7 +55,7 @@ describe('Testing Music List service', () => {
         musicId: 2,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         musicDetail: undefined
       },
       {
@@ -62,7 +63,7 @@ describe('Testing Music List service', () => {
         musicId: 3,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         musicDetail: undefined
       }
     ];
@@ -88,7 +89,7 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         musicDetail: undefined
       },
       {
@@ -96,7 +97,7 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         musicDetail: undefined
       },
       {
@@ -104,7 +105,7 @@ describe('Testing Music List service', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         musicDetail: undefined
       }
     ];
@@ -184,11 +185,11 @@ describe('Testing Music List service', () => {
       musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       musicDetail: undefined
     };
 
-    service.add('XXX1')
+    service.add('XXX1', MusicTypeConstants.MUSIC_TYPE_ALBUM)
       .subscribe(data => {
         expect(data).toEqual(data);
       });
@@ -208,7 +209,7 @@ describe('Testing Music List service', () => {
       musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       musicDetail: undefined
     };
 

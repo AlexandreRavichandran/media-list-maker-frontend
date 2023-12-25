@@ -5,7 +5,7 @@ export interface MusicListItem {
     id: number;
     musicId: number;
     appUserId: number;
-    sortingNumber: number;
+    sortingOrder: number;
     addedAt: Date;
     musicDetail: Music | undefined;
 }

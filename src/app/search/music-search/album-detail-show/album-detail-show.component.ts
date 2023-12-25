@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
+import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { SongDetails } from 'src/app/shared/models/music/search/song/song-details';
@@ -40,7 +41,7 @@ export class AlbumDetailShowComponent implements OnInit {
 
   onAddToList(apiCode: string): void {
 
-    this.musicListService.add(apiCode)
+    this.musicListService.add(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
       .pipe(
         map(response => {
           console.log(response);
