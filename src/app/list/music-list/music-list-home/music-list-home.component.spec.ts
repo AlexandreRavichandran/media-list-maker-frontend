@@ -44,7 +44,7 @@ describe('Testing Music list item component', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         musicDetail: undefined
       },
       {
@@ -52,7 +52,7 @@ describe('Testing Music list item component', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         musicDetail: undefined
       },
       {
@@ -60,7 +60,7 @@ describe('Testing Music list item component', () => {
         musicId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         musicDetail: undefined
       }
     ];

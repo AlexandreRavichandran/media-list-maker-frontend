@@ -25,7 +25,7 @@ describe('Testing Music list item component', () => {
       musicId: 1,
       appUserId: 1,
       addedAt: new Date(),
-      sortingNumber: 1,
+      sortingOrder: 1,
       musicDetail: undefined
     };
 

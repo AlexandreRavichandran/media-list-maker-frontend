@@ -46,7 +46,7 @@ describe('Testing movie list home component', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 1,
+        sortingOrder: 1,
         movieDetail: undefined
       },
       {
@@ -54,7 +54,7 @@ describe('Testing movie list home component', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 2,
+        sortingOrder: 2,
         movieDetail: undefined
       },
       {
@@ -62,7 +62,7 @@ describe('Testing movie list home component', () => {
         movieId: 1,
         appUserId: 1,
         addedAt: new Date(),
-        sortingNumber: 3,
+        sortingOrder: 3,
         movieDetail: undefined
       }
     ];
