@@ -23,5 +23,14 @@
             margin: 0;
             font-size: 20px;
         }
+
+        &:hover {
+            cursor: pointer;
+            background-color: #1d0707;
+    
+            .music__picture {
+                filter: brightness(50%);
+            }
+        }
     }
 }

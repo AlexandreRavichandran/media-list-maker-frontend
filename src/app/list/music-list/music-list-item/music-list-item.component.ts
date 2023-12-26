@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 
 @Component({
@@ -11,6 +12,10 @@ export class MusicListItemComponent {
   @Input()
   musicItem!: MusicListItem;
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  onClickDetails(): void {
+    this.router.navigate(['/search/albums/', this.musicItem.musicDetail?.apiCode]);
+  }
 
 }
