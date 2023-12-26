@@ -1,0 +1,20 @@
+<div class="movie__list__section">
+    <div class="container mx-auto">
+        <ul class="menu__list flex flex-row justify-end ">
+            <li routerLink="/search" class="menu__list__item">Search</li>
+            <li routerLink="/me" class="menu__list__item">My lists</li>
+        </ul>
+    </div>
+    <div *ngIf="this.userMovieList$ | async as movieList" class="grid grid-cols-12">
+        <div class="col-span-5 flex flex-col movie__list">
+            <div class="grid grid-cols-12" *ngFor="let movieItem of this.movieList">
+                <div class="col-span-4 flex justify-center items-center">
+                    <div class="sorting__order__section flex justify-center items-center">
+                        <p class="movie__sorting__order">{{movieItem.sortingOrder}}</p>
+                    </div>
+                </div>
+                <mlm-movie-list-item class="col-span-5 movie__item" [movieItem]="movieItem"></mlm-movie-list-item>
+            </div>
+        </div>
+    </div>
+</div>

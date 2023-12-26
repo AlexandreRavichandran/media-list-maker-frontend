@@ -68,6 +68,38 @@ describe('Testing Music List service', () => {
       }
     ];
 
+    const mockMusicList: Music[] = [
+      {
+        id: 1,
+        type: 1,
+        artistName: "Artist",
+        title: "title 1",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 2,
+        type: 1,
+        artistName: "Artist",
+        title: "title 2",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 3,
+        type: 1,
+        artistName: "Artist",
+        title: "title 3",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      }
+    ];
+
+    const musicSpy = mockMusicService.browseByIds.and.returnValue(of(mockMusicList));
+
     service.browse()
       .subscribe(datas => {
         expect(datas).toEqual(datas);
@@ -79,6 +111,8 @@ describe('Testing Music List service', () => {
 
     request.flush(datas);
 
+    expect(musicSpy).toHaveBeenCalled();
+    
   });
 
   it('should return user latest added music list', () => {

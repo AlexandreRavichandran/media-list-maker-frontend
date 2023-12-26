@@ -1,0 +1,82 @@
+.menu__list {
+    margin-top: 40px;
+    font-size: 25px;
+    color: white;
+
+    .menu__list__item {
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}
+
+.movie__list__section {
+    min-width: 1096px;
+    border: 2px solid #000;
+    height: 950px;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
+    background-image: url('http://localhost:8080/api/movies/pictures/random');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 1096px 950px;
+
+    .movie__list {
+        overflow: scroll;
+        overflow-x: hidden;
+        height: 780px;
+        margin-top: 50px;
+
+        .sorting__order__section {
+
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background-color: #240089;
+            border-radius: 13px;
+            padding: 18px;
+            
+            .movie__sorting__order {
+                align-self: center;
+                color: white;
+                font-weight: 500;
+                font-size: 20px;
+                margin: 0;
+
+            }
+        }
+
+        .movie__item {
+            width: 430px;
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7d74f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #200089;
+}

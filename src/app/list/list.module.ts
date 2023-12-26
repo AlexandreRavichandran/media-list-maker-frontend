@@ -7,6 +7,8 @@ import { CommonModule } from "@angular/common";
 import { SharedModule } from "../shared/shared.module";
 import { MusicListHomeComponent } from './music-list/music-list-home/music-list-home.component';
 import { MusicListItemComponent } from './music-list/music-list-item/music-list-item.component';
+import { MovieListShowComponent } from './movie-list/movie-list-show/movie-list-show.component';
+import { MusicListShowComponent } from './music-list/music-list-show/music-list-show.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { MusicListItemComponent } from './music-list/music-list-item/music-list-
     MovieListItemComponent,
     MovieListHomeComponent,
     MusicListHomeComponent,
-    MusicListItemComponent
+    MusicListItemComponent,
+    MovieListShowComponent,
+    MusicListShowComponent
   ],
   imports: [
     ListRoutingModule,

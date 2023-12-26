@@ -16,7 +16,24 @@ export class MusicListService extends AbstractService {
   }
 
   public browse(): Observable<MusicListItem[]> {
-    return this.http.get<MusicListItem[]>(`${this.getResourceUrl()}`);
+    return this.http.get<MusicListItem[]>(`${this.getResourceUrl()}`).pipe(
+      switchMap((musicListItems: MusicListItem[]) => {
+
+        if (musicListItems.length === 0) {
+          return of([]);
+        }
+
+        const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
+        return this.musicService.browseByIds(musicIds).pipe(
+          map(musicDetailList => {
+            return musicListItems.map(musicListItem => {
+              const musicDetail = musicDetailList.find(m => m.id === musicListItem.musicId);
+              return { ...musicListItem, musicDetail } as MusicListItem;
+            });
+          })
+        );
+      })
+    );
   }
 
   public browseLatest(): Observable<MusicListItem[]> {
