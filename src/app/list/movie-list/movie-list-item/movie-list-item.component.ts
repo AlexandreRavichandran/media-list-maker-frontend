@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
 
 @Component({
@@ -11,8 +12,10 @@ export class MovieListItemComponent {
   @Input()
   movieItem!: MovieListItem;
 
+  constructor(private router: Router) { }
+
   onClickDetails(): void {
-      //not implemented
+    this.router.navigate(['/search/movies/', this.movieItem.movieDetail?.apiCode]);
   }
 
 }

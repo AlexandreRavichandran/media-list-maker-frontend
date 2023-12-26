@@ -23,5 +23,15 @@
             margin: 0;
             font-size: 20px;
         }
+
+        &:hover {
+            cursor: pointer;
+            background-color: #050716;
+
+            .movie__picture {
+                filter: brightness(50%);
+            }
+        }
     }
+
 }

@@ -1,4 +1,4 @@
-<div class="item__movie__section container mx-auto">
+<div (click)="this.onClickDetails()" class="item__movie__section container mx-auto">
     <div class="flex flex justify-end">
         <p class="item__movie__addedAt">Added {{this.movieItem.addedAt | timeAgo }}</p>
     </div>
