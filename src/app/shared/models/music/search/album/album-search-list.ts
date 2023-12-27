@@ -1,7 +1,8 @@
-import { AlbumSearchListElement } from "./album-search-list-element";
+import { ElementSearchResult } from "../../../element-search-result";
+import { AlbumSearchItem } from "./album-search-item";
 
-export interface AlbumSearchList {
+export interface AlbumSearchList extends ElementSearchResult {
 
-    data: AlbumSearchListElement[];
-
+    searchResults: AlbumSearchItem[];
+    totalResults: number;
 }

@@ -1,9 +1,9 @@
+import { ElementSearchResult } from "../../element-search-result";
 import { MovieSearchItem } from "./movie-search-item";
 
-export interface MovieSearchList {
+export interface MovieSearchList extends ElementSearchResult {
 
     totalResults: number;
-    responseStatus: number;
-    movieElementList: MovieSearchItem[];
+    searchResults: MovieSearchItem[];
 
 }

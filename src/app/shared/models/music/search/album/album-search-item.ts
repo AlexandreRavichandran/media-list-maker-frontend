@@ -1,10 +1,10 @@
 import { ArtistDetails } from "../artist/artist-details";
 
-export interface AlbumSearchListElement {
+export interface AlbumSearchItem {
 
-    id: string;
+    apiCode: string;
     title: string;
     pictureUrl: string;
     artist: ArtistDetails;
-    
+
 }
