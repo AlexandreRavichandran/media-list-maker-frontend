@@ -1,0 +1,27 @@
+<div class="container mx-auto">
+    <ul class="menu__list flex flex-row justify-end">
+        <li routerLink="/search" class="menu__list__item">Search</li>
+        <li routerLink="/me" class="menu__list__item">My lists</li>
+    </ul>
+</div>
+<div class="container mx-auto">
+
+    <div class="flex justify-center search__title__section">
+        <p class="search__title">Search your favorite movie/music</p>
+    </div>
+    <div class="search__form__section">
+        <form [formGroup]="this.searchForm" class="flex justify-center" (ngSubmit)="this.onSearch()">
+            <select (change)="this.onTypeChange()" formControlName="type" class="field__type__select">
+                <option selected value="movie">Movie</option>
+                <option value="album">Album</option>
+            </select>
+            <input formControlName="query" class="field__query__input" placeholder="Type your query here" type="text">
+            <button [disabled]="!this.isFormValid()" class="search__button"
+                [ngClass]="this.searchButtonStyle">Search</button>
+        </form>
+    </div>
+
+    <div>
+
+    </div>
+</div>

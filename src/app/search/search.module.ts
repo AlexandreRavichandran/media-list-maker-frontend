@@ -9,6 +9,8 @@ import { RottenTomatoesRatingTemplateComponent } from './movie-search/movie-rati
 import { AlbumDetailShowComponent } from "./music-search/album-detail-show/album-detail-show.component";
 import { SongItemComponent } from './music-search/album-detail-show/song-item/song-item.component';
 import { SongListComponent } from './music-search/album-detail-show/song-list/song-list.component';
+import { SearchComponent } from './search.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { SongListComponent } from './music-search/album-detail-show/song-list/so
     MetacriticRatingTemplateComponent,
     RottenTomatoesRatingTemplateComponent,
     SongItemComponent,
-    SongListComponent
+    SongListComponent,
+    SearchComponent
   ],
   imports: [
+    SharedModule,
     SearchRoutingModule,
-    SharedModule
+    ReactiveFormsModule,
   ],
 
   providers: []
