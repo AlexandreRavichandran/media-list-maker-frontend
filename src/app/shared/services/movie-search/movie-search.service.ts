@@ -5,6 +5,7 @@ import { ApiServiceConstants } from '../../constants/api-service-constants';
 import { Observable } from 'rxjs';
 import { MovieSearchList } from '../../models/movie/search/movie-search-list';
 import { MovieDetails } from '../../models/movie/search/movie-details';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class MovieSearchService extends AbstractService {
 
     return this.http.get<MovieDetails>(`${this.getResourceUrl()}/omdbapi/apicodes/${movieApiCode}`);
 
+  }
+
+  public generateFilterForm(): FormGroup {
+    
+    return new FormGroup({
+      year: new FormControl('', Validators.required)
+    });
+    
   }
 
 }

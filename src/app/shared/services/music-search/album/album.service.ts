@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,15 @@ export class AlbumService extends AbstractService {
 
   public getTrackListByApiCode(albumApiCode: string): Observable<TrackList> {
     return this.http.get<TrackList>(`${this.getResourceUrl()}/deezerapi/albums/apicodes/${albumApiCode}/tracklist`);
+  }
+
+  public generateFilterForm(): FormGroup {
+
+    return new FormGroup({
+      artist: new FormControl(''),
+      label: new FormControl('')
+    });
+
   }
 
 }

@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
+import { FormGroup } from '@angular/forms';
 
 describe('Testing Album search service', () => {
 
@@ -36,9 +37,9 @@ describe('Testing Album search service', () => {
   it('should return album search list by name', () => {
 
     const datas: AlbumSearchList = {
-      data: [
+      searchResults: [
         {
-          id: 'XXX1',
+          apiCode: 'XXX1',
           title: 'Album 1',
           pictureUrl: 'Picture 1',
           artist: {
@@ -47,7 +48,7 @@ describe('Testing Album search service', () => {
           }
         },
         {
-          id: 'XXX1',
+          apiCode: 'XXX1',
           title: 'Album 1',
           pictureUrl: 'Picture 1',
           artist: {
@@ -55,7 +56,8 @@ describe('Testing Album search service', () => {
             name: 'Artist 1'
           }
         }
-      ]
+      ],
+      totalResults: 30
     };
 
     service.browseByAlbumName('test')
@@ -152,6 +154,15 @@ describe('Testing Album search service', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(datas);
+
+  });
+
+  it('should return album filter form group with valid fields', () => {
+
+    const formGroup: FormGroup = service.generateFilterForm();
+
+    expect(formGroup.contains('artist')).toBeTrue();
+    expect(formGroup.contains('label')).toBeTrue();
 
   });
 

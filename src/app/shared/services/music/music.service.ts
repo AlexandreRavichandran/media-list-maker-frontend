@@ -43,12 +43,6 @@ export class MusicService extends AbstractService {
 
   }
 
-  public addByApiCode(musicApiCode: string): Observable<Music> {
-
-    return this.http.post<Music>(`${this.getResourceUrl()}/apicodes/${musicApiCode}`, null);
-
-  }
-
   public getRandomIllustrationPictureUrl(): Observable<string> {
     return of(`${this.getResourceUrl()}/pictures/random`);
   }

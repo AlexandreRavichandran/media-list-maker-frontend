@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MovieSearchList } from '../../models/movie/search/movie-search-list';
 import { MovieDetails } from '../../models/movie/search/movie-details';
+import { FormGroup } from '@angular/forms';
 
 describe('Testing Movie search service', () => {
 
@@ -36,8 +37,7 @@ describe('Testing Movie search service', () => {
 
     const datas: MovieSearchList = {
       totalResults: 2,
-      responseStatus: 200,
-      movieElementList: [
+      searchResults: [
         {
           title: 'Movie 1',
           apiCode: 'XXX1',
@@ -97,6 +97,14 @@ describe('Testing Movie search service', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(datas);
+
+  });
+
+  it('should return movie filter form group with valid fields', () => {
+
+    const formGroup: FormGroup = service.generateFilterForm();
+
+    expect(formGroup.contains('year')).toBeTrue();
 
   });
 
