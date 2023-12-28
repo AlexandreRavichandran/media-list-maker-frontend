@@ -112,7 +112,7 @@ describe('Testing Music List service', () => {
     request.flush(datas);
 
     expect(musicSpy).toHaveBeenCalled();
-    
+
   });
 
   it('should return user latest added music list', () => {
@@ -212,7 +212,7 @@ describe('Testing Music List service', () => {
 
   });
 
-  it('should add movie list item in list', () => {
+  it('should add music list item in list', () => {
 
     const data: MusicListItem = {
       id: 1,
@@ -236,7 +236,23 @@ describe('Testing Music List service', () => {
 
   });
 
-  it('should delete movie in list by id', () => {
+  it('should return if music is already on app user list', () => {
+
+    service.isAlreadyInAppuserMusicList('XXX1', MusicTypeConstants.MUSIC_TYPE_ALBUM)
+      .subscribe(data => {
+        expect(data).toEqual(true);
+      });
+
+    const request = httpTestingController
+      .expectOne(`${environmentUrl}/lists/musics/apicode/XXX1?type=${MusicTypeConstants.MUSIC_TYPE_ALBUM}`);
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(true);
+
+  });
+
+  it('should delete music in list by id', () => {
 
     const data: MusicListItem = {
       id: 1,

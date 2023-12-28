@@ -24,10 +24,10 @@
                 </div>
                 <div class="col-span-4 flex justify-center">
                     <div class="music__in__list">
-                        <div *ngIf="this.albumDetail.isAlreadyInList">
+                        <div *ngIf="(this.isAlreadyInList$ | async) === true">
                             <p class="music__already__in__list">Already in your list</p>
                         </div>
-                        <div *ngIf="!this.albumDetail.isAlreadyInList">
+                        <div *ngIf="(this.isAlreadyInList$ | async) === false">
                             <button class="music__add__button" (click)="this.onAddToList(this.albumDetail.apiCode)">Add
                                 to list</button>
                         </div>

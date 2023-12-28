@@ -25,7 +25,7 @@ describe('Testing Album detail show component', () => {
   beforeEach(async () => {
 
     mockAlbumSearchService = jasmine.createSpyObj('AlbumSearchService', ['readByApiCode', 'getTrackListByApiCode']);
-    mockMusicListService = jasmine.createSpyObj('MusicListService', ['add']);
+    mockMusicListService = jasmine.createSpyObj('MusicListService', ['add', 'isAlreadyInAppuserMusicList']);
 
     await TestBed.configureTestingModule({
       declarations: [AlbumDetailShowComponent],
@@ -71,8 +71,7 @@ describe('Testing Album detail show component', () => {
         id: '1',
         name: 'artist'
       },
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const trackList: TrackList = {
@@ -95,6 +94,8 @@ describe('Testing Album detail show component', () => {
     }
     const getByApiCodeSpy = mockAlbumSearchService.readByApiCode.and.returnValue(of(albumDetail));
     const getTrackListSpy = mockAlbumSearchService.getTrackListByApiCode.and.returnValue(of(trackList));
+    const getIsAlreadyInAppUserList = mockMusicListService.isAlreadyInAppuserMusicList.and.returnValue(of(false));
+
     fixture.detectChanges();
 
     const element: DebugElement = fixture.debugElement;
@@ -103,6 +104,7 @@ describe('Testing Album detail show component', () => {
 
     expect(getByApiCodeSpy).toHaveBeenCalled();
     expect(getTrackListSpy).toHaveBeenCalled();
+    expect(getIsAlreadyInAppUserList).toHaveBeenCalled();
     expect(isAlreadyInListElement).toBeNull();
     expect(addToListButton).toBeTruthy();
 
@@ -123,8 +125,7 @@ describe('Testing Album detail show component', () => {
         id: '1',
         name: 'artist'
       },
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: true
+      pictureUrl: 'http://url.com'
     };
 
     const trackList: TrackList = {
@@ -148,6 +149,7 @@ describe('Testing Album detail show component', () => {
 
     const getByApiCodeSpy = mockAlbumSearchService.readByApiCode.and.returnValue(of(albumDetail));
     const getTrackListSpy = mockAlbumSearchService.getTrackListByApiCode.and.returnValue(of(trackList));
+    const getIsAlreadyInAppUserList = mockMusicListService.isAlreadyInAppuserMusicList.and.returnValue(of(true));
 
     fixture.detectChanges();
 
@@ -157,6 +159,7 @@ describe('Testing Album detail show component', () => {
 
     expect(getByApiCodeSpy).toHaveBeenCalled();
     expect(getTrackListSpy).toHaveBeenCalled();
+    expect(getIsAlreadyInAppUserList).toHaveBeenCalled();
     expect(addToListButton).toBeNull();
     expect(isAlreadyInListElement).toBeTruthy();
 
@@ -183,8 +186,7 @@ describe('Testing Album detail show component', () => {
         id: '1',
         name: 'artist'
       },
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const trackList: TrackList = {
@@ -219,6 +221,7 @@ describe('Testing Album detail show component', () => {
 
     component.albumDetail$ = of(albumDetail);
     component.trackList$ = of(trackList);
+    component.isAlreadyInList$ = of(false);
 
     fixture.detectChanges();
 
@@ -229,9 +232,6 @@ describe('Testing Album detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
-    component.albumDetail$.subscribe(music => {
-      expect(music.isAlreadyInList).toBeTrue()
-    });
 
   });
 
@@ -246,8 +246,7 @@ describe('Testing Album detail show component', () => {
         id: '1',
         name: 'artist'
       },
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const trackList: TrackList = {
@@ -273,9 +272,10 @@ describe('Testing Album detail show component', () => {
 
     component.albumDetail$ = of(albumDetail);
     component.trackList$ = of(trackList);
+    component.isAlreadyInList$ = of(false);
     fixture.detectChanges();
 
-    component.albumDetail$.subscribe(test=>console.log(test))
+    component.albumDetail$.subscribe(test => console.log(test))
     const element: DebugElement = fixture.debugElement;
     const addToListButton: HTMLButtonElement = element.query(By.css('.music__add__button')).nativeElement;
 
@@ -283,9 +283,6 @@ describe('Testing Album detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
-    component.albumDetail$.subscribe(music => {
-      expect(music.isAlreadyInList).toBeFalse()
-    });
 
   });
 

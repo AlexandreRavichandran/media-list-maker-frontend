@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractService } from '../../abstract-service.services';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiServiceConstants } from 'src/app/shared/constants/api-service-constants';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { Observable, map, of, switchMap } from 'rxjs';
@@ -59,6 +59,13 @@ export class MusicListService extends AbstractService {
 
   public add(musicApiCode: string, type: number): Observable<MusicListItem> {
     return this.http.post<MusicListItem>(`${this.getResourceUrl()}`, { apiCode: musicApiCode, type: type });
+  }
+
+  public isAlreadyInAppuserMusicList(musicApiCode: string, type: number): Observable<boolean> {
+
+    let params: HttpParams = new HttpParams().append('type', type);
+
+    return this.http.get<boolean>(`${this.getResourceUrl()}/apicode/${musicApiCode}`, { params });
   }
 
   public deleteById(musicId: number): Observable<MusicListItem> {

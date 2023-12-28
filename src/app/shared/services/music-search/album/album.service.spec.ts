@@ -93,8 +93,7 @@ describe('Testing Album search service', () => {
           id: 2,
           name: 'Genre 2'
         }
-      ],
-      isAlreadyInList: false
+      ]
 
     };
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, delay, map, of } from 'rxjs';
 import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
@@ -16,6 +16,7 @@ import { AlbumService } from 'src/app/shared/services/music-search/album/album.s
 export class AlbumDetailShowComponent implements OnInit {
 
   selectedSong$!: Observable<SongDetails>;
+  isAlreadyInList$!: Observable<boolean>;
   albumDetail$!: Observable<AlbumDetails>;
   trackList$!: Observable<TrackList>;
 
@@ -36,6 +37,7 @@ export class AlbumDetailShowComponent implements OnInit {
 
     this.albumDetail$ = this.albumSearchService.readByApiCode(apiCode);
     this.trackList$ = this.albumSearchService.getTrackListByApiCode(apiCode);
+    this.isAlreadyInList$ = this.musicListService.isAlreadyInAppuserMusicList(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM);
 
   }
 
@@ -46,9 +48,7 @@ export class AlbumDetailShowComponent implements OnInit {
         map(response => {
           console.log(response);
 
-          this.albumDetail$ = this.albumDetail$.pipe(
-            map(detail => ({ ...detail, isAlreadyInList: true }))
-          );
+          this.isAlreadyInList$ = of(true);
 
           return response;
         }),
@@ -61,3 +61,13 @@ export class AlbumDetailShowComponent implements OnInit {
 
   }
 }
+
+//TODO 
+/**
+ * Faire en sorte que l'api is already in list soit isolé
+ * Comme ca on met a jour que le bouton et pas le reste
+ * En gros on aura 2 appel: appel de la musique + appel isolé is isAlreadyInList
+ * 
+ * Et quand c'est ajouté on met a jour le bouton uniquement
+ * Le bouton disparait, c'est normal, faut ajouter le loading
+ */
