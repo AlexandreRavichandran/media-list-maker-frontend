@@ -77,7 +77,6 @@ describe('Testing Movie search service', () => {
       duration: '185 min',
       genreList: ['Action', 'Adventure'],
       mainActors: 'Actor 1',
-      isAlreadyInList: false,
       ratings: [
         {
           source: 'ImDB',

@@ -61,6 +61,11 @@ export class MovieListService extends AbstractService {
     return this.http.post<MovieListItem>(`${this.getResourceUrl()}`, { apiCode: movieApiCode });
   }
 
+  public isAlreadyInAppUserMovieList(movieApiCode: string): Observable<boolean> {
+
+    return this.http.get<boolean>(`${this.getResourceUrl()}/apicode/${movieApiCode}`);
+  }
+
   public deleteById(movieId: number): Observable<MovieListItem> {
     return this.http.delete<MovieListItem>(`${this.getResourceUrl()}/${movieId}`);
   }

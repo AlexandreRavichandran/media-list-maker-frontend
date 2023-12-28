@@ -13,6 +13,7 @@ import { MovieSearchService } from 'src/app/shared/services/movie-search/movie-s
 export class MovieDetailShowComponent implements OnInit {
 
   movieDetail$!: Observable<MovieDetails>;
+  isAlreadyInList$!: Observable<boolean>;
 
   constructor(
     private movieSearchService: MovieSearchService,
@@ -29,6 +30,7 @@ export class MovieDetailShowComponent implements OnInit {
     }
 
     this.movieDetail$ = this.movieSearchService.getByApiCode(apiCode);
+    this.isAlreadyInList$ = this.movieListService.isAlreadyInAppUserMovieList(apiCode);
 
   }
 
@@ -47,11 +49,8 @@ export class MovieDetailShowComponent implements OnInit {
     this.movieListService.add(apiCode)
       .pipe(
         map(response => {
-          console.log(response);
 
-          this.movieDetail$ = this.movieDetail$.pipe(
-            map(detail => ({ ...detail, isAlreadyInList: true }))
-          );
+          this.isAlreadyInList$ = of(true);
 
           return response;
         }),

@@ -24,7 +24,7 @@ describe('Testing Movie detail show component', () => {
   beforeEach(async () => {
 
     mockMovieSearchService = jasmine.createSpyObj('MovieSearchService', ['getByApiCode']);
-    mockMovieListService = jasmine.createSpyObj('MovieListService', ['add']);
+    mockMovieListService = jasmine.createSpyObj('MovieListService', ['add', 'isAlreadyInAppUserMovieList']);
 
     await TestBed.configureTestingModule({
       declarations: [MovieDetailShowComponent],
@@ -73,11 +73,11 @@ describe('Testing Movie detail show component', () => {
       synopsis: 'Synopsis',
       director: 'Director',
       ratings: [{ source: 'source', value: 'value' }],
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const getByApiCodeSpy = mockMovieSearchService.getByApiCode.and.returnValue(of(movieDetail));
+    const getIsAlreadyInAppUserList = mockMovieListService.isAlreadyInAppUserMovieList.and.returnValue(of(false));
 
     fixture.detectChanges();
 
@@ -86,6 +86,7 @@ describe('Testing Movie detail show component', () => {
     const addToListButton: DebugElement = element.query(By.css('.movie__add__button'));
 
     expect(getByApiCodeSpy).toHaveBeenCalled();
+    expect(getIsAlreadyInAppUserList).toHaveBeenCalled();
     expect(isAlreadyInListElement).toBeNull();
     expect(addToListButton).toBeTruthy();
 
@@ -107,11 +108,11 @@ describe('Testing Movie detail show component', () => {
       synopsis: 'Synopsis',
       director: 'Director',
       ratings: [{ source: 'source', value: 'value' }],
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: true
+      pictureUrl: 'http://url.com'
     };
 
     const getByApiCodeSpy = mockMovieSearchService.getByApiCode.and.returnValue(of(movieDetail));
+    const getIsAlreadyInAppUserList = mockMovieListService.isAlreadyInAppUserMovieList.and.returnValue(of(true));
 
     fixture.detectChanges();
 
@@ -120,6 +121,7 @@ describe('Testing Movie detail show component', () => {
     const addToListButton: DebugElement = element.query(By.css('.movie__add__button'));
 
     expect(getByApiCodeSpy).toHaveBeenCalled();
+    expect(getIsAlreadyInAppUserList).toHaveBeenCalled();
     expect(addToListButton).toBeNull();
     expect(isAlreadyInListElement).toBeTruthy();
 
@@ -147,8 +149,7 @@ describe('Testing Movie detail show component', () => {
       synopsis: 'Synopsis',
       director: 'Director',
       ratings: [{ source: 'source', value: 'value' }],
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const movieListItem: MovieListItem = {
@@ -163,6 +164,7 @@ describe('Testing Movie detail show component', () => {
     const addToListSpy = mockMovieListService.add.and.returnValue(of(movieListItem));
 
     component.movieDetail$ = of(movieDetail);
+    component.isAlreadyInList$ = of(false);
 
     fixture.detectChanges();
 
@@ -173,9 +175,6 @@ describe('Testing Movie detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
-    component.movieDetail$.subscribe(movie => {
-      expect(movie.isAlreadyInList).toBeTrue()
-    });
 
   });
 
@@ -191,8 +190,7 @@ describe('Testing Movie detail show component', () => {
       synopsis: 'Synopsis',
       director: 'Director',
       ratings: [{ source: 'source', value: 'value' }],
-      pictureUrl: 'http://url.com',
-      isAlreadyInList: false
+      pictureUrl: 'http://url.com'
     };
 
     const movieListItem: MovieListItem = {
@@ -207,6 +205,7 @@ describe('Testing Movie detail show component', () => {
     const addToListSpy = mockMovieListService.add.and.returnValue(throwError(() => 'error'));
 
     component.movieDetail$ = of(movieDetail);
+    component.isAlreadyInList$ = of(false);
 
     fixture.detectChanges();
 
@@ -217,9 +216,6 @@ describe('Testing Movie detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
-    component.movieDetail$.subscribe(movie => {
-      expect(movie.isAlreadyInList).toBeFalse()
-    });
 
   });
 

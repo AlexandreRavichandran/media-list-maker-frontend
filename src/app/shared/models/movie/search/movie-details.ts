@@ -12,6 +12,5 @@ export interface MovieDetails {
     director: string;
     pictureUrl: string;
     ratings: Rating[];
-    isAlreadyInList: boolean;
 
 }

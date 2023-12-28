@@ -239,6 +239,22 @@ describe('Testing Movie List service', () => {
 
   });
 
+  it('should return if movie is already on app user list', () => {
+
+    service.isAlreadyInAppUserMovieList('XXX1')
+      .subscribe(data => {
+        expect(data).toEqual(true);
+      });
+
+    const request = httpTestingController
+      .expectOne(`${environmentUrl}/lists/movies/apicode/XXX1`);
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(true);
+
+  });
+
   it('should delete movie in list by id', () => {
 
     const data: MovieListItem = {
