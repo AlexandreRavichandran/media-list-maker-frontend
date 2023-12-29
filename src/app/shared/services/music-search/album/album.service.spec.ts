@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AlbumService } from './album.service';
+import { AlbumSearchService } from './album.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
@@ -10,17 +10,17 @@ import { FormGroup } from '@angular/forms';
 
 describe('Testing Album search service', () => {
 
-  let service: AlbumService;
+  let service: AlbumSearchService;
   let environmentUrl: string = environment.apiUrl;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AlbumService]
+      providers: [AlbumSearchService]
     });
 
-    service = TestBed.inject(AlbumService);
+    service = TestBed.inject(AlbumSearchService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -43,8 +43,9 @@ describe('Testing Album search service', () => {
           title: 'Album 1',
           pictureUrl: 'Picture 1',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         },
         {
@@ -52,15 +53,16 @@ describe('Testing Album search service', () => {
           title: 'Album 1',
           pictureUrl: 'Picture 1',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         }
       ],
       totalResults: 30
     };
 
-    service.browseByAlbumName('test')
+    service.browseByQuery('test')
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })
@@ -81,8 +83,9 @@ describe('Testing Album search service', () => {
       pictureUrl: 'Picture url',
       releasedAt: '05/12/2021',
       artist: {
-        id: 'YY1',
-        name: 'Artist 1'
+        apiCode: 'YY1',
+        name: 'Artist 1',
+        pictureUrl: 'https://picture.com'
       },
       genreList: [
         {
@@ -124,8 +127,9 @@ describe('Testing Album search service', () => {
           trackNumber: 1,
           preview: 'preview',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         },
         {
@@ -136,8 +140,9 @@ describe('Testing Album search service', () => {
           trackNumber: 1,
           preview: 'preview',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         },
       ]

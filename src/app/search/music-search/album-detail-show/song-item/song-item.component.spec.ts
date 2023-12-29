@@ -30,8 +30,9 @@ describe('Testing song item component', () => {
       trackNumber: 1,
       preview: 'http://preview.com',
       artist: {
-        id: '1',
-        name: 'Artist'
+        apiCode: '1',
+        name: 'Artist',
+        pictureUrl: 'https://picture.com'
       }
     };
 

@@ -6,7 +6,7 @@ import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-det
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { SongDetails } from 'src/app/shared/models/music/search/song/song-details';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
-import { AlbumService } from 'src/app/shared/services/music-search/album/album.service';
+import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album.service';
 
 @Component({
   selector: 'mlm-album-detail-show',
@@ -21,7 +21,7 @@ export class AlbumDetailShowComponent implements OnInit {
   trackList$!: Observable<TrackList>;
 
   constructor(
-    private albumSearchService: AlbumService,
+    private albumSearchService: AlbumSearchService,
     private musicListService: MusicListService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -61,13 +61,3 @@ export class AlbumDetailShowComponent implements OnInit {
 
   }
 }
-
-//TODO 
-/**
- * Faire en sorte que l'api is already in list soit isolé
- * Comme ca on met a jour que le bouton et pas le reste
- * En gros on aura 2 appel: appel de la musique + appel isolé is isAlreadyInList
- * 
- * Et quand c'est ajouté on met a jour le bouton uniquement
- * Le bouton disparait, c'est normal, faut ajouter le loading
- */

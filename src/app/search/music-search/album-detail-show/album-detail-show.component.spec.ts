@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumDetailShowComponent } from './album-detail-show.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlbumService } from 'src/app/shared/services/music-search/album/album.service';
+import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album.service';
 import { SearchModule } from '../../search.module';
 import { AppModule } from 'src/app/app.module';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
@@ -17,7 +17,7 @@ describe('Testing Album detail show component', () => {
 
   let component: AlbumDetailShowComponent;
   let fixture: ComponentFixture<AlbumDetailShowComponent>;
-  let mockAlbumSearchService: jasmine.SpyObj<AlbumService>;
+  let mockAlbumSearchService: jasmine.SpyObj<AlbumSearchService>;
   let mockMusicListService: jasmine.SpyObj<MusicListService>;
   let activatedRoute: ActivatedRoute;
   let router: Router;
@@ -32,7 +32,7 @@ describe('Testing Album detail show component', () => {
       imports: [AppModule, SearchModule],
       providers: [
         {
-          provide: AlbumService,
+          provide: AlbumSearchService,
           useValue: mockAlbumSearchService
         },
         {
@@ -68,7 +68,7 @@ describe('Testing Album detail show component', () => {
       releasedAt: '2020',
       genreList: [],
       artist: {
-        id: '1',
+        apiCode: '1',
         name: 'artist'
       },
       pictureUrl: 'http://url.com'
@@ -86,7 +86,7 @@ describe('Testing Album detail show component', () => {
           trackNumber: 1,
           preview: 'http://preview.com',
           artist: {
-            id: '1',
+            apiCode: '1',
             name: 'Artist'
           }
         }
@@ -122,7 +122,7 @@ describe('Testing Album detail show component', () => {
       releasedAt: '2020',
       genreList: [],
       artist: {
-        id: '1',
+        apiCode: '1',
         name: 'artist'
       },
       pictureUrl: 'http://url.com'
@@ -140,7 +140,7 @@ describe('Testing Album detail show component', () => {
           trackNumber: 1,
           preview: 'http://preview.com',
           artist: {
-            id: '1',
+            apiCode: '1',
             name: 'Artist'
           }
         }
@@ -183,7 +183,7 @@ describe('Testing Album detail show component', () => {
       releasedAt: '2020',
       genreList: [],
       artist: {
-        id: '1',
+        apiCode: '1',
         name: 'artist'
       },
       pictureUrl: 'http://url.com'
@@ -201,7 +201,7 @@ describe('Testing Album detail show component', () => {
           trackNumber: 1,
           preview: 'http://preview.com',
           artist: {
-            id: '1',
+            apiCode: '1',
             name: 'Artist'
           }
         }
@@ -243,7 +243,7 @@ describe('Testing Album detail show component', () => {
       releasedAt: '2020',
       genreList: [],
       artist: {
-        id: '1',
+        apiCode: '1',
         name: 'artist'
       },
       pictureUrl: 'http://url.com'
@@ -261,7 +261,7 @@ describe('Testing Album detail show component', () => {
           trackNumber: 1,
           preview: 'http://preview.com',
           artist: {
-            id: '1',
+            apiCode: '1',
             name: 'Artist'
           }
         }

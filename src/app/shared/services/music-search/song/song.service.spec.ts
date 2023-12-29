@@ -39,8 +39,9 @@ describe('Testing Song search service', () => {
           duration: "120",
           preview: 'preview',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         },
         {
@@ -49,8 +50,9 @@ describe('Testing Song search service', () => {
           duration: "120",
           preview: 'preview',
           artist: {
-            id: 'YY1',
-            name: 'Artist 1'
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
           }
         },
       ]
@@ -79,8 +81,9 @@ describe('Testing Song search service', () => {
       trackNumber: 1,
       preview: 'preview',
       artist: {
-        id: 'YY1',
-        name: 'Artist 1'
+        apiCode: 'YY1',
+        name: 'Artist 1',
+        pictureUrl: 'https://picture.com'
       }
 
     };

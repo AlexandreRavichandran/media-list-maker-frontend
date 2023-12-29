@@ -19,7 +19,10 @@
                                 {{this.genreItem.name}}
                             </p>
                         </div>
-                        <p class="music__director">{{this.albumDetail.artist.name}}</p>
+                        <div class="flex music__artist__section">
+                            <img class="music__artist__picture" src="{{this.albumDetail.artist.pictureUrl}}" alt="">
+                            <p class="music__artist__name">{{this.albumDetail.artist.name}}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-4 flex justify-center">

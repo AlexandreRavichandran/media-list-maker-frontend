@@ -1,6 +1,6 @@
 export interface ArtistDetails {
 
-    id: string;
+    apiCode: string;
     name: string;
-    
+    pictureUrl: string | null;
 }

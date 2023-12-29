@@ -14,6 +14,6 @@ export abstract class AbstractService {
     }
 
     getResourceUrl(): string {
-        return `${this.baseUrl + this.serviceUrl}`;
+        return `${this.getBaseUrl() + this.serviceUrl}`;
     }
 }
