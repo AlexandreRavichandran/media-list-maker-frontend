@@ -6,6 +6,8 @@
             </div>
         </div>
         <div class="col-span-6">
+            <mlm-search-result-album *ngIf="this.type === 'album'"
+                [searchResults]="this.searchResults"></mlm-search-result-album>
             <mlm-search-result-movie *ngIf="this.type === 'movie'"
                 [searchResults]="this.searchResults"></mlm-search-result-movie>
         </div>

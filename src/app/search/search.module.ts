@@ -13,6 +13,7 @@ import { SearchComponent } from './search.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchResultAlbumComponent } from './search-result/search-result-album/search-result-album.component';
+import { SearchResultMovieComponent } from './search-result/search-result-movie/search-result-movie.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchResultAlbumComponent } from './search-result/search-result-album/
     SongListComponent,
     SearchComponent,
     SearchResultComponent,
-    SearchResultAlbumComponent
+    SearchResultAlbumComponent,
+    SearchResultMovieComponent
   ],
   imports: [
     SharedModule,

@@ -1,0 +1,16 @@
+<div class="search__result__display__section">
+    <div class="flex justify-end">
+        <p class="result__number">1-25 on {{this.searchResults.totalResults}} results</p>
+    </div>
+    <div class="search__result__display">
+        <div *ngFor="let movie of this.searchResults.searchResults"
+            (click)="this.onClickMovieDetails(this.movie.apiCode)" class="movie__element flex">
+            <div class="movie__picture__section">
+                <img class="movie__picture" [src]="this.movie.pictureUrl" alt="">
+            </div>
+            <div class="movie__detail__section flex flex-col justify-center">
+                <p class="movie__title">{{this.movie.title}}</p>
+            </div>
+        </div>
+    </div>
+</div>
