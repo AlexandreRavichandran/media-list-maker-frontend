@@ -14,7 +14,8 @@
             <div class="empty__section__container">
                 <p class="empty__section__label">It seems like you don't have any music in your list !</p>
                 <div class="flex flex justify-center">
-                    <button class="empty__section__button" routerLink="/search">Add musics</button>
+                    <button class="empty__section__button" [routerLink]="['/search']"
+                        [queryParams]="{type: 'album'}">Add musics</button>
                 </div>
             </div>
         </div>

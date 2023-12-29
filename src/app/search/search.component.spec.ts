@@ -6,17 +6,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchModule } from './search.module';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+import { MovieSearchService } from '../shared/services/movie-search/movie-search.service';
+import { AlbumSearchService } from '../shared/services/music-search/album/album.service';
 
-describe('SearchComponent', () => {
+describe('Testing search component', () => {
 
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let activatedRoute: ActivatedRoute;
+  let mockMovieSearchService: jasmine.SpyObj<MovieSearchService>;
+  let mockAlbumSearchService: jasmine.SpyObj<AlbumSearchService>;
 
   beforeEach(async () => {
+
+    mockMovieSearchService = jasmine.createSpyObj('MovieSearchService', ['browseByQuery']);
+    mockAlbumSearchService = jasmine.createSpyObj('AlbumSearchService', ['browseByQuery']);
+
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
-      imports: [SearchModule, AppModule]
+      imports: [SearchModule, AppModule],
+      providers: [
+        {
+          provide: MovieSearchService,
+          useValue: mockMovieSearchService
+        },
+        {
+          provide: AlbumSearchService,
+          useValue: mockAlbumSearchService
+        }
+      ]
     })
       .compileComponents();
   });
@@ -80,6 +99,63 @@ describe('SearchComponent', () => {
     const searchButton: HTMLButtonElement = element.query(By.css('.search__button')).nativeElement;
 
     expect(searchButton.getAttributeNames().includes('disabled')).toBeTrue();
+
+  });
+
+  it('should not apply search if form is not valid', () => {
+
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('movie');
+    component.searchForm.get('query')?.setValue('');
+
+    fixture.detectChanges();
+
+    component.onSearch();
+
+    expect(browseMovieByQuerySpy).toHaveBeenCalledTimes(0);
+    expect(browseAlbumByQuerySpy).toHaveBeenCalledTimes(0);
+
+  });
+
+  it('should call movie search service when type is movie', () => {
+
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('movie');
+    component.searchForm.get('query')?.setValue('test');
+
+    fixture.detectChanges();
+
+    component.onSearch();
+
+    expect(browseMovieByQuerySpy).toHaveBeenCalledTimes(1);
+    expect(browseAlbumByQuerySpy).toHaveBeenCalledTimes(0);
+
+  });
+
+  it('should call album search service when type is movie', () => {
+
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('album');
+    component.searchForm.get('query')?.setValue('test');
+
+    fixture.detectChanges();
+
+    component.onSearch();
+
+    expect(browseMovieByQuerySpy).toHaveBeenCalledTimes(0);
+    expect(browseAlbumByQuerySpy).toHaveBeenCalledTimes(1);
 
   });
 

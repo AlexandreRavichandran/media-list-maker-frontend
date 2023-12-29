@@ -11,6 +11,8 @@ import { SongItemComponent } from './music-search/album-detail-show/song-item/so
 import { SongListComponent } from './music-search/album-detail-show/song-list/song-list.component';
 import { SearchComponent } from './search.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchResultAlbumComponent } from './search-result/search-result-album/search-result-album.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +24,14 @@ import { ReactiveFormsModule } from "@angular/forms";
     RottenTomatoesRatingTemplateComponent,
     SongItemComponent,
     SongListComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultComponent,
+    SearchResultAlbumComponent
   ],
   imports: [
     SharedModule,
     SearchRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
 
   providers: []

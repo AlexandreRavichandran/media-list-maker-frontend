@@ -12,8 +12,8 @@
     <div class="search__form__section">
         <form [formGroup]="this.searchForm" class="flex justify-center" (ngSubmit)="this.onSearch()">
             <select (change)="this.onTypeChange()" formControlName="type" class="field__type__select">
-                <option selected value="movie">Movie</option>
-                <option value="album">Album</option>
+                <option *ngFor="let type of this.searchTypeConstants.SEARCH_TYPE_LIST" [value]="type">{{type |
+                    titlecase}}</option>
             </select>
             <input formControlName="query" class="field__query__input" placeholder="Type your query here" type="text">
             <button [disabled]="!this.isFormValid()" class="search__button"
@@ -21,7 +21,8 @@
         </form>
     </div>
 
-    <div>
-
+    <div *ngIf="this.searchResult$ | async as searchResult">
+        <mlm-search-result [type]="this.searchForm.controls['type'].value"
+            [searchResults]="this.searchResult"></mlm-search-result>
     </div>
 </div>

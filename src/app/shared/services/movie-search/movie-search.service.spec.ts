@@ -53,7 +53,7 @@ describe('Testing Movie search service', () => {
       ]
     };
 
-    service.getByMovieName('test')
+    service.browseByQuery('test')
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })

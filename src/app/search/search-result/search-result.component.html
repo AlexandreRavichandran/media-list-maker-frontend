@@ -1,0 +1,13 @@
+<div class="container mx-auto search__result__section">
+    <div class="grid grid-cols-10">
+        <div class="col-span-3">
+            <div class="filter__form__section">
+
+            </div>
+        </div>
+        <div class="col-span-6">
+            <mlm-search-result-movie *ngIf="this.type === 'movie'"
+                [searchResults]="this.searchResults"></mlm-search-result-movie>
+        </div>
+    </div>
+</div>

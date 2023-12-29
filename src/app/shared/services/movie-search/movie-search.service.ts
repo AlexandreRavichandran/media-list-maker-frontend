@@ -6,17 +6,18 @@ import { Observable } from 'rxjs';
 import { MovieSearchList } from '../../models/movie/search/movie-search-list';
 import { MovieDetails } from '../../models/movie/search/movie-details';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SearchService } from '../search-service.services';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MovieSearchService extends AbstractService {
+export class MovieSearchService extends AbstractService implements SearchService {
 
   constructor(private http: HttpClient) {
     super(ApiServiceConstants.SERVICE_MOVIE);
   }
 
-  public getByMovieName(movieName: string): Observable<MovieSearchList> {
+  public browseByQuery(movieName: string): Observable<MovieSearchList> {
 
     return this.http.get<MovieSearchList>(`${this.getResourceUrl()}/omdbapi/names/${movieName}`);
 
@@ -29,11 +30,11 @@ export class MovieSearchService extends AbstractService {
   }
 
   public generateFilterForm(): FormGroup {
-    
+
     return new FormGroup({
       year: new FormControl('', Validators.required)
     });
-    
+
   }
 
 }
