@@ -115,6 +115,28 @@ describe('Testing Music List service', () => {
 
   });
 
+  it('should return empty array if nothing in user music list', () => {
+
+    const datas: MusicListItem[] = [];
+
+    service.browse()
+      .subscribe(datas => {
+        expect(datas).toEqual(datas);
+      });
+
+    const musicSpy = mockMusicService.browseByIds.and.returnValue(of([]));
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics');
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+
+    expect(musicSpy).toHaveBeenCalledTimes(0);
+
+
+  });
+
   it('should return user latest added music list', () => {
 
     const datas: MusicListItem[] = [
