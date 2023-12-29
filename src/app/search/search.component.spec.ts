@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchComponent } from './search.component';
 import { AppModule } from '../app.module';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SearchModule } from './search.module';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -55,6 +55,8 @@ describe('Testing search component', () => {
 
   it('should apply movie class if movie type is selected', () => {
 
+    component.searchForm.get('query')?.setValue('albumName');
+
     fixture.detectChanges();
 
     const element: DebugElement = fixture.debugElement;
@@ -71,6 +73,8 @@ describe('Testing search component', () => {
     fixture.detectChanges();
 
     component.searchForm.get('type')?.setValue('album');
+
+    component.searchForm.get('query')?.setValue('albumName');
 
     component.onTypeChange();
 

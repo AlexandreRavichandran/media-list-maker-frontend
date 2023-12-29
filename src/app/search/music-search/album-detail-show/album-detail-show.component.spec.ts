@@ -69,7 +69,8 @@ describe('Testing Album detail show component', () => {
       genreList: [],
       artist: {
         apiCode: '1',
-        name: 'artist'
+        name: 'artist',
+        pictureUrl: 'https://picture.com'
       },
       pictureUrl: 'http://url.com'
     };
@@ -87,7 +88,8 @@ describe('Testing Album detail show component', () => {
           preview: 'http://preview.com',
           artist: {
             apiCode: '1',
-            name: 'Artist'
+            name: 'Artist',
+            pictureUrl: 'https://picture.com'
           }
         }
       ]
@@ -123,7 +125,8 @@ describe('Testing Album detail show component', () => {
       genreList: [],
       artist: {
         apiCode: '1',
-        name: 'artist'
+        name: 'artist',
+        pictureUrl: 'https://picture.com'
       },
       pictureUrl: 'http://url.com'
     };
@@ -141,7 +144,8 @@ describe('Testing Album detail show component', () => {
           preview: 'http://preview.com',
           artist: {
             apiCode: '1',
-            name: 'Artist'
+            name: 'Artist',
+            pictureUrl: 'https://picture.com'
           }
         }
       ]
@@ -184,7 +188,8 @@ describe('Testing Album detail show component', () => {
       genreList: [],
       artist: {
         apiCode: '1',
-        name: 'artist'
+        name: 'artist',
+        pictureUrl: 'https://picture.com'
       },
       pictureUrl: 'http://url.com'
     };
@@ -202,7 +207,8 @@ describe('Testing Album detail show component', () => {
           preview: 'http://preview.com',
           artist: {
             apiCode: '1',
-            name: 'Artist'
+            name: 'Artist',
+            pictureUrl: 'https://picture.com'
           }
         }
       ]
@@ -244,7 +250,8 @@ describe('Testing Album detail show component', () => {
       genreList: [],
       artist: {
         apiCode: '1',
-        name: 'artist'
+        name: 'artist',
+        pictureUrl: 'https://picture.com'
       },
       pictureUrl: 'http://url.com'
     };
@@ -262,7 +269,8 @@ describe('Testing Album detail show component', () => {
           preview: 'http://preview.com',
           artist: {
             apiCode: '1',
-            name: 'Artist'
+            name: 'Artist',
+            pictureUrl: 'https://picture.com'
           }
         }
       ]
