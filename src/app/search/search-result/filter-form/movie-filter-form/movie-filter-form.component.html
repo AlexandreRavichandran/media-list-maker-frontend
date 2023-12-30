@@ -1,0 +1,17 @@
+<div class="filter__form__section">
+    <div class="flex justify-around">
+        <div>
+            <button (click)="this.onResetForm()" class="filter__form__button reset__button">Reset filter</button>
+
+        </div>
+        <button (click)="this.onApplyFilter()" class="filter__form__button apply__button">Apply
+            filter</button>
+    </div>
+
+    <form class="flex flex-col mt-5" [formGroup]="movieForm">
+        <div class="flex justify-around">
+            <label class="form__label" for="year">Year</label>
+            <input class="form__input" name="year" placeholder="2000" formControlName="year">
+        </div>
+    </form>
+</div>

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 
@@ -19,7 +18,4 @@ export class SearchResultAlbumComponent {
     this.router.navigate(['/search/albums', albumApiCode]);
   }
 
-  handlePageEvent(event: PageEvent) {
-    console.log(event);
-  }
 }

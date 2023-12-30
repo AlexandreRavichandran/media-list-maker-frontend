@@ -10,6 +10,7 @@
         height: 550px;
         overflow: scroll;
         overflow-x: hidden;
+        color: white;
 
         .movie__element {
             width: 925px;
@@ -34,7 +35,7 @@
                     font-size: 25px;
                 }
 
-                .movie__artist {
+                .movie__releasedAt {
                     margin: 0;
                     font-size: 20px;
                 }

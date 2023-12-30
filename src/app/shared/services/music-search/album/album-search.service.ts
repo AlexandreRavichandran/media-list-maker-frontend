@@ -8,6 +8,7 @@ import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-det
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchService } from '../../search-service.services';
+import { AlbumSearchRequest } from 'src/app/shared/models/music/search/album/album-search-request';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,13 @@ export class AlbumSearchService extends AbstractService implements SearchService
 
   public browseByQuery(albumName: string): Observable<AlbumSearchList> {
     const params: HttpParams = new HttpParams().set('name', albumName);
+    return this.http.get<AlbumSearchList>(`${this.getResourceUrl()}/deezerapi/albums`, { params });
+  }
+
+  public browseByQueryAndFilter(filters: AlbumSearchRequest): Observable<AlbumSearchList> {
+
+    const params: HttpParams = this.getHttpParamByQueryObject(filters);
+
     return this.http.get<AlbumSearchList>(`${this.getResourceUrl()}/deezerapi/albums`, { params });
   }
 

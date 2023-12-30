@@ -8,8 +8,9 @@
             <div class="movie__picture__section">
                 <img class="movie__picture" [src]="this.movie.pictureUrl" alt="">
             </div>
-            <div class="movie__detail__section flex flex-col justify-center">
+            <div class="movie__detail__section flex flex-col justify-around">
                 <p class="movie__title">{{this.movie.title}}</p>
+                <p class="movie__releasedAt"> {{this.movie.releasedAt}}</p>
             </div>
         </div>
     </div>

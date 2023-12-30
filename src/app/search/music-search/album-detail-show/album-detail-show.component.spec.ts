@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumDetailShowComponent } from './album-detail-show.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album.service';
+import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album-search.service';
 import { SearchModule } from '../../search.module';
 import { AppModule } from 'src/app/app.module';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';

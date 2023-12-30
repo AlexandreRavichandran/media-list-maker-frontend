@@ -8,7 +8,8 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { MovieSearchService } from '../shared/services/movie-search/movie-search.service';
-import { AlbumSearchService } from '../shared/services/music-search/album/album.service';
+import { AlbumSearchService } from '../shared/services/music-search/album/album-search.service';
+import { AlbumSearchRequest } from '../shared/models/music/search/album/album-search-request';
 
 describe('Testing search component', () => {
 
@@ -21,7 +22,7 @@ describe('Testing search component', () => {
   beforeEach(async () => {
 
     mockMovieSearchService = jasmine.createSpyObj('MovieSearchService', ['browseByQuery']);
-    mockAlbumSearchService = jasmine.createSpyObj('AlbumSearchService', ['browseByQuery']);
+    mockAlbumSearchService = jasmine.createSpyObj('AlbumSearchService', ['browseByQuery', 'browseByQueryAndFilter']);
 
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
@@ -85,6 +86,33 @@ describe('Testing search component', () => {
 
     expect(searchButton.classList.contains('search__movie__button')).toBeFalse();
     expect(searchButton.classList.contains('search__music__button')).toBeTrue();
+    expect(searchButton.getAttributeNames().includes('disabled')).toBeFalse();
+
+  });
+
+  it('should apply movie class if movie type is selected', () => {
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('album');
+
+    component.searchForm.get('query')?.setValue('albumName');
+
+    component.onTypeChange();
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('movie');
+
+    component.onTypeChange();
+
+    fixture.detectChanges();
+
+    const element: DebugElement = fixture.debugElement;
+    const searchButton: HTMLButtonElement = element.query(By.css('.search__button')).nativeElement;
+
+    expect(searchButton.classList.contains('search__music__button')).toBeFalse();
+    expect(searchButton.classList.contains('search__movie__button')).toBeTrue();
     expect(searchButton.getAttributeNames().includes('disabled')).toBeFalse();
 
   });
@@ -160,6 +188,29 @@ describe('Testing search component', () => {
 
     expect(browseMovieByQuerySpy).toHaveBeenCalledTimes(0);
     expect(browseAlbumByQuerySpy).toHaveBeenCalledTimes(1);
+
+  });
+
+  it('should call search service with filter', () => {
+
+    const browseAlbumByQueryAndFilterSpy = mockAlbumSearchService.browseByQueryAndFilter.and.returnValue(of());
+
+    fixture.detectChanges();
+
+    component.searchForm.get('type')?.setValue('album');
+    component.searchForm.get('query')?.setValue('test');
+
+    fixture.detectChanges();
+
+    const filter: AlbumSearchRequest = {
+      name: 'name',
+      artist: 'artist',
+      label: 'label'
+    };
+
+    component.onApplyFilter(filter);
+
+    expect(browseAlbumByQueryAndFilterSpy).toHaveBeenCalled();
 
   });
 

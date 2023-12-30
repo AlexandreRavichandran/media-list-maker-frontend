@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { MovieSearchList } from '../../models/movie/search/movie-search-list';
 import { MovieDetails } from '../../models/movie/search/movie-details';
 import { FormGroup } from '@angular/forms';
+import { MovieSearchRequest } from '../../models/movie/search/movie-search-request';
 
 describe('Testing Movie search service', () => {
 
@@ -58,9 +59,48 @@ describe('Testing Movie search service', () => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi/names/test');
+    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test');
 
     expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+
+  });
+
+  it('should return movie search list by filter', () => {
+
+    const datas: MovieSearchList = {
+      totalResults: 2,
+      searchResults: [
+        {
+          title: 'Movie 1',
+          apiCode: 'XXX1',
+          pictureUrl: 'http://linkurl.jpg',
+          releasedAt: 2001
+        },
+        {
+          title: 'Movie 2',
+          apiCode: 'XXX2',
+          pictureUrl: 'http://linkurl.jpg',
+          releasedAt: 2000
+        },
+      ]
+    };
+
+    const filters: MovieSearchRequest = {
+      name: 'test',
+      year: '2010',
+    }
+
+    service.browseByQueryAndFilter(filters)
+      .subscribe(datas => {
+        expect(datas).toEqual(datas);
+      })
+
+    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test&year=2010');
+
+    expect(request.request.method).toEqual('GET');
+    console.log(request.request.params);
 
     request.flush(datas);
 

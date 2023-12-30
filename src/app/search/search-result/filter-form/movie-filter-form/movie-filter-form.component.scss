@@ -1,0 +1,52 @@
+.filter__form__section {
+    margin-top: 32px;
+    color: white;
+
+    .form__input {
+        width: 300px;
+        height: 38px;
+        color: black;
+        font-size: 20px;
+        padding-left: 12px;
+        border-radius: 11px;
+    }
+
+    .form__label {
+        font-size: 20px;
+        align-self: center;
+        color: white;
+    }
+
+    .filter__form__button {
+        font-size: 20px;
+        padding: 9px 33px;
+        color: white;
+        border-radius: 11px;
+
+        &:hover {
+            border: 1px solid white;
+        }
+
+        &.reset__button {
+            border-right: 5px solid #014b00;
+            background-color: #014b00;
+            border: 1px solid #014b00;
+
+            &:hover {
+                background-color: #013700;
+            }
+        }
+
+        &.apply__button {
+            border-right: 5px solid #12004b;
+            background-color: #240089;
+            border: 1px solid #240089;
+
+            &:hover {
+                background-color: #18015c;
+            }
+        }
+
+    }
+
+}

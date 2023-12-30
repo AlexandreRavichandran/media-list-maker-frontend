@@ -1,0 +1,10 @@
+<div>
+
+    <div *ngIf="this.type === 'movie'" class="mt-5">
+        <mlm-movie-filter-form (applyFilterEvent)="this.onApplyFilter($event)"></mlm-movie-filter-form>
+    </div>
+
+    <div *ngIf="this.type === 'album'" class="mt-5">
+        <mlm-album-filter-form (applyFilterEvent)="this.onApplyFilter($event)"></mlm-album-filter-form>
+    </div>
+</div>

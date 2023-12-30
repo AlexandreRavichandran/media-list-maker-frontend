@@ -11,9 +11,11 @@ import { SongItemComponent } from './music-search/album-detail-show/song-item/so
 import { SongListComponent } from './music-search/album-detail-show/song-list/song-list.component';
 import { SearchComponent } from './search.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchResultAlbumComponent } from './search-result/search-result-album/search-result-album.component';
 import { SearchResultMovieComponent } from './search-result/search-result-movie/search-result-movie.component';
+import { FilterFormComponent } from './search-result/filter-form/filter-form.component';
+import { MovieFilterFormComponent } from './search-result/filter-form/movie-filter-form/movie-filter-form.component';
+import { AlbumFilterFormComponent } from './search-result/filter-form/album-filter-form/album-filter-form.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { SearchResultMovieComponent } from './search-result/search-result-movie/
     SongItemComponent,
     SongListComponent,
     SearchComponent,
-    SearchResultComponent,
     SearchResultAlbumComponent,
-    SearchResultMovieComponent
+    SearchResultMovieComponent,
+    FilterFormComponent,
+    MovieFilterFormComponent,
+    AlbumFilterFormComponent
   ],
   imports: [
     SharedModule,

@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AlbumSearchService } from './album.service';
+import { AlbumSearchService } from './album-search.service';
 import { environment } from 'src/environments/environment';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { FormGroup } from '@angular/forms';
+import { AlbumSearchRequest } from 'src/app/shared/models/music/search/album/album-search-request';
 
 describe('Testing Album search service', () => {
 
@@ -68,6 +69,53 @@ describe('Testing Album search service', () => {
       })
 
     const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test');
+
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(datas);
+
+  });
+
+  it('should return album search list by filter', () => {
+
+    const datas: AlbumSearchList = {
+      searchResults: [
+        {
+          apiCode: 'XXX1',
+          title: 'Album 1',
+          pictureUrl: 'Picture 1',
+          artist: {
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
+          }
+        },
+        {
+          apiCode: 'XXX1',
+          title: 'Album 1',
+          pictureUrl: 'Picture 1',
+          artist: {
+            apiCode: 'YY1',
+            name: 'Artist 1',
+            pictureUrl: 'https://picture.com'
+          }
+        }
+      ],
+      totalResults: 30
+    };
+
+    const filters: AlbumSearchRequest = {
+      name: 'test',
+      artist: 'test',
+      label: 'test'
+    };
+
+    service.browseByQueryAndFilter(filters)
+      .subscribe(datas => {
+        expect(datas).toEqual(datas);
+      })
+
+    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test&artist=test&label=test');
 
     expect(request.request.method).toEqual('GET');
 

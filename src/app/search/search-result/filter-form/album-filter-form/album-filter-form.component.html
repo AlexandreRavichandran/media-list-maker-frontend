@@ -1,0 +1,20 @@
+<div class="filter__form__section">
+    <div class="flex justify-around">
+        <div>
+            <button (click)="this.onResetForm()" class="filter__form__button reset__button">Reset filter</button>
+
+        </div>
+        <button (click)="this.onApplyFilter()" class="filter__form__button apply__button">Apply
+            filter</button>
+    </div>
+    <form class="flex flex-col mt-5" [formGroup]="albumForm">
+        <div class="flex justify-around">
+            <label class="form__label" for="artist">Artist</label>
+            <input class="form__input" name="artist" placeholder="Eminem, Jay-Z..." formControlName="artist">
+        </div>
+        <div class="flex justify-around mt-5">
+            <label class="form__label" for="label">Label</label>
+            <input class="form__input" name="label" placeholder="Def Jam, Because..." formControlName="label">
+        </div>
+    </form>
+</div>

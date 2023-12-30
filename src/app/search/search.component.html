@@ -21,8 +21,20 @@
         </form>
     </div>
 
-    <div *ngIf="this.searchResult$ | async as searchResult">
-        <mlm-search-result [type]="this.searchForm.controls['type'].value"
-            [searchResults]="this.searchResult"></mlm-search-result>
+    <div *ngIf="this.isSearchDisplayed">
+        <div class="container mx-auto search__result__section">
+            <div class="grid grid-cols-10">
+                <div class="col-span-3">
+                    <mlm-filter-form [type]="this.type"
+                        (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
+                </div>
+                <div *ngIf="this.searchResult$ | async as searchResults" [ngSwitch]="this.type" class="col-span-6">
+                    <mlm-search-result-album *ngSwitchCase="'album'"
+                        [searchResults]="this.searchResults"></mlm-search-result-album>
+                    <mlm-search-result-movie *ngSwitchCase="'movie'"
+                        [searchResults]="this.searchResults"></mlm-search-result-movie>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
