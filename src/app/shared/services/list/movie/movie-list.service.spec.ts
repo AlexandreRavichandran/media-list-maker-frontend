@@ -280,4 +280,72 @@ describe('Testing Movie List service', () => {
 
   });
 
+  it('should edit sorting order and return list of user movie', () => {
+
+    const datas: MovieListItem[] = [
+      {
+        id: 1,
+        movieId: 1,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 1,
+        movieDetail: undefined
+      },
+      {
+        id: 2,
+        movieId: 1,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 2,
+        movieDetail: undefined
+      },
+      {
+        id: 3,
+        movieId: 1,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 3,
+        movieDetail: undefined
+      }
+    ];
+
+    const mockMovieList: Movie[] = [
+      {
+        id: 1,
+        title: "title 1",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 2,
+        title: "title 2",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 3,
+        title: "title 3",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      }
+    ];
+
+    service.editSortingOrder(1, 1)
+      .subscribe(data => {
+        expect(data).toEqual(data);
+      });
+
+    const movieSpy = mockMovieService.browseByIds.and.returnValue(of(mockMovieList));
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/movies/1');
+
+    expect(request.request.method).toEqual('PUT');
+
+    request.flush(datas);
+
+  });
+
 });
