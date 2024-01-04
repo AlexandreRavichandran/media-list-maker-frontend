@@ -23,102 +23,182 @@
     }
 }
 
-.music__section {
+.music__album__section {
     margin-top: 80px;
     color: white;
 
-    .music__picture {
-        width: 384px;
-        width: 534px;
-        border-radius: 5px;
-    }
+    .music__section {
+        height: 592px;
 
-    .music__details {
-        padding-left: 15px;
-        padding-top: 20px;
-
-        .music__title {
-            font-size: 40px;
+        .music__picture {
+            width: 384px;
+            width: 534px;
+            border-radius: 5px;
         }
 
-        .music__genres {
-            margin-top: 25px;
+        .music__details {
+            padding-left: 15px;
+            padding-top: 20px;
 
-            .genres__item {
-                padding: 2px 30px;
-                border-radius: 19px;
-                background-color: #6A006C;
-                color: white;
-                margin-right: 10px;
+            .music__title {
+                font-size: 40px;
             }
-        }
 
-        .music__in__list {
+            .music__genres {
+                margin-top: 25px;
 
-            .music__add__button {
-                font-size: 25px;
-                padding: 15px 30px;
-                border-radius: 11px;
-                background-color: #890000;
-                border: 1px solid #890000;
-
-                &:hover {
-                    background-color: #5d0000;
-                    border: 1px solid white;
+                .genres__item {
+                    padding: 2px 30px;
+                    border-radius: 19px;
+                    background-color: #6A006C;
+                    color: white;
+                    margin-right: 10px;
                 }
             }
 
-            .music__already__in__list {
-                font-size: 15px;
-                padding: 15px 18px;
-                border-radius: 11px;
-                background-color: #1C1925;
-                border: 1px solid #1C1925;
+            .music__in__list {
+
+                .music__add__button {
+                    font-size: 25px;
+                    padding: 15px 30px;
+                    border-radius: 11px;
+                    background-color: #890000;
+                    border: 1px solid #890000;
+
+                    &:hover {
+                        background-color: #5d0000;
+                        border: 1px solid white;
+                    }
+                }
+
+                .music__already__in__list {
+                    font-size: 15px;
+                    padding: 15px 18px;
+                    border-radius: 11px;
+                    background-color: #1C1925;
+                    border: 1px solid #1C1925;
+                }
+
             }
 
-        }
 
 
-
-        .music__duration {
-            font-size: 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .music__artist__section {
-
-            .music__artist__picture {
-                width: 100px;
-                height: 100px;
-                margin-right: 20px;
-                border: 1px solid white;
-                border-radius: 5px;
+            .music__duration {
+                font-size: 20px;
+                margin-top: 20px;
+                text-align: center;
             }
 
-            .music__artist__name {
-                font-size: 25px;
-                margin-top: 10px;
-                align-self: center;
+            .music__artist__section {
+
+                .music__artist__picture {
+                    width: 100px;
+                    height: 100px;
+                    margin-right: 20px;
+                    border: 1px solid white;
+                    border-radius: 5px;
+                }
+
+                .music__artist__name {
+                    font-size: 25px;
+                    margin-top: 10px;
+                    align-self: center;
+                }
             }
-        }
 
-        .music__actors {
-            font-size: 20px;
-            margin-top: 25px;
-            margin-bottom: 20px;
-        }
+            .music__actors {
+                font-size: 20px;
+                margin-top: 25px;
+                margin-bottom: 20px;
+            }
 
-        .music__synopsis {
-            margin-top: 30px;
-            line-height: 30px;
-            font-size: 18px;
-            width: 1043px;
-        }
+            .music__synopsis {
+                margin-top: 30px;
+                line-height: 30px;
+                font-size: 18px;
+                width: 1043px;
+            }
 
-        .music__ratings {
-            margin-top: 25px;
-            width: 1043px;
+            .music__ratings {
+                margin-top: 25px;
+                width: 1043px;
+            }
         }
     }
+
+
+    .separation__section {
+        margin-top: 35px;
+
+        .separation {
+            width: 250px;
+            border: 1px solid white;
+        }
+    }
+
+    .artist__related__section {
+        margin-top: 35px;
+        height: 700px;
+        min-width: 1456px;
+
+        .artist__related__title {
+            font-size: 25px;
+        }
+
+        .list__section {
+            width: 1456px;
+            overflow-y: hidden;
+            overflow-x: auto;
+            margin-bottom: 30px;
+
+            .artist__related__section__list {
+                margin-top: 40px;
+                margin-bottom: 40px;
+                width: 6537px;
+
+                .artist__related__item {
+                    width: 300px;
+                    margin-right: 20px;
+
+                    .item__picture {
+                        width: 250px;
+                        height: 250px;
+                        border-radius: 11px;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.10);
+                        transition: transform 0.5s;
+                    }
+
+                    .item__details {
+                        margin-top: 20px;
+                        font-size: 18px;
+                        margin-bottom: 0;
+                        text-align: center;
+
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f97474;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #890000;
 }

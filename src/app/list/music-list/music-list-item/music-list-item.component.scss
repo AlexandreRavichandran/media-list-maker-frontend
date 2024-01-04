@@ -34,3 +34,18 @@
         }
     }
 }
+
+.music__delete__section {
+    align-self: center;
+    color: white;
+    margin-left: 20px;
+
+    &:hover {
+        cursor: pointer;
+        color: #890000;
+    }
+
+    .music__delete__button {
+        font-size: 30px;
+    }
+}

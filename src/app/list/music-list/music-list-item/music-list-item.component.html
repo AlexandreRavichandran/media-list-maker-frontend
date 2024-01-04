@@ -1,13 +1,18 @@
-<div (click)="this.onClickDetails()" class="item__music__section container mx-auto">
-    <div class="flex flex justify-end">
-        <p class="item__music__addedAt">Added {{this.musicItem.addedAt | timeAgo }}</p>
+<div class="flex">
+    <div (click)="this.onClickDetails()" class="item__music__section container mx-auto">
+        <div class="flex flex justify-end">
+            <p class="item__music__addedAt">Added {{this.musicItem.addedAt | timeAgo }}</p>
+        </div>
+        <div class="item__music__card grid grid-cols-12">
+            <div class="col-span-3">
+                <img class="music__picture" [src]="this.musicItem.musicDetail?.pictureUrl" alt="">
+            </div>
+            <div class="col-span-9 flex justify-center items-center">
+                <p class="music__name">{{this.musicItem.musicDetail?.title}}</p>
+            </div>
+        </div>
     </div>
-    <div class="item__music__card grid grid-cols-12">
-        <div class="col-span-3">
-            <img class="music__picture" [src]="this.musicItem.musicDetail?.pictureUrl" alt="">
-        </div>
-        <div class="col-span-9 flex justify-center items-center">
-            <p class="music__name">{{this.musicItem.musicDetail?.title}}</p>
-        </div>
+    <div *ngIf="this.isDeletable" class="music__delete__section flex justify-center items-center">
+        <mat-icon (click)="this.onDelete()" class="music__delete__button">delete_outline</mat-icon>
     </div>
 </div>

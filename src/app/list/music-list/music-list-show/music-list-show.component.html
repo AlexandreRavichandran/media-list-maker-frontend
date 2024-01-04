@@ -6,14 +6,17 @@
         </ul>
     </div>
     <div *ngIf="this.userMusicList$ | async as musicList" class="grid grid-cols-12">
-        <div class="col-start-12 col-end-6 flex flex-col music__list">
-            <div class="grid grid-cols-12" *ngFor="let musicItem of this.musicList">
+        <div class="col-start-12 col-end-6 flex flex-col music__list" cdkDropList [cdkDropListData]="this.musicList"
+            (cdkDropListDropped)="this.onItemDragnDropped($event)">
+            <div class="grid grid-cols-12" *ngFor="let musicItem of this.musicList" cdkDrag>
                 <div class="col-start-7 col-end-5 flex justify-center items-center">
                     <div class="sorting__order__section flex justify-center items-center">
                         <p class="music__sorting__order">{{musicItem.sortingOrder}}</p>
                     </div>
                 </div>
-                <mlm-music-list-item class="col-span-5 music__item" [musicItem]="musicItem"></mlm-music-list-item>
+                <mlm-music-list-item (onDeleteItemEvent)="this.onRefreshList()" class="col-span-5 music__item"
+                    [isDeletable]="true" [musicItem]="musicItem">
+                </mlm-music-list-item>
             </div>
         </div>
     </div>

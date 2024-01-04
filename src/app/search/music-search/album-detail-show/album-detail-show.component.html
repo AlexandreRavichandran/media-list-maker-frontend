@@ -4,8 +4,8 @@
         <li routerLink="/me" class="menu__list__item">My lists</li>
     </ul>
 </div>
-<div class="music__section container mx-auto">
-    <div class="grid grid-cols-12" *ngIf="this.albumDetail$ | async as albumDetail">
+<div class="music__album__section container mx-auto" *ngIf="this.albumDetail$ | async as albumDetail">
+    <div class="grid grid-cols-12 music__section">
         <div class="col-span-4">
             <img class="music__picture" [src]="this.albumDetail.pictureUrl" alt="">
         </div>
@@ -45,6 +45,27 @@
                 <mlm-song-list [songList]="this.trackList.songList"></mlm-song-list>
             </div>
         </div>
+    </div>
+    <div class="separation__section flex justify-center">
+        <div class="separation">
 
+        </div>
+    </div>
+    <div class="artist__related__section mt-5" *ngIf="this.artistRelatedAlbums$ | async as relatedAlbums">
+        <p class="artist__related__title">Other releases of {{this.albumDetail.artist.name}}</p>
+        <div class="list__section flex items-center">
+            <div class="flex artist__related__section__list">
+                <div *ngFor="let album of this.relatedAlbums.albumList">
+                    <div *ngIf="this.albumDetail.apiCode !== this.album.apiCode"
+                        class="artist__related__item flex flex-col justify-between items-center">
+                        <img class="item__picture" [src]="this.album.pictureUrl" alt="">
+                        <div class="item__details flex flex-col justify-center items-center">
+                            <p class="item__title"> {{this.album.title}}</p>
+                            <p class="item__releasedAt">{{this.album.releasedAt}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

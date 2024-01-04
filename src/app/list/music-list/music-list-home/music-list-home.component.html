@@ -3,7 +3,7 @@
     <div *ngIf="this.userMusicList$ | async as musicList">
         <div *ngIf="musicList.length !== 0">
             <div class="list__musics__section">
-                <mlm-music-list-item class="music__item" *ngFor="let musicItem of musicList"
+                <mlm-music-list-item class="music__item" *ngFor="let musicItem of musicList" [isDeletable]="false"
                     [musicItem]="musicItem"></mlm-music-list-item>
             </div>
             <div class="flex justify-end">

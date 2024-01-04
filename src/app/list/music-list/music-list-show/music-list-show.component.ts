@@ -1,5 +1,6 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, of, switchMap } from 'rxjs';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
 import { MusicService } from 'src/app/shared/services/music/music.service';
@@ -13,15 +14,25 @@ export class MusicListShowComponent {
 
   userMusicList$: Observable<MusicListItem[]> = this.getAllUserMusicList();
 
-  randomMusicPictureUrl$: Observable<string> = this.musicService.getRandomIllustrationPictureUrl();
-
   constructor(
-    private musicListService: MusicListService,
-    private musicService: MusicService
-  ) { }
+    private musicListService: MusicListService) { }
 
   getAllUserMusicList(): Observable<MusicListItem[]> {
     return this.musicListService.browse();
   }
 
+  onRefreshList(): void {
+
+    this.userMusicList$ = this.getAllUserMusicList();
+
+  }
+
+  onItemDragnDropped($event: CdkDragDrop<MusicListItem[]>) {
+
+    moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
+    const itemDragnDropped: MusicListItem = $event.container.data[$event.currentIndex];
+
+    this.userMusicList$ = this.musicListService.editSortingOrder(itemDragnDropped.id, $event.currentIndex + 1);
+
+  }
 }

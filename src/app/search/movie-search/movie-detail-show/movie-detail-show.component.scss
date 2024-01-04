@@ -99,10 +99,13 @@
 
         .movie__synopsis {
             margin-top: 30px;
+            padding-right: 15px;
             line-height: 30px;
             font-size: 18px;
             width: 1043px;
             height: 220px;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .movie__ratings {
@@ -110,4 +113,22 @@
             width: 1043px;
         }
     }
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #747bf9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #240089;
 }

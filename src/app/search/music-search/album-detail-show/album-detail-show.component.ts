@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, delay, map, of } from 'rxjs';
+import { Observable, catchError, map, of, shareReplay, switchMap } from 'rxjs';
 import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
+import { ArtistRelatedAlbum } from 'src/app/shared/models/artist/artist-related-albums';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { SongDetails } from 'src/app/shared/models/music/search/song/song-details';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
-import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album.service';
+import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album-search.service';
+import { ArtistService } from 'src/app/shared/services/music-search/artist/artist.service';
 
 @Component({
   selector: 'mlm-album-detail-show',
@@ -19,9 +21,11 @@ export class AlbumDetailShowComponent implements OnInit {
   isAlreadyInList$!: Observable<boolean>;
   albumDetail$!: Observable<AlbumDetails>;
   trackList$!: Observable<TrackList>;
+  artistRelatedAlbums$!: Observable<ArtistRelatedAlbum>;
 
   constructor(
     private albumSearchService: AlbumSearchService,
+    private artistService: ArtistService,
     private musicListService: MusicListService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -35,9 +39,21 @@ export class AlbumDetailShowComponent implements OnInit {
       return;
     }
 
-    this.albumDetail$ = this.albumSearchService.readByApiCode(apiCode);
+    this.albumDetail$ = this.albumSearchService.readByApiCode(apiCode)
+      .pipe(
+        shareReplay(1)
+      );
     this.trackList$ = this.albumSearchService.getTrackListByApiCode(apiCode);
-    this.isAlreadyInList$ = this.musicListService.isAlreadyInAppuserMusicList(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM);
+    this.isAlreadyInList$ = this.musicListService.isAlreadyInAppuserMusicList(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
+      .pipe(
+        shareReplay(1)
+      );
+
+    this.artistRelatedAlbums$ = this.albumDetail$.pipe(
+      switchMap((album) => {
+        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode);
+      })
+    );
 
   }
 
