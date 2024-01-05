@@ -23,15 +23,8 @@ export class MusicListService extends AbstractService {
           return of([]);
         }
 
-        const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
-        return this.musicService.browseByIds(musicIds).pipe(
-          map(musicDetailList => {
-            return musicListItems.map(musicListItem => {
-              const musicDetail = musicDetailList.find(m => m.id === musicListItem.musicId);
-              return { ...musicListItem, musicDetail } as MusicListItem;
-            });
-          })
-        );
+        return this.getMusicRelatedDetails(musicListItems);
+
       })
     );
   }
@@ -44,15 +37,18 @@ export class MusicListService extends AbstractService {
           return of([]);
         }
 
-        const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
-        return this.musicService.browseByIds(musicIds).pipe(
-          map(musicDetailList => {
-            return musicListItems.map(musicListItem => {
-              const musicDetail = musicDetailList.find(m => m.id === musicListItem.musicId);
-              return { ...musicListItem, musicDetail } as MusicListItem;
-            });
-          })
-        );
+        return this.getMusicRelatedDetails(musicListItems);
+
+      })
+    );
+  }
+
+  public editSortingOrder(listItemId: number, newSortingNumber: number): Observable<MusicListItem[]> {
+    return this.http.put<MusicListItem[]>(`${this.getResourceUrl()}/${listItemId}`, newSortingNumber).pipe(
+      switchMap((musicListItems: MusicListItem[]) => {
+
+        return this.getMusicRelatedDetails(musicListItems);
+
       })
     );
   }
@@ -70,6 +66,20 @@ export class MusicListService extends AbstractService {
 
   public deleteById(musicId: number): Observable<MusicListItem> {
     return this.http.delete<MusicListItem>(`${this.getResourceUrl()}/${musicId}`);
+  }
+
+  private getMusicRelatedDetails(musicListItems: MusicListItem[]): Observable<MusicListItem[]> {
+
+    const musicIds: number[] = musicListItems.map(musicListItem => musicListItem.musicId);
+
+    return this.musicService.browseByIds(musicIds).pipe(
+      map(musicDetailList => {
+        return musicListItems.map(musicListItem => {
+          const musicDetail = musicDetailList.find(m => m.id === musicListItem.musicId);
+          return { ...musicListItem, musicDetail } as MusicListItem;
+        });
+      })
+    );
   }
 
 }

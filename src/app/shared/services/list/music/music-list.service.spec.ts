@@ -298,4 +298,78 @@ describe('Testing Music List service', () => {
 
   });
 
+  it('should edit sorting order and return list of user movie', () => {
+
+    const datas: MusicListItem[] = [
+      {
+        id: 1,
+        musicId: 1,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 1,
+        musicDetail: undefined
+      },
+      {
+        id: 2,
+        musicId: 2,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 2,
+        musicDetail: undefined
+      },
+      {
+        id: 3,
+        musicId: 3,
+        appUserId: 1,
+        addedAt: new Date(),
+        sortingOrder: 3,
+        musicDetail: undefined
+      }
+    ];
+
+    const mockMusicList: Music[] = [
+      {
+        id: 1,
+        type: 1,
+        artistName: "Artist",
+        title: "title 1",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 2,
+        type: 1,
+        artistName: "Artist",
+        title: "title 2",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      },
+      {
+        id: 3,
+        type: 1,
+        artistName: "Artist",
+        title: "title 3",
+        apiCode: "apicode",
+        pictureUrl: "http://picture.com",
+        releasedAt: 2001
+      }
+    ];
+
+    service.editSortingOrder(1, 1)
+      .subscribe(data => {
+        expect(data).toEqual(data);
+      });
+
+    const musicSpy = mockMusicService.browseByIds.and.returnValue(of(mockMusicList));
+
+    const request = httpTestingController.expectOne(environmentUrl + '/lists/musics/1');
+
+    expect(request.request.method).toEqual('PUT');
+
+    request.flush(datas);
+
+  });
+
 });
