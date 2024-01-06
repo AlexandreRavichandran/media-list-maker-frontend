@@ -7,12 +7,14 @@ import { CustomDateFormatPipe } from './pipes/custom-date-format/custom-date-for
 import { TimeAgoPipe } from './pipes/time-ago/time-ago.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { TimestampToTimePipe } from './pipes/timestamp-to-time/timestamp-to-time.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
     CustomDateFormatPipe,
     TimeAgoPipe,
     TimestampToTimePipe,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -27,8 +29,8 @@ import { TimestampToTimePipe } from './pipes/timestamp-to-time/timestamp-to-time
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    TimestampToTimePipe
-
+    TimestampToTimePipe,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
