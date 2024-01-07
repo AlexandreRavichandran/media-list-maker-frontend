@@ -283,7 +283,6 @@ describe('Testing Album detail show component', () => {
     component.isAlreadyInList$ = of(false);
     fixture.detectChanges();
 
-    component.albumDetail$.subscribe(test => console.log(test))
     const element: DebugElement = fixture.debugElement;
     const addToListButton: HTMLButtonElement = element.query(By.css('.music__add__button')).nativeElement;
 

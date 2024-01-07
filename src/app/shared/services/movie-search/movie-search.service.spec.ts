@@ -100,7 +100,6 @@ describe('Testing Movie search service', () => {
     const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test&year=2010');
 
     expect(request.request.method).toEqual('GET');
-    console.log(request.request.params);
 
     request.flush(datas);
 

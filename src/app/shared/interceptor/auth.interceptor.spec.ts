@@ -32,7 +32,7 @@ describe('Testing Auth interceptor', () => {
   afterEach(() => {
 
     httpMock.verify();
-
+    sessionStorage.clear();
   })
 
   it('should be created', () => {
@@ -47,6 +47,16 @@ describe('Testing Auth interceptor', () => {
     const request = httpMock.expectOne('test');
 
     expect(request.request.headers.get('Authorization')).toEqual('Bearer testtoken');
+
+  });
+
+  it('should not add token in request if there is no token in storage', () => {
+
+    httpClient.get('test').subscribe();
+
+    const request = httpMock.expectOne('test');
+
+    expect(request.request.headers.get('Authorization')).toBeNull();
 
   });
 
