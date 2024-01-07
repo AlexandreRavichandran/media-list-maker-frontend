@@ -1,23 +1,28 @@
 <div class="list__movies">
     <p class="list__movies__title">Recently added movies</p>
-    <div *ngIf="this.userMovieList$ | async as movieList">
-        <div *ngIf="movieList.length !== 0">
-            <div class="list__movies__section">
-                <mlm-movie-list-item class="movie__item" *ngFor="let movieItem of movieList" [isDeletable]="false"
-                    [movieItem]="movieItem"></mlm-movie-list-item>
-            </div>
-            <div class="flex justify-end">
-                <button routerLink="list/movies" class="movie__show__all__button">Show all</button>
-            </div>
-        </div>
-        <div *ngIf="movieList.length === 0" class="list__movie__empty__section flex flex-col justify-center">
-            <div class="empty__section__container">
-                <p class="empty__section__label">It seems like you don't have any movie in your list !</p>
-                <div class="flex flex justify-center">
-                    <button class="empty__section__button" [routerLink]="['/search']"
-                        [queryParams]="{type: 'movie'}">Add movies</button>
+    <div *ngIf="this.userMovieList$ | asyncLoading | async as movieList">
+        <div *ngIf="this.movieList.value">
+            <div *ngIf="movieList.value.length !== 0">
+                <div class="list__movies__section">
+                    <mlm-movie-list-item class="movie__item" *ngFor="let movieItem of movieList.value"
+                        [isDeletable]="false" [movieItem]="movieItem"></mlm-movie-list-item>
+                </div>
+                <div class="flex justify-end">
+                    <button routerLink="list/movies" class="movie__show__all__button">Show all</button>
                 </div>
             </div>
+            <div *ngIf="movieList.value.length === 0" class="list__movie__empty__section flex flex-col justify-center">
+                <div class="empty__section__container">
+                    <p class="empty__section__label">It seems like you don't have any movie in your list !</p>
+                    <div class="flex flex justify-center">
+                        <button class="empty__section__button" [routerLink]="['/search']"
+                            [queryParams]="{type: 'movie'}">Add movies</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="movieList.loading" class="list__movies__section flex justify-center items-center">
+            <mlm-loading spinnerColor="#240089"></mlm-loading>
         </div>
     </div>
 

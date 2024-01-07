@@ -7,8 +7,9 @@ import { DebugElement } from '@angular/core';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
 import { ListModule } from '../../list.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-describe('Testing Music list item component', () => {
+describe('Testing Music list home component', () => {
 
   let component: MusicListHomeComponent;
   let fixture: ComponentFixture<MusicListHomeComponent>;
@@ -20,7 +21,7 @@ describe('Testing Music list item component', () => {
 
     await TestBed.configureTestingModule({
       declarations: [MusicListHomeComponent],
-      imports: [ListModule, RouterTestingModule],
+      imports: [ListModule, RouterTestingModule, SharedModule],
       providers: [{ provide: MusicListService, useValue: mockMusicListService }]
     })
       .compileComponents();
@@ -33,6 +34,8 @@ describe('Testing Music list item component', () => {
   });
 
   it('should create', () => {
+    component.userMusicList$ = of([]);
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
@@ -68,7 +71,6 @@ describe('Testing Music list item component', () => {
     component.userMusicList$ = of(datas);
 
     fixture.detectChanges();
-
     const musicSection: DebugElement = fixture.nativeElement.querySelector('.list__musics__section');
     const musicItems: DebugElement[] = fixture.nativeElement.querySelectorAll('.music__item');
     const emptyMusicSection: DebugElement = fixture.nativeElement.querySelector('.list__music__empty__section');
