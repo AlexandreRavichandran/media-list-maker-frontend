@@ -4,6 +4,10 @@
     .item__movie__addedAt {
         font-size: 15px;
         margin-bottom: 2px;
+
+        &:hover {
+            cursor: default;
+        }
     }
 
     .item__movie__card {

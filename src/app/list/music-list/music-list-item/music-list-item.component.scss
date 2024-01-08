@@ -4,6 +4,10 @@
     .item__music__addedAt {
         font-size: 15px;
         margin-bottom: 2px;
+
+        &:hover {
+            cursor: default;
+        }
     }
 
     .item__music__card {
@@ -27,7 +31,7 @@
         &:hover {
             cursor: pointer;
             background-color: #1d0707;
-    
+
             .music__picture {
                 filter: brightness(50%);
             }

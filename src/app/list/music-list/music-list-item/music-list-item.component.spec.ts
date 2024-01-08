@@ -24,7 +24,7 @@ describe('Testing Music list item component', () => {
 
     await TestBed.configureTestingModule({
       declarations: [MusicListItemComponent],
-      imports: [ListModule, AppModule],
+      imports: [ListModule, AppModule, SharedModule],
       providers: [
         {
           provide: MusicListService,
