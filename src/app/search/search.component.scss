@@ -23,6 +23,14 @@
     }
 }
 
+.test {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scale: 1.20;
+}
+
 .search__title__section {
     margin-top: 100px;
 

@@ -8,6 +8,7 @@ import { MovieSearchService } from '../shared/services/movie-search/movie-search
 import { SearchService } from '../shared/services/search-service.services';
 import { SearchTypeConstants } from '../shared/constants/search-type.constants';
 import { BaseSearchRequest } from '../shared/models/base-search-request';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'mlm-search',
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit {
   isSearchDisplayed: boolean = false;
   searchTypeConstants: SearchTypeConstants = new SearchTypeConstants();
   type!: string;
+  searchBarState: string = "default";
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -105,6 +107,20 @@ export class SearchComponent implements OnInit {
     return this.albumSearchService;
   }
 
+  getLoadingColorBySearchType(): string {
+
+    switch (this.type) {
+
+      case SearchTypeConstants.TYPE_MOVIE:
+        return "#950000";
+
+      case SearchTypeConstants.TYPE_ALBUM:
+        return "#950000";
+    }
+    return "#FFFFFF";
+
+
+  }
 
 
 }

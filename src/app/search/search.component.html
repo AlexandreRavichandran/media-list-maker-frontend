@@ -28,11 +28,16 @@
                     <mlm-filter-form [type]="this.type"
                         (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
                 </div>
-                <div *ngIf="this.searchResult$ | async as searchResults" [ngSwitch]="this.type" class="col-span-6">
-                    <mlm-search-result-album *ngSwitchCase="'album'"
-                        [searchResults]="this.searchResults"></mlm-search-result-album>
-                    <mlm-search-result-movie *ngSwitchCase="'movie'"
-                        [searchResults]="this.searchResults"></mlm-search-result-movie>
+                <div *ngIf="this.searchResult$ | asyncLoading | async as searchResults"  class="col-span-6">
+                    <div *ngIf="this.searchResults.value" [ngSwitch]="this.type">
+                        <mlm-search-result-album *ngSwitchCase="'album'"
+                            [searchResults]="this.searchResults.value"></mlm-search-result-album>
+                        <mlm-search-result-movie *ngSwitchCase="'movie'"
+                            [searchResults]="this.searchResults.value"></mlm-search-result-movie>
+                    </div>
+                    <div *ngIf="searchResults.loading" style="height: 550px;" class="flex justify-center items-center">
+                        <mlm-loading [spinnerColor]="this.getLoadingColorBySearchType()"></mlm-loading>
+                    </div>
                 </div>
             </div>
         </div>
