@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('Testing Album detail show component', () => {
 
@@ -29,7 +30,7 @@ describe('Testing Album detail show component', () => {
 
     await TestBed.configureTestingModule({
       declarations: [AlbumDetailShowComponent],
-      imports: [AppModule, SearchModule],
+      imports: [AppModule, SearchModule, SharedModule],
       providers: [
         {
           provide: AlbumSearchService,
@@ -58,7 +59,7 @@ describe('Testing Album detail show component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display add to list button if music is not in list', () => {
+  fit('should display add to list button if music is not in list', () => {
 
     activatedRoute.snapshot.params = { 'apicode': 'test' };
 
@@ -114,7 +115,7 @@ describe('Testing Album detail show component', () => {
 
   });
 
-  it('should display already in list element if music is not in list', () => {
+  fit('should display already in list element if music is not in list', () => {
 
     activatedRoute.snapshot.params = { apicode: 'test' };
 

@@ -4,59 +4,76 @@
         <li routerLink="/me" class="menu__list__item">My lists</li>
     </ul>
 </div>
-<div class="music__album__section container mx-auto" *ngIf="this.albumDetail$ | async as albumDetail">
-    <div class="grid grid-cols-12 music__section">
+<div class="music__album__section container mx-auto" *ngIf="this.albumDetail$  | asyncLoading | async as albumDetail">
+    <div class="grid grid-cols-12 music__section" *ngIf="this.albumDetail.value">
         <div class="col-span-4">
-            <img class="music__picture" [src]="this.albumDetail.pictureUrl" alt="">
+            <img class="music__picture" [src]="this.albumDetail.value.pictureUrl" alt="">
         </div>
-        <div class="col-span-8 music__details" *ngIf="this.trackList$ | async as trackList">
+        <div class="col-span-8 music__details" *ngIf="this.trackList$ | asyncLoading | async as trackList">
             <div class="grid grid-cols-12">
                 <div class="col-span-8 flex justify-start">
                     <div>
-                        <p class="music__title">{{this.albumDetail.title}} ({{this.albumDetail.releasedAt}})</p>
+                        <p class="music__title">{{this.albumDetail.value.title}} ({{this.albumDetail.value.releasedAt}})
+                        </p>
                         <div class="music__genres flex">
-                            <p *ngFor="let genreItem of this.albumDetail.genreList" class="genres__item">
+                            <p *ngFor="let genreItem of this.albumDetail.value.genreList" class="genres__item">
                                 {{this.genreItem.name}}
                             </p>
                         </div>
                         <div class="flex music__artist__section">
-                            <img class="music__artist__picture" src="{{this.albumDetail.artist.pictureUrl}}" alt="">
-                            <p class="music__artist__name">{{this.albumDetail.artist.name}}</p>
+                            <img class="music__artist__picture" src="{{this.albumDetail.value.artist.pictureUrl}}"
+                                alt="">
+                            <p class="music__artist__name">{{this.albumDetail.value.artist.name}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-span-4 flex justify-center">
-                    <div class="music__in__list">
-                        <div *ngIf="(this.isAlreadyInList$ | async) === true">
+                    <div class="music__in__list"
+                        *ngIf="this.isAlreadyInList$ | asyncLoading | async as isAlreadyInList">
+                        <div *ngIf="(this.isAlreadyInList$ | async) === true && !this.displayAddLoadingButton">
                             <p class="music__already__in__list">Already in your list</p>
                         </div>
-                        <div *ngIf="(this.isAlreadyInList$ | async) === false">
-                            <button class="music__add__button" (click)="this.onAddToList(this.albumDetail.apiCode)">Add
+                        <div *ngIf="this.displayAddLoadingButton">
+                            <p class="music__adding__to__list">Adding to list...</p>
+                        </div>
+                        <div *ngIf="(this.isAlreadyInList$ | async) === false && !this.displayAddLoadingButton">
+                            <button class="music__add__button"
+                                (click)="this.onAddToList(this.albumDetail.value.apiCode)">Add
                                 to list</button>
                         </div>
+                        <div *ngIf="this.isAlreadyInList.loading === true">
+                            <p><mlm-loading></mlm-loading></p>
+                        </div>
                         <div>
-                            <p class="music__duration">Duration:
-                                {{this.trackList.totalDurationInEpochMilli | timestampToTime}}</p>
+                            <p *ngIf="this.trackList.value" class="music__duration">Duration:
+                                {{this.trackList.value.totalDurationInEpochMilli | timestampToTime}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <mlm-song-list [songList]="this.trackList.songList"></mlm-song-list>
+            <div *ngIf="this.trackList.value">
+                <mlm-song-list [songList]="this.trackList.value.songList"></mlm-song-list>
+            </div>
+            <div class="flex justify-center items-center" *ngIf="this.trackList.loading"><mlm-loading></mlm-loading>
             </div>
         </div>
+    </div>
+    <div class="music__section flex justify-around items-center" *ngIf="this.albumDetail.loading">
+        <mlm-loading></mlm-loading>
     </div>
     <div class="separation__section flex justify-center">
         <div class="separation">
 
         </div>
     </div>
-    <div class="artist__related__section mt-5" *ngIf="this.artistRelatedAlbums$ | async as relatedAlbums">
-        <p class="artist__related__title">Other releases of {{this.albumDetail.artist.name}}</p>
+    <div class="artist__related__section mt-5"
+        *ngIf="this.artistRelatedAlbums$ | asyncLoading | async as relatedAlbums">
+        <p *ngIf="this.albumDetail.value" class="artist__related__title">Other releases of
+            {{this.albumDetail.value.artist.name}}</p>
         <div class="list__section flex items-center">
-            <div class="flex artist__related__section__list">
-                <div *ngFor="let album of this.relatedAlbums.albumList">
-                    <div *ngIf="this.albumDetail.apiCode !== this.album.apiCode"
+            <div *ngIf="this.relatedAlbums.value && this.albumDetail.value" class="flex artist__related__section__list">
+                <div *ngFor="let album of this.relatedAlbums.value.albumList">
+                    <div *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
                         class="artist__related__item flex flex-col justify-between items-center">
                         <img class="item__picture" [src]="this.album.pictureUrl" alt="">
                         <div class="item__details flex flex-col justify-center items-center">
@@ -65,6 +82,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-center items-center list__section" *ngIf="this.relatedAlbums.loading">
+                <mlm-loading></mlm-loading>
             </div>
         </div>
     </div>

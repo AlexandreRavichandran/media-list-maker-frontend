@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, map, of, shareReplay, switchMap } from 'rxjs';
+import { Observable, catchError, delay, map, of, shareReplay, switchMap } from 'rxjs';
 import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
 import { ArtistRelatedAlbum } from 'src/app/shared/models/artist/artist-related-albums';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
@@ -22,6 +22,7 @@ export class AlbumDetailShowComponent implements OnInit {
   albumDetail$!: Observable<AlbumDetails>;
   trackList$!: Observable<TrackList>;
   artistRelatedAlbums$!: Observable<ArtistRelatedAlbum>;
+  displayAddLoadingButton: boolean = false;
 
   constructor(
     private albumSearchService: AlbumSearchService,
@@ -51,19 +52,18 @@ export class AlbumDetailShowComponent implements OnInit {
 
     this.artistRelatedAlbums$ = this.albumDetail$.pipe(
       switchMap((album) => {
-        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode);
+        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode).pipe(delay(4000));
       })
     );
 
   }
 
   onAddToList(apiCode: string): void {
-
+    this.displayAddLoadingButton = true;
     this.musicListService.add(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
       .pipe(
         map(response => {
-          console.log(response);
-
+          this.displayAddLoadingButton = false;
           this.isAlreadyInList$ = of(true);
 
           return response;
