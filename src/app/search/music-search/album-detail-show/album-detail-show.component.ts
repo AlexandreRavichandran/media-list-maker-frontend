@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, delay, map, of, shareReplay, switchMap } from 'rxjs';
+import { Observable, catchError, map, of, shareReplay, switchMap } from 'rxjs';
 import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
 import { ArtistRelatedAlbum } from 'src/app/shared/models/artist/artist-related-albums';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
@@ -52,7 +52,7 @@ export class AlbumDetailShowComponent implements OnInit {
 
     this.artistRelatedAlbums$ = this.albumDetail$.pipe(
       switchMap((album) => {
-        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode).pipe(delay(4000));
+        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode);
       })
     );
 

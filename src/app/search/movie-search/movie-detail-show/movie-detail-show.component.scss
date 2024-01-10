@@ -75,7 +75,16 @@
                 background-color: #1C1925;
                 border: 1px solid #1C1925;
             }
-            
+
+            .movie__adding__to__list {
+                font-size: 15px;
+                padding: 15px 18px;
+                border-radius: 11px;
+                text-align: center;
+                background-color: rgb(51, 202, 17);
+                border: 1px solid rgb(51, 202, 17);
+            }
+
         }
 
 
@@ -112,6 +121,10 @@
             margin-top: 25px;
             width: 1043px;
         }
+    }
+
+    .loading_section {
+        height: 696px;
     }
 }
 

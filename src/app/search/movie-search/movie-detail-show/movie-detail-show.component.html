@@ -5,45 +5,59 @@
     </ul>
 </div>
 <div class="movie__section container mx-auto">
-    <div class="grid grid-cols-12" *ngIf="this.movieDetail$ | async as movieDetail">
-        <div class="col-span-3">
-            <img class="movie__picture" [src]="this.movieDetail.pictureUrl" alt="">
+    <div class="grid grid-cols-12" *ngIf="this.movieDetail$ | asyncLoading | async as movieDetail">
+        <div class="col-span-3" *ngIf="this.movieDetail.value">
+            <img class="movie__picture" [src]="this.movieDetail.value.pictureUrl" alt="">
         </div>
-        <div class="col-span-9 movie__details">
+        <div class="col-span-9 movie__details" *ngIf="this.movieDetail.value">
             <div class="grid grid-cols-12">
                 <div class="col-span-8 flex justify-start">
                     <div>
-                        <p class="movie__title">{{this.movieDetail.title}} ({{this.movieDetail.releasedAt}})</p>
+                        <p class="movie__title">{{this.movieDetail.value.title}} ({{this.movieDetail.value.releasedAt}})
+                        </p>
                         <div class="movie__genres flex">
-                            <p *ngFor="let genreItem of this.movieDetail.genreList" class="genres__item">
+                            <p *ngFor="let genreItem of this.movieDetail.value.genreList" class="genres__item">
                                 {{this.genreItem}}
                             </p>
                         </div>
-                        <p class="movie__director">Directed by {{this.movieDetail.director}}</p>
+                        <p class="movie__director">Directed by {{this.movieDetail.value.director}}</p>
                     </div>
                 </div>
                 <div class="col-span-4 flex justify-center">
-                    <div class="movie__in__list">
-                        <div *ngIf="(this.isAlreadyInList$ | async) === true">
+                    <div class="movie__in__list"
+                        *ngIf="this.isAlreadyInList$ | asyncLoading | async as isAlreadyInList">
+                        <div *ngIf="(this.isAlreadyInList$ | async) === true && !this.displayAddLoadingButton">
                             <p class="movie__already__in__list">Already in your list</p>
                         </div>
-                        <div *ngIf="(this.isAlreadyInList$ | async) === false">
-                            <button class="movie__add__button" (click)="this.onAddToList(this.movieDetail.apiCode)">Add
+                        <div *ngIf="this.displayAddLoadingButton">
+                            <p class="music__adding__to__list">Adding to list...</p>
+                        </div>
+                        <div *ngIf="(this.isAlreadyInList$ | async) === false && !this.displayAddLoadingButton">
+                            <button class="movie__add__button"
+                                (click)="this.onAddToList(this.movieDetail.value.apiCode)">Add
                                 to list</button>
                         </div>
+                        <div *ngIf="this.isAlreadyInList.loading === true">
+                            <p><mlm-loading></mlm-loading></p>
+                        </div>
                         <div>
-                            <p class="movie__duration">Duration: {{this.toHourMinute(this.movieDetail.duration)}}</p>
+                            <p class="movie__duration">Duration: {{this.toHourMinute(this.movieDetail.value.duration)}}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="movie__actors">Starring {{this.movieDetail.mainActors}}</p>
+            <p class="movie__actors">Starring {{this.movieDetail.value.mainActors}}</p>
             <div>
-                <p class="movie__synopsis">{{this.movieDetail.synopsis}}</p>
+                <p class="movie__synopsis">{{this.movieDetail.value.synopsis}}</p>
                 <div class="movie__ratings">
                     <mlm-movie-rating class="flex justify-around"
-                        [movieRatingList]="this.movieDetail.ratings"></mlm-movie-rating>
+                        [movieRatingList]="this.movieDetail.value.ratings"></mlm-movie-rating>
                 </div>
+            </div>
+        </div>
+        <div class="col-span-12 loading_section flex justify-center items-center">
+            <div class="flex justify-center items-center" *ngIf="this.movieDetail.loading"><mlm-loading></mlm-loading>
             </div>
         </div>
     </div>
