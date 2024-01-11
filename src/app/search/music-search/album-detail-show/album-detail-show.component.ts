@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, of, shareReplay, switchMap } from 'rxjs';
@@ -30,6 +31,7 @@ export class AlbumDetailShowComponent implements OnInit {
     private musicListService: MusicListService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -40,21 +42,7 @@ export class AlbumDetailShowComponent implements OnInit {
       return;
     }
 
-    this.albumDetail$ = this.albumSearchService.readByApiCode(apiCode)
-      .pipe(
-        shareReplay(1)
-      );
-    this.trackList$ = this.albumSearchService.getTrackListByApiCode(apiCode);
-    this.isAlreadyInList$ = this.musicListService.isAlreadyInAppuserMusicList(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
-      .pipe(
-        shareReplay(1)
-      );
-
-    this.artistRelatedAlbums$ = this.albumDetail$.pipe(
-      switchMap((album) => {
-        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode);
-      })
-    );
+    this.getAlbumRelatedDataByApiCode(apiCode);
 
   }
 
@@ -75,5 +63,34 @@ export class AlbumDetailShowComponent implements OnInit {
       )
       .subscribe();
 
+  }
+
+  onChangeAlbumByApiCode(apiCode: string): void {
+    this.getAlbumRelatedDataByApiCode(apiCode);
+  }
+
+  private getAlbumRelatedDataByApiCode(apiCode: string): void {
+
+    this.router.navigate(['/search/albums/', apiCode]);
+
+    this.albumDetail$ = this.albumSearchService.readByApiCode(apiCode)
+      .pipe(
+        shareReplay(1)
+      );
+    this.trackList$ = this.albumSearchService.getTrackListByApiCode(apiCode);
+    this.isAlreadyInList$ = this.musicListService.isAlreadyInAppuserMusicList(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
+      .pipe(
+        shareReplay(1)
+      );
+
+    this.artistRelatedAlbums$ = this.albumDetail$.pipe(
+      switchMap((album) => {
+        return this.artistService.browseAlbumByArtistApiCode(album.artist.apiCode);
+      })
+    );
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

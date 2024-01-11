@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '../../abstract-service.services';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiServiceConstants } from '../../../constants/api-service-constants';
-import { Observable, delay } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';

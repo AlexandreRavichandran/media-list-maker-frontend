@@ -73,7 +73,8 @@
         <div class="list__section flex items-center">
             <div *ngIf="this.relatedAlbums.value && this.albumDetail.value" class="flex artist__related__section__list">
                 <div *ngFor="let album of this.relatedAlbums.value.albumList">
-                    <div *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
+                    <div (click)="this.onChangeAlbumByApiCode(this.album.apiCode)"
+                        *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
                         class="artist__related__item flex flex-col justify-between items-center">
                         <img class="item__picture" [src]="this.album.pictureUrl" alt="">
                         <div class="item__details flex flex-col justify-center items-center">

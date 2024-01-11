@@ -7,7 +7,6 @@ import { SearchComponent } from "./search.component";
 const routes: Routes = [
     { path: '', component: SearchComponent },
     { path: 'albums/:apicode', component: AlbumDetailShowComponent },
-    { path: 'songs/:apicode' },
     { path: 'movies/:apicode', component: MovieDetailShowComponent }
 ];
 
