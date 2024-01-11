@@ -5,10 +5,10 @@
             <li routerLink="/me" class="menu__list__item">My lists</li>
         </ul>
     </div>
-    <div *ngIf="this.userMovieList$ | async as movieList" class="grid grid-cols-12">
-        <div class="col-span-5 flex flex-col movie__list" cdkDropList [cdkDropListData]="this.movieList"
-            (cdkDropListDropped)="this.onItemDragnDropped($event)">
-            <div class="grid grid-cols-12" *ngFor="let movieItem of this.movieList" cdkDrag>
+    <div *ngIf="this.userMovieList$ | asyncLoading | async as movieList" class="grid grid-cols-12">
+        <div *ngIf="this.movieList.value" class="col-span-5 flex flex-col movie__list" cdkDropList
+            [cdkDropListData]="this.movieList.value" (cdkDropListDropped)="this.onItemDragnDropped($event)">
+            <div class="grid grid-cols-12" *ngFor="let movieItem of this.movieList.value" cdkDrag>
                 <div class="col-span-4 flex justify-center items-center">
                     <div class="sorting__order__section flex justify-center items-center">
                         <p class="movie__sorting__order">{{movieItem.sortingOrder}}</p>
