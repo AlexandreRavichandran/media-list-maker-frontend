@@ -1,0 +1,18 @@
+<div class="pagination__section">
+    <div class="flex justify-end">
+        <p class="result__number">{{this.getFromIndex()}}-{{this.currentIndex}} on {{this.totalResults}} results</p>
+    </div>
+    <div class="search__result__display">
+        <ng-content></ng-content>
+    </div>
+    <div class="flex justify-center pagination__button">
+        <div class="flex justify-center button previous__button" (click)="this.onGetPreviousPage()">
+            <mat-icon>arrow_back</mat-icon>
+            <p class="pagination__label">Previous page</p>
+        </div>
+        <div class="flex justify-center button next__button" (click)="this.onGetNextPage()">
+            <p class="pagination__label">Next page</p>
+            <mat-icon>arrow_forward</mat-icon>
+        </div>
+    </div>
+</div>

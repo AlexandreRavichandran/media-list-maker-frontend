@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
   isSearchDisplayed: boolean = false;
   searchTypeConstants: SearchTypeConstants = new SearchTypeConstants();
   type!: string;
-  searchBarState: string = "default";
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -60,7 +59,7 @@ export class SearchComponent implements OnInit {
 
     const service: SearchService = this.getServiceByType(this.type);
 
-    this.searchResult$ = service.browseByQuery(this.searchForm.controls['query'].value);
+    this.searchResult$ = service.browseByQueryAndIndex(this.searchForm.controls['query'].value);
 
     this.isSearchDisplayed = true;
   }
@@ -92,6 +91,10 @@ export class SearchComponent implements OnInit {
 
   }
 
+  onGetSearchResultsByIndex(index: number): void {
+    this.searchResult$ = this.albumSearchService.browseByQueryAndIndex(this.searchForm.controls['query'].value, index);
+  }
+
   private getServiceByType(type: string): SearchService {
 
     switch (type) {
@@ -121,6 +124,5 @@ export class SearchComponent implements OnInit {
 
 
   }
-
 
 }

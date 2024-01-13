@@ -54,7 +54,7 @@ describe('Testing Movie search service', () => {
       ]
     };
 
-    service.browseByQuery('test')
+    service.browseByQueryAndIndex('test')
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })

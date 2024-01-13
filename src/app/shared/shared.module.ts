@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TimestampToTimePipe } from './pipes/timestamp-to-time/timestamp-to-time.pipe';
 import { AsyncLoadingPipe } from './pipes/async-loading/async-loading.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     TimeAgoPipe,
     TimestampToTimePipe,
     LoadingComponent,
-    AsyncLoadingPipe
+    AsyncLoadingPipe,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatIconModule,
     TimestampToTimePipe,
     LoadingComponent,
-    AsyncLoadingPipe
+    AsyncLoadingPipe,
+    PaginationComponent
   ]
 })
 export class SharedModule { }

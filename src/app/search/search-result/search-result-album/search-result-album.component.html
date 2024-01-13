@@ -1,7 +1,9 @@
-<div class="search__result__display__section">
-    <div class="flex justify-end">
-        <p class="result__number">1-25 on {{this.searchResults.totalResults}} results</p>
-    </div>
+<mlm-pagination
+[currentIndex]="25" 
+[elementsPerPage]="25" 
+[totalResults]="this.searchResults.totalResults"
+(onNextPageEvent)="this.onChangePage($event)"
+(onPreviousPageEvent)="this.onChangePage($event)">
     <div class="search__result__display">
         <div (click)="this.onClickAlbumDetails(this.album.apiCode)"
             *ngFor="let album of this.searchResults.searchResults" class="album__element flex">
@@ -14,4 +16,4 @@
             </div>
         </div>
     </div>
-</div>
+</mlm-pagination>

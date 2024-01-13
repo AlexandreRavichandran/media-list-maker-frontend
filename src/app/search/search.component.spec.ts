@@ -136,8 +136,8 @@ describe('Testing search component', () => {
 
   it('should not apply search if form is not valid', () => {
 
-    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
-    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQueryAndIndex.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQueryAndIndex.and.returnValue(of());
 
     fixture.detectChanges();
 
@@ -155,8 +155,8 @@ describe('Testing search component', () => {
 
   it('should call movie search service when type is movie', () => {
 
-    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
-    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQueryAndIndex.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQueryAndIndex.and.returnValue(of());
 
     fixture.detectChanges();
 
@@ -174,8 +174,8 @@ describe('Testing search component', () => {
 
   it('should call album search service when type is movie', () => {
 
-    const browseMovieByQuerySpy = mockMovieSearchService.browseByQuery.and.returnValue(of());
-    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQuery.and.returnValue(of());
+    const browseMovieByQuerySpy = mockMovieSearchService.browseByQueryAndIndex.and.returnValue(of());
+    const browseAlbumByQuerySpy = mockAlbumSearchService.browseByQueryAndIndex.and.returnValue(of());
 
     fixture.detectChanges();
 

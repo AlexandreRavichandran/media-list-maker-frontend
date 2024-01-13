@@ -63,7 +63,7 @@ describe('Testing Album search service', () => {
       totalResults: 30
     };
 
-    service.browseByQuery('test')
+    service.browseByQueryAndIndex('test')
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })

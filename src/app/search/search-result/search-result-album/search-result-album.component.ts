@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 
@@ -12,10 +12,16 @@ export class SearchResultAlbumComponent {
   @Input()
   searchResults!: AlbumSearchList;
 
+  @Output()
+  onChangePageEvent: EventEmitter<number> = new EventEmitter();
+
   constructor(private router: Router) { }
 
   onClickAlbumDetails(albumApiCode: string): void {
     this.router.navigate(['/search/albums', albumApiCode]);
   }
 
+  onChangePage(index: number): void {
+    this.onChangePageEvent.emit(index);
+  }
 }

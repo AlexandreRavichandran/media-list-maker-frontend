@@ -1,0 +1,38 @@
+.pagination__section {
+    color: white;
+
+    .result__number {
+        font-size: 18px;
+    }
+
+    .pagination__button {
+        margin-top: 20px;
+        font-size: 15px;
+
+        .button {
+            background-color: #240089;
+            padding: 9px 10px;
+            border-radius: 11px;
+
+            &:hover {
+                background-color: #19005d;
+                cursor: pointer;
+            }
+        }
+
+        .previous__button {
+            margin-right: 10px;
+
+        }
+
+        .next__button {
+            margin-left: 10px;
+        }
+
+        .pagination__label {
+            align-self: center;
+            margin: 0;
+        }
+    }
+
+}

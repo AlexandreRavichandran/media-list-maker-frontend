@@ -18,7 +18,7 @@ export class MovieSearchService extends AbstractService implements SearchService
     super(ApiServiceConstants.SERVICE_MOVIE);
   }
 
-  public browseByQuery(movieName: string): Observable<MovieSearchList> {
+  public browseByQueryAndIndex(movieName: string): Observable<MovieSearchList> {
 
     const params: HttpParams = new HttpParams().set('name', movieName);
 

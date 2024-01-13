@@ -28,9 +28,9 @@
                     <mlm-filter-form [type]="this.type"
                         (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
                 </div>
-                <div *ngIf="this.searchResult$ | asyncLoading | async as searchResults"  class="col-span-6">
+                <div *ngIf="this.searchResult$ | asyncLoading | async as searchResults"  class="col-span-6 search__result">
                     <div *ngIf="this.searchResults.value" [ngSwitch]="this.type">
-                        <mlm-search-result-album *ngSwitchCase="'album'"
+                        <mlm-search-result-album (onChangePageEvent)="this.onGetSearchResultsByIndex($event)" *ngSwitchCase="'album'"
                             [searchResults]="this.searchResults.value"></mlm-search-result-album>
                         <mlm-search-result-movie *ngSwitchCase="'movie'"
                             [searchResults]="this.searchResults.value"></mlm-search-result-movie>
