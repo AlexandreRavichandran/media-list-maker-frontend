@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ApiError } from 'src/app/shared/error/api-error';
 import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MovieService } from 'src/app/shared/services/movie/movie.service';
+import { AppUserState } from '../state/app-user.state';
+import { AppUserPageActions } from '../state/actions';
+import { getError, getIsLoading } from '../state/selectors/app-user.selectors';
 
 @Component({
   selector: 'mlm-login',
@@ -16,12 +20,12 @@ export class LoginComponent {
 
   loginForm: FormGroup = this.authService.generateLoginForm();
   randomMoviePictureUrl$: Observable<string> = this.movieService.getRandomIllustrationPictureUrl();
-  apiError: ApiError | null = null;
-  isLoading: boolean = false;
+  apiError: Observable<ApiError | null> = this.appUserStore.select(getError);
+  isLoading: Observable<boolean> = this.appUserStore.select(getIsLoading);
 
   constructor(
+    private appUserStore: Store<AppUserState>,
     private authService: AuthService,
-    private router: Router,
     private movieService: MovieService
   ) { }
 
@@ -31,18 +35,8 @@ export class LoginComponent {
       return;
     }
 
-    this.isLoading = true;
-
-    this.authService.login(this.loginForm.value).subscribe({
-
-      next: (token: AuthResponse) => {
-        this.handleAuthSuccessful(token);
-      },
-      error: (error: ApiError) => {
-        this.handleAuthFailure(error);
-      }
-
-    });
+    this.appUserStore.dispatch(AppUserPageActions.toggleLoading());
+    this.appUserStore.dispatch(AppUserPageActions.login({ credentials: this.loginForm.value }));
 
   }
 
@@ -50,19 +44,4 @@ export class LoginComponent {
     return this.loginForm.valid;
   }
 
-  private handleAuthSuccessful(authResponse: AuthResponse): void {
-
-    sessionStorage.setItem('token', authResponse.token);
-    this.isLoading = false;
-    this.router.navigate(['me']);
-
-  }
-
-  private handleAuthFailure(error: ApiError): void {
-
-    this.apiError = error;
-    sessionStorage.removeItem('token');
-    this.isLoading = false;
-
-  }
 }
