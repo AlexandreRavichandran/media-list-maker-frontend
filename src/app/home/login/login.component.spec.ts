@@ -6,34 +6,27 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { of} from 'rxjs';
+import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
+import { of, throwError } from 'rxjs';
+import { ApiError } from 'src/app/shared/error/api-error';
 import { MovieService } from 'src/app/shared/services/movie/movie.service';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppUserState } from '../state/app-user.state';
-import { AppUserPageActions } from '../state/actions';
-import { AuthRequest } from 'src/app/shared/models/auth/auth-request';
 
-fdescribe('Testing Login component', () => {
+describe('Testing Login component', () => {
 
   const MOCK_PICTURE_URL: string = 'https://picsum.photos/200/300';
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let mockAuthService: jasmine.SpyObj<AuthService>;
   let mockMovieService: jasmine.SpyObj<MovieService>;
-  let store: MockStore<AppUserState>;
 
   beforeEach(async () => {
 
-    mockAuthService = jasmine.createSpyObj('AuthService', ['generateLoginForm']);
+    mockAuthService = jasmine.createSpyObj('AuthService', ['generateLoginForm', 'login', 'getAuthenticatedUserToken']);
     mockMovieService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl'])
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [AppModule],
-      providers: [
-        { provide: AuthService, useValue: mockAuthService },
-        { provide: MovieService, useValue: mockMovieService },
-        provideMockStore({})
-      ],
+      providers: [{ provide: AuthService, useValue: mockAuthService }, { provide: MovieService, useValue: mockMovieService }],
       teardown: { destroyAfterEach: false }
     })
       .compileComponents();
@@ -51,12 +44,12 @@ fdescribe('Testing Login component', () => {
       password: new FormControl(null, Validators.required)
     });
 
-
     mockMovieService.getRandomIllustrationPictureUrl.and.returnValue(of(MOCK_PICTURE_URL));
-    store = TestBed.inject(MockStore);
+
   });
 
   it('should create', () => {
+
     expect(component).toBeTruthy();
 
   });
@@ -101,43 +94,63 @@ fdescribe('Testing Login component', () => {
 
   });
 
-  it('should call loading and login action when form is valid', () => {
+  it('should set token to session storage when login success', () => {
 
-    const authRequest: AuthRequest = {
+    const authResponse: AuthResponse = {
+      token: 'token',
       username: 'username',
-      password: 'password'
+      expiresAt: new Date()
     };
 
     component.loginForm.controls['username'].setValue('username');
     component.loginForm.controls['password'].setValue('password');
 
-    fixture.detectChanges();
+    const loginSpy = mockAuthService.login.and.returnValue(of(authResponse));
 
-    spyOn(store, 'dispatch');
+    fixture.detectChanges();
 
     component.attemptAuth();
 
-    expect(store.dispatch).toHaveBeenCalledWith(AppUserPageActions.toggleLoading());
-    expect(store.dispatch).toHaveBeenCalledWith(AppUserPageActions.login({ credentials: authRequest }));
+    expect(loginSpy).toHaveBeenCalled();
+    expect(sessionStorage.getItem('token')).toEqual('token');
+    expect(component.apiError).toBeNull();
+    expect(component.isLoading).toBeFalse();
+
+  });
+
+  it('should display error when login failed', () => {
+
+    component.loginForm.controls['username'].setValue('username');
+    component.loginForm.controls['password'].setValue('password');
+
+    const apiError: ApiError = {
+      message: 'Api error',
+      errorList: []
+    };
+
+    const loginSpy = mockAuthService.login.and.returnValue(throwError(() => apiError));
+
+    fixture.detectChanges();
+
+    component.attemptAuth();
+
+    expect(loginSpy).toHaveBeenCalled();
+    expect(component.apiError).toEqual(apiError);
+    expect(component.isLoading).toBeFalse();
 
   });
 
   it('should not attempt login when form is invalid', () => {
 
-    spyOn(store, 'dispatch');
-
-    const authRequest: AuthRequest = {
-      username: 'username',
-      password: 'password'
-    };
-
     component.loginForm.controls['username'].setValue('username');
+
+    const loginSpy = mockAuthService.login.and.returnValue(of());
 
     fixture.detectChanges();
 
     component.attemptAuth();
 
-    expect(store.dispatch).toHaveBeenCalledTimes(0);
+    expect(loginSpy).toHaveBeenCalledTimes(0);
 
   });
 
