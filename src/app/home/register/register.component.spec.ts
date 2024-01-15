@@ -7,15 +7,13 @@ import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { isPasswordConfirmationValid } from 'src/app/shared/validator/core-validators';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { of } from 'rxjs';
+import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
+import { of, throwError } from 'rxjs';
+import { ApiError } from 'src/app/shared/error/api-error';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
 import { MusicService } from 'src/app/shared/services/music/music.service';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppUserState } from '../state/app-user.state';
-import { AppUser } from 'src/app/shared/models/appuser/appuser';
-import { AppUserPageActions } from '../state/actions';
 
-fdescribe('Testing Register component', () => {
+describe('Testing Register component', () => {
 
   const MOCK_PICTURE_URL: string = 'https://picsum.photos/200/300';
 
@@ -23,20 +21,15 @@ fdescribe('Testing Register component', () => {
   let fixture: ComponentFixture<RegisterComponent>;
   let mockAuthService: jasmine.SpyObj<AuthService>;
   let mockMusicService: jasmine.SpyObj<MusicService>;
-  let store: MockStore<AppUserState>;
 
   beforeEach(async () => {
 
-    mockAuthService = jasmine.createSpyObj('AuthService', ['generateRegisterForm']);
+    mockAuthService = jasmine.createSpyObj('AuthService', ['generateRegisterForm', 'register', 'getAuthenticatedUserToken']);
     mockMusicService = jasmine.createSpyObj('MovieService', ['getRandomIllustrationPictureUrl']);
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       imports: [AppModule],
-      providers: [
-        { provide: AuthService, useValue: mockAuthService },
-        { provide: MusicListService, useValue: mockMusicService },
-        provideMockStore({})
-      ],
+      providers: [{ provide: AuthService, useValue: mockAuthService }, { provide: MusicListService, useValue: mockMusicService }],
       teardown: { destroyAfterEach: false }
     })
       .compileComponents();
@@ -56,7 +49,7 @@ fdescribe('Testing Register component', () => {
     }, { validators: isPasswordConfirmationValid });
 
     mockMusicService.getRandomIllustrationPictureUrl.and.returnValue(of(MOCK_PICTURE_URL));
-    store = TestBed.inject(MockStore);
+
   });
 
   it('should create', () => {
@@ -105,42 +98,65 @@ fdescribe('Testing Register component', () => {
 
   });
 
-  fit('should call loading and register action when form is valid', () => {
+  it('should set token to session storage when register success', () => {
 
-    const appUser: AppUser = {
+    const authResponse: AuthResponse = {
+      token: 'token',
       username: 'username',
-      password: 'password'
+      expiresAt: new Date()
     };
 
     component.registerForm.controls['username'].setValue('username');
     component.registerForm.controls['password'].setValue('password');
     component.registerForm.controls['passwordConfirmation'].setValue('password');
 
-    fixture.detectChanges();
+    const registerSpy = mockAuthService.register.and.returnValue(of(authResponse));
 
-    spyOn(store, 'dispatch');
+    fixture.detectChanges();
 
     component.attemptRegistration();
 
-    expect(store.dispatch).toHaveBeenCalledWith(AppUserPageActions.toggleLoading());
-    expect(store.dispatch).toHaveBeenCalledWith(AppUserPageActions.register({ appUser }));
+    expect(registerSpy).toHaveBeenCalled();
+    expect(sessionStorage.getItem('token')).toEqual('token');
+    expect(component.apiError).toBeNull();
+    expect(component.isLoading).toBeFalse();
 
+  });
+
+  it('should display error when register failed', () => {
+
+    component.registerForm.controls['username'].setValue('username');
+    component.registerForm.controls['password'].setValue('password');
+    component.registerForm.controls['passwordConfirmation'].setValue('password');
+
+    const apiError: ApiError = {
+      message: 'Api error',
+      errorList: []
+    };
+
+    const registerSpy = mockAuthService.register.and.returnValue(throwError(() => apiError));
+
+    fixture.detectChanges();
+
+    component.attemptRegistration();
+
+    expect(registerSpy).toHaveBeenCalled();
+    expect(component.apiError).toEqual(apiError);
+    expect(component.isLoading).toBeFalse();
 
   });
 
   it('should not attempt register when form is invalid', () => {
 
-    spyOn(store, 'dispatch');
-
     component.registerForm.controls['username'].setValue('username');
     component.registerForm.controls['password'].setValue('password');
     component.registerForm.controls['passwordConfirmation'].setValue('password2');
 
-    fixture.detectChanges();
+    const registerSpy = mockAuthService.register.and.returnValue(of());
 
     component.attemptRegistration();
 
-    expect(store.dispatch).toHaveBeenCalledTimes(0);
+    expect(registerSpy).toHaveBeenCalledTimes(0);
 
   });
 
