@@ -113,6 +113,14 @@ export const searchReducer = createReducer(
         }
 
     }),
+    on(SearchPageActions.onClearSearchResults, (state): SearchState<ElementSearchResult> => {
+
+        return {
+            ...state,
+            searchResults: null
+        }
+
+    }),
     on(SearchPageActions.onToggleLoading, (state, actions): SearchState<ElementSearchResult> => {
 
         return {
