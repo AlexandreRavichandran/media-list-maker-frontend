@@ -2,9 +2,9 @@ import { FormGroup } from "@angular/forms";
 import { ApiError } from "src/app/shared/error/api-error";
 import { ElementSearchResult } from "src/app/shared/models/element-search-result";
 
-export interface SearchState<T extends ElementSearchResult> {
+export interface SearchState {
 
-    searchResults: T | null;
+    searchResults: ElementSearchResult | null;
     searchedQuery: string;
     currentPage: number;
     elementPerPage: number;
@@ -16,7 +16,7 @@ export interface SearchState<T extends ElementSearchResult> {
 
 }
 
-export const initialState: SearchState<ElementSearchResult> = {
+export const initialState: SearchState = {
 
     searchResults: null,
     searchedQuery: "",

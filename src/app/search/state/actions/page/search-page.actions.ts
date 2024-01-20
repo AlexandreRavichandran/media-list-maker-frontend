@@ -7,7 +7,7 @@ export const onSearchElement = createAction(
 );
 
 export const onSearchElementWithFilter = createAction(
-    "[Search] Search element",
+    "[Search] Search element with filter",
     props<{ query: string, filter: FormGroup }>()
 );
 
@@ -24,6 +24,10 @@ export const onSetFilterForm = createAction(
 export const onClearQuery = createAction(
     "[Search] Clear query"
 );
+
+export const onClearSearchResults = createAction(
+    "[Search] Clear search results"
+)
 
 export const onChangeSearchElementType = createAction(
     "[Search] Change search element type",

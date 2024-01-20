@@ -1,8 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { SearchState } from "../search.state";
-import { ElementSearchResult } from "src/app/shared/models/element-search-result";
 
-export const getSearchFeatureState = createFeatureSelector<SearchState<ElementSearchResult>>("search");
+export const getSearchFeatureState = createFeatureSelector<SearchState>("search");
 
 export const getSearchResults = createSelector(
     getSearchFeatureState,

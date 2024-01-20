@@ -6,6 +6,8 @@ import { SearchApiActions, SearchPageActions } from "../actions";
 import { catchError, map, mergeMap, of } from "rxjs";
 import { MovieSearchService } from "src/app/shared/services/movie-search/movie-search.service";
 import { SearchService } from "src/app/shared/services/search-service.services";
+import { AlbumSearchList } from "src/app/shared/models/music/search/album/album-search-list";
+import { ElementSearchResult } from "src/app/shared/models/element-search-result";
 
 @Injectable()
 export class SearchEffects {
@@ -21,7 +23,7 @@ export class SearchEffects {
                 ofType(SearchPageActions.onSearchElement),
                 mergeMap((action) => this.getServiceBySearchedElementType(action.elementType).browseByQueryAndIndex(action.query)
                     .pipe(
-                        map(elements => SearchApiActions.onSearchElementSuccess({ searchResults: elements })),
+                        map((elements: ElementSearchResult) => SearchApiActions.onSearchElementSuccess({ searchResults: elements })),
                         catchError(error => of(SearchApiActions.onSearchElementFailure({ error })))
                     ))
             );

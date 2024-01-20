@@ -2,20 +2,23 @@ import { createReducer, on } from "@ngrx/store";
 import { SearchState, initialState } from "../search.state";
 import { SearchApiActions, SearchPageActions } from "../actions";
 import { ElementSearchResult } from "src/app/shared/models/element-search-result";
+import { act } from "@ngrx/effects";
 
 export const searchReducer = createReducer(
     initialState,
-    on(SearchApiActions.onSearchElementSuccess, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onSearchElementSuccess, (state, actions): SearchState => {
 
         return {
             ...state,
             searchResults: actions.searchResults,
+            currentIndex: actions.searchResults.currentIndex,
+            elementPerPage: actions.searchResults.elementsPerPage,
             error: null,
             isLoading: false
         }
 
     }),
-    on(SearchApiActions.onSearchElementFailure, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onSearchElementFailure, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -25,7 +28,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchApiActions.onSearchElementWithFilterSuccess, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onSearchElementWithFilterSuccess, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -35,7 +38,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchApiActions.onSearchElementWithFilterFailure, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onSearchElementWithFilterFailure, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -45,7 +48,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchApiActions.onChangePageSuccess, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onChangePageSuccess, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -55,7 +58,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchApiActions.onChangePageFailure, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchApiActions.onChangePageFailure, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -65,7 +68,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onChangeSearchElementType, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onChangeSearchElementType, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -73,7 +76,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onSetFilterForm, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onSetFilterForm, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -81,7 +84,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onClearFilter, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onClearFilter, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -89,7 +92,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onClearError, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onClearError, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -97,7 +100,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onSetQuery, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onSetQuery, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -105,7 +108,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onClearQuery, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onClearQuery, (state, actions): SearchState => {
 
         return {
             ...state,
@@ -113,7 +116,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onClearSearchResults, (state): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onClearSearchResults, (state): SearchState => {
 
         return {
             ...state,
@@ -121,7 +124,7 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchPageActions.onToggleLoading, (state, actions): SearchState<ElementSearchResult> => {
+    on(SearchPageActions.onToggleLoading, (state, actions): SearchState => {
 
         return {
             ...state,
