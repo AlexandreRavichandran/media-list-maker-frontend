@@ -104,7 +104,7 @@ export const searchReducer = createReducer(
 
         return {
             ...state,
-            searchedQuery: actions.query
+            searchedQuery: actions.query 
         }
 
     }),
@@ -112,7 +112,7 @@ export const searchReducer = createReducer(
 
         return {
             ...state,
-            searchedQuery: "null"
+            searchedQuery: ""
         }
 
     }),
@@ -132,5 +132,13 @@ export const searchReducer = createReducer(
         }
 
     }),
+    on(SearchPageActions.onSetIsSearchResultsDisplayed, (state, actions): SearchState => {
+
+        return {
+            ...state,
+            isSearchResultsDisplayed: actions.isSearchResultsDisplayed
+        }
+
+    })
 
 )

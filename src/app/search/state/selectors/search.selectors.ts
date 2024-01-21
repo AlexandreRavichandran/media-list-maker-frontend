@@ -37,3 +37,13 @@ export const getIsLoading = createSelector(
     getSearchFeatureState,
     state => state.isLoading
 );
+
+export const getIsSearchResultsDisplayed = createSelector(
+    getSearchFeatureState,
+    state => state.isSearchResultsDisplayed
+);
+
+export const getSearchElementType = createSelector(
+    getSearchFeatureState,
+    state => state.searchElementType
+);

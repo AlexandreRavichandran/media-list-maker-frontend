@@ -13,6 +13,7 @@ export interface SearchState {
     searchElementType: number;
     error: ApiError | null;
     isLoading: boolean;
+    isSearchResultsDisplayed: boolean;
 
 }
 
@@ -26,6 +27,7 @@ export const initialState: SearchState = {
     appliedFilter: null,
     searchElementType: 0,
     error: null,
-    isLoading: false
+    isLoading: false,
+    isSearchResultsDisplayed: false
 
 }

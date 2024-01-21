@@ -12,7 +12,7 @@
     <div class="search__form__section">
         <form [formGroup]="this.searchForm" class="flex justify-center" (ngSubmit)="this.onSearch()">
             <select (change)="this.onTypeChange()" formControlName="type" class="field__type__select">
-                <option *ngFor="let type of this.searchTypeConstants.SEARCH_TYPE_LIST" [value]="type">{{type |
+                <option *ngFor="let type of this.searchTypeConstants.SEARCH_TYPE_LIST" [value]="type.value">{{type.label |
                     titlecase}}</option>
             </select>
             <input formControlName="query" class="field__query__input" placeholder="Type your query here" type="text">
@@ -21,22 +21,20 @@
         </form>
     </div>
 
-    <div *ngIf="this.isSearchDisplayed">
+    <div *ngIf="(this.isSearchDisplayed$ | async) === true">
         <div class="container mx-auto search__result__section">
             <div class="grid grid-cols-10">
                 <div class="col-span-3">
-                    <mlm-filter-form [type]="this.type"
+                    <mlm-filter-form [type]="this.serviceId"
                         (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
                 </div>
-                <div *ngIf="this.searchResult$ | asyncLoading | async as searchResults"  class="col-span-6 search__result">
-                    <div *ngIf="this.searchResults.value" [ngSwitch]="this.type">
-                        <mlm-search-result-album (onChangePageEvent)="this.onGetSearchResultsByIndex($event)" *ngSwitchCase="'album'"
-                            [searchResults]="this.searchResults.value"></mlm-search-result-album>
-                        <mlm-search-result-movie *ngSwitchCase="'movie'"
-                            [searchResults]="this.searchResults.value"></mlm-search-result-movie>
-                    </div>
-                    <div *ngIf="searchResults.loading" style="height: 550px;" class="flex justify-center items-center">
-                        <mlm-loading [spinnerColor]="this.getLoadingColorBySearchType()"></mlm-loading>
+                <div class="col-span-6 search__result">
+                    <div [ngSwitch]="this.serviceId">
+                        <mlm-search-result-movie *ngSwitchCase="1"
+                            [searchResults$]="this.searchResults$"></mlm-search-result-movie>
+                        <mlm-search-result-album *ngSwitchCase="2"
+                            (onChangePageEvent)="this.onGetSearchResultsByIndex($event)"
+                            [searchResults$]="this.searchResults$"></mlm-search-result-album>
                     </div>
                 </div>
             </div>

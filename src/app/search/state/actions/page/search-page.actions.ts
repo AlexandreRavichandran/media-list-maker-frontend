@@ -50,3 +50,8 @@ export const onClearError = createAction(
 export const onToggleLoading = createAction(
     "[Search] Toggle loading"
 );
+
+export const onSetIsSearchResultsDisplayed = createAction(
+    "[Search] Display search results",
+    props<{ isSearchResultsDisplayed: boolean }>()
+);

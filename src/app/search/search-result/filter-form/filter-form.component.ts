@@ -9,7 +9,7 @@ import { BaseSearchRequest } from 'src/app/shared/models/base-search-request';
 export class FilterFormComponent {
 
   @Input()
-  type!: string;
+  type!: number;
 
   @Output()
   applyFilterEvent: EventEmitter<BaseSearchRequest> = new EventEmitter();

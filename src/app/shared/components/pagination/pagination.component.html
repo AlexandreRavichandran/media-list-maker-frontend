@@ -1,6 +1,7 @@
 <div class="pagination__section">
     <div class="flex justify-end">
-        <p class="result__number">{{this.getFromIndex()}}-{{this.currentIndex}} on {{this.totalResults}} results</p>
+        <p class="result__number">{{this.currentIndex}} - {{this.currentIndex + this.elementsPerPage - 1 }} on
+            {{this.totalResults}} results</p>
     </div>
     <div class="search__result__display">
         <ng-content></ng-content>
@@ -10,6 +11,7 @@
             <mat-icon>arrow_back</mat-icon>
             <p class="pagination__label">Previous page</p>
         </div>
+        <p *ngIf="this.currentPage$ | async as currentPage">{{this.currentPage}}</p>
         <div class="flex justify-center button next__button" (click)="this.onGetNextPage()">
             <p class="pagination__label">Next page</p>
             <mat-icon>arrow_forward</mat-icon>

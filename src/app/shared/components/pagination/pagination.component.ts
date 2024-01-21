@@ -1,4 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AlbumSearchList } from '../../models/music/search/album/album-search-list';
+import { getCurrentPage } from 'src/app/search/state/selectors/search.selectors';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'mlm-pagination',
   templateUrl: './pagination.component.html',
@@ -21,41 +26,35 @@ export class PaginationComponent implements OnInit {
   @Input()
   elementsPerPage!: number;
 
+  currentPage$: Observable<number> = this.albumStore.select(getCurrentPage);
+
   totalPages: number = 0;
 
+  constructor(private albumStore: Store<AlbumSearchList>) { }
+
   ngOnInit(): void {
-    console.log("create new");
     this.totalPages = this.getTotalPages();
   }
 
-  getFromIndex(): number {
-    let fromIndex: number = this.currentIndex - this.elementsPerPage;
-    if (fromIndex === 0) {
-      fromIndex = 1;
-    }
-    return fromIndex
-  }
-
   getTotalPages(): number {
-    console.log(this.totalResults)
-    console.log(this.elementsPerPage);
-    console.log(Math.round(this.totalResults / this.elementsPerPage))
     return Math.round(this.totalResults / this.elementsPerPage);
   }
 
   generatePageArray(): number[] {
-    console.log(Array.from({ length: this.totalPages }, (_, index) => index + 1))
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }
 
   onGetNextPage(): void {
+    if(this.currentIndex === 1) {
+      this.currentIndex = 0;
+    }
     this.onNextPageEvent.emit(this.currentIndex + this.elementsPerPage);
-    this.currentIndex += this.elementsPerPage; 
+    this.currentIndex += this.elementsPerPage;
   }
 
   onGetPreviousPage(): void {
     this.onPreviousPageEvent.emit(this.currentIndex - this.elementsPerPage);
-    this.currentIndex -= this.elementsPerPage; 
+    this.currentIndex -= this.elementsPerPage;
   }
 
 }
