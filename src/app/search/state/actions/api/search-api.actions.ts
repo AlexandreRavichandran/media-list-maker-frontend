@@ -21,13 +21,3 @@ export const onSearchElementWithFilterFailure = createAction(
     "[Search/API] On search elements with filter failed",
     props<{ error: ApiError }>()
 );
-
-export const onChangePageSuccess = createAction(
-    "[Search/API] On change page succeed",
-    props<{ searchResults: ElementSearchResult }>()
-);
-
-export const onChangePageFailure = createAction(
-    "[Search/API] On change page failed",
-    props<{ error: ApiError }>()
-);

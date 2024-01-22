@@ -6,13 +6,15 @@
     <div class="search__result__display">
         <ng-content></ng-content>
     </div>
-    <div class="flex justify-center pagination__button">
-        <div class="flex justify-center button previous__button" (click)="this.onGetPreviousPage()">
+    <div class="flex justify-center pagination__button" *ngIf="this.currentPage$ | async as currentPage">
+        <div *ngIf="this.currentPage !== 1" class="flex justify-center button previous__button"
+            (click)="this.onGetPreviousPage(this.currentPage - 1)">
             <mat-icon>arrow_back</mat-icon>
             <p class="pagination__label">Previous page</p>
         </div>
-        <p *ngIf="this.currentPage$ | async as currentPage">{{this.currentPage}}</p>
-        <div class="flex justify-center button next__button" (click)="this.onGetNextPage()">
+        <div></div>
+        <p>{{this.currentPage}}</p>
+        <div class="flex justify-center button next__button" (click)="this.onGetNextPage(this.currentPage + 1)">
             <p class="pagination__label">Next page</p>
             <mat-icon>arrow_forward</mat-icon>
         </div>

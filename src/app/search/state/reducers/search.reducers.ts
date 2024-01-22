@@ -48,23 +48,12 @@ export const searchReducer = createReducer(
         }
 
     }),
-    on(SearchApiActions.onChangePageSuccess, (state, actions): SearchState => {
+    on(SearchPageActions.onChangePage, (state, actions): SearchState => {
 
         return {
             ...state,
-            searchResults: actions.searchResults,
-            error: null,
-            isLoading: false
-        }
-
-    }),
-    on(SearchApiActions.onChangePageFailure, (state, actions): SearchState => {
-
-        return {
-            ...state,
-            searchResults: null,
-            error: actions.error,
-            isLoading: false
+            currentIndex: actions.nextIndex,
+            currentPage: actions.nextPage
         }
 
     }),
@@ -104,7 +93,7 @@ export const searchReducer = createReducer(
 
         return {
             ...state,
-            searchedQuery: actions.query 
+            searchedQuery: actions.query
         }
 
     }),

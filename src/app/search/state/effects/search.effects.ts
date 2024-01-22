@@ -21,7 +21,7 @@ export class SearchEffects {
         return this.actions$
             .pipe(
                 ofType(SearchPageActions.onSearchElement),
-                mergeMap((action) => this.getServiceBySearchedElementType(action.elementType).browseByQueryAndIndex(action.query)
+                mergeMap((action) => this.getServiceBySearchedElementType(action.elementType).browseByQueryAndIndex(action.query, action.index)
                     .pipe(
                         map((elements: ElementSearchResult) => SearchApiActions.onSearchElementSuccess({ searchResults: elements })),
                         catchError(error => of(SearchApiActions.onSearchElementFailure({ error })))

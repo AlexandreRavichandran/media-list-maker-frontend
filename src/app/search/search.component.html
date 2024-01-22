@@ -15,7 +15,7 @@
                 <option *ngFor="let type of this.searchTypeConstants.SEARCH_TYPE_LIST" [value]="type.value">{{type.label |
                     titlecase}}</option>
             </select>
-            <input formControlName="query" class="field__query__input" placeholder="Type your query here" type="text">
+            <input (change)="this.onQueryChange()" formControlName="query" class="field__query__input" placeholder="Type your query here" type="text">
             <button [disabled]="!this.isFormValid()" class="search__button"
                 [ngClass]="this.searchButtonStyle">Search</button>
         </form>
@@ -29,6 +29,7 @@
                         (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
                 </div>
                 <div class="col-span-6 search__result">
+                    <p> </p>
                     <div [ngSwitch]="this.serviceId">
                         <mlm-search-result-movie *ngSwitchCase="1"
                             [searchResults$]="this.searchResults$"></mlm-search-result-movie>

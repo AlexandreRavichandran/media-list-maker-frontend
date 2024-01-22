@@ -12,10 +12,10 @@ import { Observable } from 'rxjs';
 export class PaginationComponent implements OnInit {
 
   @Output()
-  onNextPageEvent: EventEmitter<number> = new EventEmitter();
+  onNextPageEvent: EventEmitter<{ nextIndex: number, nextPage: number }> = new EventEmitter();
 
   @Output()
-  onPreviousPageEvent: EventEmitter<number> = new EventEmitter();
+  onPreviousPageEvent: EventEmitter<{ nextIndex: number, nextPage: number }> = new EventEmitter();
 
   @Input()
   currentIndex!: number;
@@ -44,17 +44,25 @@ export class PaginationComponent implements OnInit {
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }
 
-  onGetNextPage(): void {
-    if(this.currentIndex === 1) {
+  onGetNextPage(nextPage: number): void {
+    if (this.currentIndex === 1) {
       this.currentIndex = 0;
     }
-    this.onNextPageEvent.emit(this.currentIndex + this.elementsPerPage);
+
+    const nextIndex = this.currentIndex + this.elementsPerPage;
+
+    this.onNextPageEvent.emit({ nextIndex, nextPage });
     this.currentIndex += this.elementsPerPage;
+
   }
 
-  onGetPreviousPage(): void {
-    this.onPreviousPageEvent.emit(this.currentIndex - this.elementsPerPage);
+  onGetPreviousPage(nextPage: number): void {
+
+    const nextIndex = this.currentIndex - this.elementsPerPage;
+
+    this.onPreviousPageEvent.emit({ nextIndex, nextPage });
     this.currentIndex -= this.elementsPerPage;
+
   }
 
 }

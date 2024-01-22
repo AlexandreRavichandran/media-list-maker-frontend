@@ -3,7 +3,7 @@ import { createAction, props } from "@ngrx/store";
 
 export const onSearchElement = createAction(
     "[Search] Search element",
-    props<{ query: string, elementType: number }>()
+    props<{ query: string, elementType: number, index: number }>()
 );
 
 export const onSearchElementWithFilter = createAction(
@@ -13,7 +13,7 @@ export const onSearchElementWithFilter = createAction(
 
 export const onChangePage = createAction(
     "[Search] Change page",
-    props<{ nextPage: number, nextIndex: number }>()
+    props<{ nextIndex: number, nextPage: number }>()
 );
 
 export const onSetFilterForm = createAction(

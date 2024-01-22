@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, forkJoin, take } from 'rxjs';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
-import { getIsLoading, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
+import { getCurrentIndex, getCurrentPage, getIsLoading, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
 import { SearchPageActions } from '../../state/actions';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 
@@ -26,12 +26,7 @@ export class SearchResultAlbumComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.store.select(getSearchedQuery).subscribe(
-      query => {
-        this.store.dispatch(SearchPageActions.onClearSearchResults());
-        this.store.dispatch(SearchPageActions.onToggleLoading());
-        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID }));
-      });
+    this.getAlbums();
 
   }
 
@@ -39,7 +34,22 @@ export class SearchResultAlbumComponent implements OnInit {
     this.router.navigate(['/search/albums', albumApiCode]);
   }
 
-  onChangePage(index: number): void {
+  onChangePage(item: any): void {
+    this.store.dispatch(SearchPageActions.onChangePage({ nextIndex: item.nextIndex, nextPage: item.nextPage }));
+    this.getAlbums();
+  }
+
+
+  private getAlbums(): void {
+    combineLatest([
+      this.store.select(getSearchedQuery),
+      this.store.select(getCurrentIndex)
+    ]).pipe(take(1)).subscribe(
+      ([query, index]) => {
+        console.log("test")
+        this.store.dispatch(SearchPageActions.onToggleLoading());
+        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index }));
+      });
 
   }
 }

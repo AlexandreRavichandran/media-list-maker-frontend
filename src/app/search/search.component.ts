@@ -53,8 +53,13 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  onQueryChange(): void {
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
+  }
 
   onSearch(): void {
+
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
 
     if (!this.isFormValid()) {
       return;
