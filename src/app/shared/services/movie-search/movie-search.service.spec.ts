@@ -37,6 +37,8 @@ describe('Testing Movie search service', () => {
   it('should return movie search list by name', () => {
 
     const datas: MovieSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       totalResults: 2,
       searchResults: [
         {
@@ -70,6 +72,8 @@ describe('Testing Movie search service', () => {
   it('should return movie search list by filter', () => {
 
     const datas: MovieSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       totalResults: 2,
       searchResults: [
         {

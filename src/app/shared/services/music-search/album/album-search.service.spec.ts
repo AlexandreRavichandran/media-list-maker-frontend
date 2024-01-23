@@ -38,6 +38,8 @@ describe('Testing Album search service', () => {
   it('should return album search list by name', () => {
 
     const datas: AlbumSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       searchResults: [
         {
           apiCode: 'XXX1',
@@ -79,6 +81,8 @@ describe('Testing Album search service', () => {
   it('should return album search list by filter', () => {
 
     const datas: AlbumSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       searchResults: [
         {
           apiCode: 'XXX1',
