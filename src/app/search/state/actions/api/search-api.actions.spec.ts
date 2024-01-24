@@ -2,7 +2,7 @@ import { ElementSearchResult } from "src/app/shared/models/element-search-result
 import { SearchApiActions } from "..";
 import { ApiError } from "src/app/shared/error/api-error";
 
-fdescribe("Testing search api actions", () => {
+describe("Testing search api actions", () => {
 
     it("should create search element success action", () => {
 

@@ -59,7 +59,7 @@ describe('Testing Album detail show component', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should display add to list button if music is not in list', () => {
+  it('should display add to list button if music is not in list', () => {
 
     activatedRoute.snapshot.params = { 'apicode': 'test' };
 
@@ -115,7 +115,7 @@ describe('Testing Album detail show component', () => {
 
   });
 
-  fit('should display already in list element if music is not in list', () => {
+  it('should display already in list element if music is not in list', () => {
 
     activatedRoute.snapshot.params = { apicode: 'test' };
 

@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.queryParams.subscribe(param => {
-      if (param['type'] !== null) {
+      if (!!param['type']) {
         this.searchForm.controls['type'].setValue(param['type']);
       }
     });
@@ -48,8 +48,8 @@ export class SearchComponent implements OnInit {
 
   private generateSearchForm(): FormGroup {
     return new FormGroup({
-      type: new FormControl(2, Validators.required),
-      query: new FormControl('', Validators.required)
+      type: new FormControl(1, Validators.required),
+      query: new FormControl('', [Validators.required, Validators.min(2)])
     });
   }
 
@@ -83,7 +83,7 @@ export class SearchComponent implements OnInit {
 
   onTypeChange(): void {
 
-    if (this.searchForm.controls['type'].value === 'movie') {
+    if (this.searchForm.controls['type'].value === SearchTypeConstants.TYPE_MOVIE_ID) {
       this.searchButtonStyle = 'search__movie__button';
     } else {
       this.searchButtonStyle = 'search__music__button';
@@ -91,6 +91,7 @@ export class SearchComponent implements OnInit {
     this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
   }
 
+  //TODO To be managed by ngrx
   onApplyFilter(filters: BaseSearchRequest): void {
 
     const type: string = this.searchForm.controls['type'].value;
@@ -103,10 +104,7 @@ export class SearchComponent implements OnInit {
 
   }
 
-  onGetSearchResultsByIndex(index: number): void {
-    this.searchResults$ = this.albumSearchService.browseByQueryAndIndex(this.searchForm.controls['query'].value, index);
-  }
-
+  //TODO To delete after tranfeing filter to ngrx
   private getServiceByType(type: number): SearchService {
 
     switch (type) {

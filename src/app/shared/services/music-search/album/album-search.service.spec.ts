@@ -70,7 +70,7 @@ describe('Testing Album search service', () => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test');
+    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test&index=0');
 
     expect(request.request.method).toEqual('GET');
 

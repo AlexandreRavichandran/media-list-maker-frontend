@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FilterFormComponent } from './filter-form.component';
 import { SearchModule } from '../../search.module';
 import { BaseSearchRequest } from 'src/app/shared/models/base-search-request';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 describe('Testing filter form component', () => {
   let component: FilterFormComponent;
@@ -11,7 +13,11 @@ describe('Testing filter form component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FilterFormComponent],
-      imports: [SearchModule]
+      imports: [
+        SearchModule,
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([])
+      ]
     })
       .compileComponents();
   });
