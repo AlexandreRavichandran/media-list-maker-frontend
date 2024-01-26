@@ -9,6 +9,27 @@
         margin-top: 20px;
         font-size: 15px;
 
+        .pagination__pages__number {
+
+            background-color: #240089;
+            padding: 9px 10px;
+            margin-right: 10px;
+            border-radius: 9px;
+
+            .number__label {
+                margin-bottom: 0;
+            }
+
+            &:hover {
+                background-color: #19005d;
+                cursor: pointer;
+            }
+
+            &.current__page {
+                border: 2px solid white;
+            }
+        }
+
         .button {
             background-color: #240089;
             padding: 9px 10px;

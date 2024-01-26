@@ -17,8 +17,7 @@ export class SearchResultAlbumComponent implements OnInit {
   @Input()
   searchResults$: Observable<AlbumSearchList | null> = this.store.select(getSearchResults);
 
-  @Output()
-  onChangePageEvent: EventEmitter<number> = new EventEmitter();
+  currentPage$: Observable<number> = this.store.select(getCurrentPage);
 
   isSearchLoading$: Observable<boolean> = this.store.select(getIsLoading);
 
@@ -44,12 +43,12 @@ export class SearchResultAlbumComponent implements OnInit {
     combineLatest([
       this.store.select(getSearchedQuery),
       this.store.select(getCurrentIndex)
-    ]).pipe(take(1)).subscribe(
-      ([query, index]) => {
-        console.log("test")
-        this.store.dispatch(SearchPageActions.onToggleLoading());
-        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index }));
-      });
+    ]).pipe(
+      take(1)).subscribe(
+        ([query, index]) => {
+          this.store.dispatch(SearchPageActions.onToggleLoading());
+          this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index }));
+        });
 
   }
 }

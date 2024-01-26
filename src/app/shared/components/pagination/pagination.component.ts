@@ -1,7 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AlbumSearchList } from '../../models/music/search/album/album-search-list';
-import { getCurrentPage } from 'src/app/search/state/selectors/search.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -26,11 +23,15 @@ export class PaginationComponent implements OnInit {
   @Input()
   elementsPerPage!: number;
 
-  currentPage$: Observable<number> = this.albumStore.select(getCurrentPage);
+  @Input()
+  paginationColor!: string;
+
+  @Input()
+  currentPage$!: Observable<number>;
 
   totalPages: number = 0;
 
-  constructor(private albumStore: Store<AlbumSearchList>) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.totalPages = this.getTotalPages();
@@ -42,6 +43,17 @@ export class PaginationComponent implements OnInit {
 
   generatePageArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  }
+
+  showAvailablePages(currentPage: number): number[] {
+    const pages = this.generatePageArray();
+
+    const previousAvailablePages = Math.max(1, currentPage - 2);
+
+    const endPage = Math.min(this.totalPages, currentPage + 2);
+
+    return pages.slice(previousAvailablePages - 1, endPage);
+
   }
 
   onGetNextPage(nextPage: number): void {
@@ -63,6 +75,18 @@ export class PaginationComponent implements OnInit {
     this.onPreviousPageEvent.emit({ nextIndex, nextPage });
     this.currentIndex -= this.elementsPerPage;
 
+  }
+
+  onGetSpecificPage(specificPage: number, currentPage: number): void {
+
+    let nextIndex = 0;
+    if (specificPage > currentPage) {
+      nextIndex = this.currentIndex + this.elementsPerPage * (specificPage - currentPage);
+    } else {
+      nextIndex = this.currentIndex - this.elementsPerPage * (currentPage - specificPage);
+    }
+
+    this.onNextPageEvent.emit({ nextIndex, nextPage: specificPage });
   }
 
 }

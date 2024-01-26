@@ -1,5 +1,5 @@
 <div *ngIf="this.searchResults$ | async as searchResults">
-    <mlm-pagination [currentIndex]="this.searchResults.currentIndex"
+    <mlm-pagination [currentIndex]="this.searchResults.currentIndex" [currentPage$]="this.currentPage$"
         [elementsPerPage]="this.searchResults.elementsPerPage" [totalResults]="this.searchResults.totalResults"
         (onNextPageEvent)="this.onChangePage($event)" (onPreviousPageEvent)="this.onChangePage($event)">
         <div class="search__result__display">
