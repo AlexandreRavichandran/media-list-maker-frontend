@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, combineLatest, forkJoin, take } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Observable, combineLatest, forkJoin, of, switchMap, take, withLatestFrom } from 'rxjs';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { getCurrentIndex, getCurrentPage, getIsLoading, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
 import { SearchPageActions } from '../../state/actions';
@@ -40,15 +40,16 @@ export class SearchResultAlbumComponent implements OnInit {
 
 
   private getAlbums(): void {
-    combineLatest([
-      this.store.select(getSearchedQuery),
-      this.store.select(getCurrentIndex)
-    ]).pipe(
-      take(1)).subscribe(
-        ([query, index]) => {
-          this.store.dispatch(SearchPageActions.onToggleLoading());
-          this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index }));
-        });
+
+    this.store.pipe(
+      select(getSearchedQuery),
+      withLatestFrom(this.store.select(getCurrentIndex)),
+      switchMap(([query, index]) => {
+        this.store.dispatch(SearchPageActions.onToggleLoading());
+        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index }));
+        return of();
+      })
+    ).subscribe();
 
   }
 }
