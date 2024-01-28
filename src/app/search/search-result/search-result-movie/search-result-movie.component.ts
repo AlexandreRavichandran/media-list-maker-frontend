@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { MovieSearchList } from 'src/app/shared/models/movie/search/movie-search-list';
-import { getIsLoading, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
+import { getCurrentIndex, getIsLoading, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
 import { SearchPageActions } from '../../state/actions';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 
@@ -23,12 +23,16 @@ export class SearchResultMovieComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.store.select(getSearchedQuery).subscribe(
-      query => {
+    forkJoin([
+      this.store.select(getSearchedQuery),
+      this.store.select(getCurrentIndex)
+    ]).subscribe(
+      ([query, index]) => {
         this.store.dispatch(SearchPageActions.onClearSearchResults());
         this.store.dispatch(SearchPageActions.onToggleLoading());
-        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_MOVIE_ID }));
+        this.store.dispatch(SearchPageActions.onSearchElement({ query, elementType: SearchTypeConstants.TYPE_MOVIE_ID, index }));
       });
+
 
   }
 

@@ -37,7 +37,6 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.activatedRoute.queryParams.subscribe(param => {
       if (!!param['type']) {
         this.searchForm.controls['type'].setValue(param['type']);
@@ -54,7 +53,7 @@ export class SearchComponent implements OnInit {
   }
 
   onQueryChange(): void {
-    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
+    this.resetSearchResults();
   }
 
   onSearch(): void {
@@ -88,7 +87,9 @@ export class SearchComponent implements OnInit {
     } else {
       this.searchButtonStyle = 'search__music__button';
     }
-    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
+
+    this.resetSearchResults();
+
   }
 
   //TODO To be managed by ngrx
@@ -118,6 +119,27 @@ export class SearchComponent implements OnInit {
     }
 
     return this.albumSearchService;
+  }
+
+  public getSearchResultLabel(): string {
+
+    const searchResultLabel: string = "Search results for ";
+
+    if (this.serviceId === SearchTypeConstants.TYPE_MOVIE_ID) {
+      return searchResultLabel + "movie " + this.searchForm.value.query.toString().toUpperCase() + ": ";
+    }
+
+    if (this.serviceId === SearchTypeConstants.TYPE_ALBUM_ID) {
+      return searchResultLabel + "music " + this.searchForm.value.query.toUpperCase() + ": ";
+    }
+
+    return "";
+  }
+
+  private resetSearchResults(): void {
+    this.searchStore.dispatch(SearchPageActions.onClearSearchResults());
+    this.searchStore.dispatch(SearchPageActions.onResetPagination());
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
   }
 
 }

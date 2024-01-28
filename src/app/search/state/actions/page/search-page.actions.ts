@@ -43,6 +43,10 @@ export const onClearFilter = createAction(
     "[Search] Clear filter"
 );
 
+export const onResetPagination = createAction(
+    "[Search] Reset pagination"
+);
+
 export const onClearError = createAction(
     "[Search] Clear error"
 );

@@ -105,6 +105,15 @@ export const searchReducer = createReducer(
         }
 
     }),
+    on(SearchPageActions.onResetPagination, (state): SearchState => {
+
+        return {
+            ...state,
+            currentIndex: initialState.currentIndex,
+            currentPage: initialState.currentPage
+        }
+
+    }),
     on(SearchPageActions.onClearSearchResults, (state): SearchState => {
 
         return {

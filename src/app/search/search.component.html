@@ -16,7 +16,7 @@
                     |
                     titlecase}}</option>
             </select>
-            <input (change)="this.onQueryChange()" formControlName="query" class="field__query__input"
+            <input (keypress)="this.onQueryChange()" formControlName="query" class="field__query__input"
                 placeholder="Type your query here" type="text">
             <button [disabled]="!this.isFormValid()" class="search__button"
                 [ngClass]="this.searchButtonStyle">Search</button>
@@ -31,7 +31,7 @@
                         (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
                 </div>
                 <div class="col-span-6 search__result">
-                    <p> </p>
+                    <p class="search__result__label">{{this.getSearchResultLabel()}}</p>
                     <div [ngSwitch]="this.serviceId">
                         <mlm-search-result-movie *ngSwitchCase="1"
                             [searchResults$]="this.searchResults$"></mlm-search-result-movie>
