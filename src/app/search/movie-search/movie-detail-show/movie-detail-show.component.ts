@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, of, shareReplay } from 'rxjs';
@@ -20,7 +21,8 @@ export class MovieDetailShowComponent implements OnInit {
     private movieSearchService: MovieSearchService,
     private movieListService: MovieListService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit(): void {
     const apiCode: string | null = this.activatedRoute.snapshot.paramMap.get('apicode');
@@ -64,5 +66,13 @@ export class MovieDetailShowComponent implements OnInit {
       )
       .subscribe();
 
+  }
+
+  getLoadingColor(): string {
+    return "#240089"
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -5,6 +5,12 @@
     </ul>
 </div>
 <div class="music__album__section container mx-auto" *ngIf="this.albumDetail$  | asyncLoading | async as albumDetail">
+    <div class="flex justify-start">
+        <div (click)="this.goBack()" class="flex back__button">
+            <mat-icon>arrow_back</mat-icon>
+            <p class="back__button__label">Go back</p>
+        </div>
+    </div>
     <div class="grid grid-cols-12 music__section" *ngIf="this.albumDetail.value">
         <div class="col-span-4">
             <img class="music__picture" [src]="this.albumDetail.value.pictureUrl" alt="">
@@ -42,7 +48,7 @@
                                 to list</button>
                         </div>
                         <div *ngIf="this.isAlreadyInList.loading === true">
-                            <p><mlm-loading></mlm-loading></p>
+                            <p><mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading></p>
                         </div>
                         <div>
                             <p *ngIf="this.trackList.value" class="music__duration">Duration:
@@ -54,12 +60,13 @@
             <div *ngIf="this.trackList.value">
                 <mlm-song-list [songList]="this.trackList.value.songList"></mlm-song-list>
             </div>
-            <div class="flex justify-center items-center" *ngIf="this.trackList.loading"><mlm-loading></mlm-loading>
+            <div class="flex justify-center items-center" *ngIf="this.trackList.loading">
+                <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
             </div>
         </div>
     </div>
     <div class="music__section flex justify-around items-center" *ngIf="this.albumDetail.loading">
-        <mlm-loading></mlm-loading>
+        <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
     </div>
     <div class="separation__section flex justify-center">
         <div class="separation">
@@ -76,7 +83,9 @@
                     <div (click)="this.onChangeAlbumByApiCode(this.album.apiCode)"
                         *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
                         class="artist__related__item flex flex-col justify-between items-center">
-                        <img class="item__picture" [src]="this.album.pictureUrl" alt="">
+                        <div>
+                            <img class="item__picture" [src]="this.album.pictureUrl" alt="">
+                        </div>
                         <div class="item__details flex flex-col justify-center items-center">
                             <p class="item__title"> {{this.album.title}}</p>
                             <p class="item__releasedAt">{{this.album.releasedAt}}</p>
@@ -85,7 +94,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center list__section" *ngIf="this.relatedAlbums.loading">
-                <mlm-loading></mlm-loading>
+                <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
             </div>
         </div>
     </div>
