@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { MovieService } from "src/app/shared/services/movie/movie.service";
 import { AlbumSearchService } from "src/app/shared/services/music-search/album/album-search.service";
 import { SearchApiActions, SearchPageActions } from "../actions";
 import { catchError, map, mergeMap, of } from "rxjs";
 import { MovieSearchService } from "src/app/shared/services/movie-search/movie-search.service";
 import { SearchService } from "src/app/shared/services/search-service.services";
-import { AlbumSearchList } from "src/app/shared/models/music/search/album/album-search-list";
 import { ElementSearchResult } from "src/app/shared/models/element-search-result";
 
 @Injectable()
@@ -28,6 +26,18 @@ export class SearchEffects {
                     ))
             );
 
+    });
+
+    searchElementWithFilter$ = createEffect(() => {
+        return this.actions$
+            .pipe(
+                ofType(SearchPageActions.onSearchElementWithFilter),
+                mergeMap((action) => this.getServiceBySearchedElementType(action.elementType).browseByQueryAndFilter(action.query, action.index, action.filter)
+                    .pipe(
+                        map((elements: ElementSearchResult) => SearchApiActions.onSearchElementWithFilterSuccess({ searchResults: elements })),
+                        catchError(error => of(SearchApiActions.onSearchElementWithFilterFailure({ error })))
+                    ))
+            );
     });
 
     private getServiceBySearchedElementType(type: number): SearchService {

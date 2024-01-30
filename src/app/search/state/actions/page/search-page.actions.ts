@@ -1,5 +1,5 @@
-import { FormGroup } from "@angular/forms";
 import { createAction, props } from "@ngrx/store";
+import { BaseSearchRequest } from "src/app/shared/models/base-search-request";
 
 export const onSearchElement = createAction(
     "[Search] Search element",
@@ -8,7 +8,7 @@ export const onSearchElement = createAction(
 
 export const onSearchElementWithFilter = createAction(
     "[Search] Search element with filter",
-    props<{ query: string, filter: FormGroup }>()
+    props<{ query: string, elementType: number, index: number, filter: BaseSearchRequest }>()
 );
 
 export const onChangePage = createAction(
@@ -18,7 +18,7 @@ export const onChangePage = createAction(
 
 export const onSetFilterForm = createAction(
     "[Search] Set filter form",
-    props<{ filterForm: FormGroup }>()
+    props<{ filterForm: BaseSearchRequest }>()
 );
 
 export const onClearQuery = createAction(

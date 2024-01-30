@@ -1,5 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { ApiError } from "src/app/shared/error/api-error";
+import { BaseSearchRequest } from "src/app/shared/models/base-search-request";
 import { ElementSearchResult } from "src/app/shared/models/element-search-result";
 
 export interface SearchState {
@@ -9,7 +10,7 @@ export interface SearchState {
     currentPage: number;
     elementPerPage: number;
     currentIndex: number;
-    appliedFilter: FormGroup | null;
+    appliedFilter: BaseSearchRequest | null;
     searchElementType: number;
     error: ApiError | null;
     isLoading: boolean;

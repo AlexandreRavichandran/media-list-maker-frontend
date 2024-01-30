@@ -92,35 +92,6 @@ export class SearchComponent implements OnInit {
 
   }
 
-  //TODO To be managed by ngrx
-  onApplyFilter(filters: BaseSearchRequest): void {
-
-    const type: string = this.searchForm.controls['type'].value;
-
-    const service: SearchService = this.getServiceByType(1);
-
-    filters.name = this.searchForm.controls['query'].value;
-
-    this.searchResults$ = service.browseByQueryAndFilter(filters);
-
-  }
-
-  //TODO To delete after tranfeing filter to ngrx
-  private getServiceByType(type: number): SearchService {
-
-    switch (type) {
-
-      case SearchTypeConstants.TYPE_MOVIE.value:
-        return this.movieSearchService;
-
-      case SearchTypeConstants.TYPE_MOVIE.value:
-        return this.albumSearchService;
-
-    }
-
-    return this.albumSearchService;
-  }
-
   public getSearchResultLabel(): string {
 
     const searchResultLabel: string = "Search results for ";
@@ -138,6 +109,7 @@ export class SearchComponent implements OnInit {
 
   private resetSearchResults(): void {
     this.searchStore.dispatch(SearchPageActions.onClearSearchResults());
+    this.searchStore.dispatch(SearchPageActions.onClearFilter());
     this.searchStore.dispatch(SearchPageActions.onResetPagination());
     this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
   }

@@ -47,3 +47,12 @@ export const getSearchElementType = createSelector(
     getSearchFeatureState,
     state => state.searchElementType
 );
+
+export const getSearchElementDatas = createSelector(
+    getSearchFeatureState,
+    state => ({
+        currentIndex: state.currentIndex,
+        query: state.searchedQuery,
+        filter: state.appliedFilter
+    })
+);
