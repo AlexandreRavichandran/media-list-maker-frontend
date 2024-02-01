@@ -93,4 +93,9 @@ export class AlbumDetailShowComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  getLoadingColor(): string {
+    return "#950000";
+  }
+
 }

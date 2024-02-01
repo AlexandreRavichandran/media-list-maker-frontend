@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ElementSearchResult } from '../shared/models/element-search-result';
 import { AlbumSearchService } from '../shared/services/music-search/album/album-search.service';
 import { MovieSearchService } from '../shared/services/movie-search/movie-search.service';
 import { SearchService } from '../shared/services/search-service.services';
 import { SearchTypeConstants } from '../shared/constants/search-type.constants';
 import { BaseSearchRequest } from '../shared/models/base-search-request';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Store } from '@ngrx/store';
+import { SearchState } from './state/search.state';
+import { getIsLoading, getIsSearchResultsDisplayed, getSearchResults } from './state/selectors/search.selectors';
+import { SearchPageActions } from './state/actions';
 
 @Component({
   selector: 'mlm-search',
@@ -18,50 +21,59 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class SearchComponent implements OnInit {
 
   searchForm: FormGroup = this.generateSearchForm();
-  searchResult$: Observable<ElementSearchResult> = of();
+  searchResults$: Observable<ElementSearchResult | null> = this.searchStore.select(getSearchResults);
   searchButtonStyle: string = 'search__movie__button';
-  isSearchDisplayed: boolean = false;
+  isSearchDisplayed$: Observable<boolean> = this.searchStore.select(getIsSearchResultsDisplayed);
   searchTypeConstants: SearchTypeConstants = new SearchTypeConstants();
-  type!: string;
+  serviceId: number = 2;
+  isSearchLoading$: Observable<boolean | null> = this.searchStore.select(getIsLoading);
+
 
   constructor(
+    private searchStore: Store<SearchState>,
     private activatedRoute: ActivatedRoute,
     private albumSearchService: AlbumSearchService,
     private movieSearchService: MovieSearchService
   ) { }
 
   ngOnInit(): void {
-
     this.activatedRoute.queryParams.subscribe(param => {
-      if (param['type'] !== null) {
+      if (!!param['type']) {
         this.searchForm.controls['type'].setValue(param['type']);
       }
     });
-
-    this.searchForm.controls['type'].setValue('album');
 
   }
 
   private generateSearchForm(): FormGroup {
     return new FormGroup({
-      type: new FormControl('movie', Validators.required),
-      query: new FormControl('', Validators.required)
+      type: new FormControl(1, Validators.required),
+      query: new FormControl('', [Validators.required, Validators.min(2)])
     });
   }
 
+  onQueryChange(): void {
+    this.resetSearchResults();
+  }
+
   onSearch(): void {
+
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
 
     if (!this.isFormValid()) {
       return;
     }
 
-    this.type = this.searchForm.controls['type'].value;
+    if (this.searchForm.controls['type'].value == 1) {
+      this.serviceId = SearchTypeConstants.TYPE_MOVIE_ID;
+    } else {
+      this.serviceId = SearchTypeConstants.TYPE_ALBUM_ID;
+    }
 
-    const service: SearchService = this.getServiceByType(this.type);
+    this.searchStore.dispatch(SearchPageActions.onSetQuery({ query: this.searchForm.value.query }));
 
-    this.searchResult$ = service.browseByQueryAndIndex(this.searchForm.controls['query'].value);
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: true }));
 
-    this.isSearchDisplayed = true;
   }
 
   isFormValid(): boolean {
@@ -70,59 +82,36 @@ export class SearchComponent implements OnInit {
 
   onTypeChange(): void {
 
-    if (this.searchForm.controls['type'].value === 'movie') {
+    if (this.searchForm.controls['type'].value === SearchTypeConstants.TYPE_MOVIE_ID) {
       this.searchButtonStyle = 'search__movie__button';
     } else {
       this.searchButtonStyle = 'search__music__button';
     }
-    this.searchResult$ = of();
-    this.isSearchDisplayed = false;
-  }
 
-  onApplyFilter(filters: BaseSearchRequest): void {
-
-    const type: string = this.searchForm.controls['type'].value;
-
-    const service: SearchService = this.getServiceByType(type);
-
-    filters.name = this.searchForm.controls['query'].value;
-
-    this.searchResult$ = service.browseByQueryAndFilter(filters);
+    this.resetSearchResults();
 
   }
 
-  onGetSearchResultsByIndex(index: number): void {
-    this.searchResult$ = this.albumSearchService.browseByQueryAndIndex(this.searchForm.controls['query'].value, index);
-  }
+  public getSearchResultLabel(): string {
 
-  private getServiceByType(type: string): SearchService {
+    const searchResultLabel: string = "Search results for ";
 
-    switch (type) {
-
-      case SearchTypeConstants.TYPE_MOVIE:
-        return this.movieSearchService;
-
-      case SearchTypeConstants.TYPE_ALBUM:
-        return this.albumSearchService;
-
+    if (this.serviceId === SearchTypeConstants.TYPE_MOVIE_ID) {
+      return searchResultLabel + "movie " + this.searchForm.value.query.toString().toUpperCase() + ": ";
     }
 
-    return this.albumSearchService;
+    if (this.serviceId === SearchTypeConstants.TYPE_ALBUM_ID) {
+      return searchResultLabel + "music " + this.searchForm.value.query.toUpperCase() + ": ";
+    }
+
+    return "";
   }
 
-  getLoadingColorBySearchType(): string {
-
-    switch (this.type) {
-
-      case SearchTypeConstants.TYPE_MOVIE:
-        return "#950000";
-
-      case SearchTypeConstants.TYPE_ALBUM:
-        return "#950000";
-    }
-    return "#FFFFFF";
-
-
+  private resetSearchResults(): void {
+    this.searchStore.dispatch(SearchPageActions.onClearSearchResults());
+    this.searchStore.dispatch(SearchPageActions.onClearFilter());
+    this.searchStore.dispatch(SearchPageActions.onResetPagination());
+    this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: false }));
   }
 
 }

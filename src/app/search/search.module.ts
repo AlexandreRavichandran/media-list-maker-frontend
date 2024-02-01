@@ -16,6 +16,10 @@ import { SearchResultMovieComponent } from './search-result/search-result-movie/
 import { FilterFormComponent } from './search-result/filter-form/filter-form.component';
 import { MovieFilterFormComponent } from './search-result/filter-form/movie-filter-form/movie-filter-form.component';
 import { AlbumFilterFormComponent } from './search-result/filter-form/album-filter-form/album-filter-form.component';
+import { StoreModule } from "@ngrx/store";
+import { searchReducer } from "./state/reducers/search.reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { SearchEffects } from "./state/effects/search.effects";
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { AlbumFilterFormComponent } from './search-result/filter-form/album-filt
   imports: [
     SharedModule,
     SearchRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature("search", searchReducer),
+    EffectsModule.forFeature([SearchEffects])
   ],
 
   providers: []

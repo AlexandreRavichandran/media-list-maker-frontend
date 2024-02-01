@@ -5,6 +5,12 @@
     </ul>
 </div>
 <div class="movie__section container mx-auto">
+    <div class="flex justify-start">
+        <div (click)="this.goBack()" class="flex back__button">
+            <mat-icon>arrow_back</mat-icon>
+            <p class="back__button__label">Go back</p>
+        </div>
+    </div>
     <div class="grid grid-cols-12" *ngIf="this.movieDetail$ | asyncLoading | async as movieDetail">
         <div class="col-span-3" *ngIf="this.movieDetail.value">
             <img class="movie__picture" [src]="this.movieDetail.value.pictureUrl" alt="">
@@ -38,7 +44,7 @@
                                 to list</button>
                         </div>
                         <div *ngIf="this.isAlreadyInList.loading === true">
-                            <p><mlm-loading></mlm-loading></p>
+                            <p><mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading></p>
                         </div>
                         <div>
                             <p class="movie__duration">Duration: {{this.toHourMinute(this.movieDetail.value.duration)}}
@@ -57,7 +63,8 @@
             </div>
         </div>
         <div class="col-span-12 loading_section flex justify-center items-center">
-            <div class="flex justify-center items-center" *ngIf="this.movieDetail.loading"><mlm-loading></mlm-loading>
+            <div class="flex justify-center items-center" *ngIf="this.movieDetail.loading">
+                <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
             </div>
         </div>
     </div>

@@ -5,6 +5,8 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SearchModule } from 'src/app/search/search.module';
 import { MatIcon } from '@angular/material/icon';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 describe('Testing song item component', () => {
   let component: SongItemComponent;
@@ -13,7 +15,12 @@ describe('Testing song item component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SongItemComponent],
-      imports: [SearchModule]
+      imports: [
+        SearchModule,
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([])
+      ]
+
     })
       .compileComponents();
   });

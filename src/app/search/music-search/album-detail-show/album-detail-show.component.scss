@@ -27,6 +27,27 @@
     margin-top: 80px;
     color: white;
 
+    .back__button {
+        margin-bottom: 15px;
+        background-color: #890000;
+        font-size: 18px;
+        padding: 9px 13px;
+        border-radius: 11px;
+        border: 1px solid #890000;
+        cursor: pointer;
+
+        .back__button__label {
+            margin-left: 5px;
+            margin-bottom: 0;
+            align-self: center;
+        }
+
+        &:hover {
+            background-color: #5d0000;
+            border: 1px solid white;
+        }
+    }
+
     .music__section {
         height: 592px;
 

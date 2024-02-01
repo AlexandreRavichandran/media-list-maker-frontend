@@ -6,6 +6,8 @@ import { MovieSearchRequest } from 'src/app/shared/models/movie/search/movie-sea
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 describe('Testing movie filter form component', () => {
   let component: MovieFilterFormComponent;
@@ -14,7 +16,11 @@ describe('Testing movie filter form component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieFilterFormComponent],
-      imports: [SearchModule]
+      imports: [
+        SearchModule,
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([])
+      ]
     })
       .compileComponents();
   });

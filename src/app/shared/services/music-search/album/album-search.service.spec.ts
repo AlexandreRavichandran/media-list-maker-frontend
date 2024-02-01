@@ -38,6 +38,8 @@ describe('Testing Album search service', () => {
   it('should return album search list by name', () => {
 
     const datas: AlbumSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       searchResults: [
         {
           apiCode: 'XXX1',
@@ -68,7 +70,7 @@ describe('Testing Album search service', () => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test');
+    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test&index=0');
 
     expect(request.request.method).toEqual('GET');
 
@@ -79,6 +81,8 @@ describe('Testing Album search service', () => {
   it('should return album search list by filter', () => {
 
     const datas: AlbumSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 6,
       searchResults: [
         {
           apiCode: 'XXX1',

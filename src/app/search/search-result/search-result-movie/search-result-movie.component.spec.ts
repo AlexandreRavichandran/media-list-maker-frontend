@@ -7,6 +7,7 @@ import { SearchModule } from '../../search.module';
 import { MovieSearchList } from 'src/app/shared/models/movie/search/movie-search-list';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
 
 describe('Testing search result movie component', () => {
 
@@ -36,6 +37,8 @@ describe('Testing search result movie component', () => {
   it('should redirect to movie detail when click on movie item', () => {
 
     const searchResults: MovieSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 25,
       totalResults: 1,
       searchResults: [
         {
@@ -47,7 +50,7 @@ describe('Testing search result movie component', () => {
       ]
     };
 
-    component.searchResults = searchResults;
+    component.searchResults$ = of(searchResults);
 
     const navigateSpy = spyOn(router, 'navigate');
 

@@ -27,6 +27,27 @@
     margin-top: 80px;
     color: white;
 
+    .back__button {
+        margin-bottom: 15px;
+        background-color: #240089;;
+        font-size: 18px;
+        padding: 9px 13px;
+        border-radius: 11px;
+        border: 1px solid #240089;;
+        cursor: pointer;
+
+        .back__button__label {
+            margin-left: 5px;
+            margin-bottom: 0;
+            align-self: center;
+        }
+
+        &:hover {
+            background-color:#19005d;
+            border: 1px solid white;
+        }
+    }
+
     .movie__picture {
         width: 384px;
         width: 534px;

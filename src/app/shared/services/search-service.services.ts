@@ -4,7 +4,7 @@ import { BaseSearchRequest } from "../models/base-search-request";
 
 export interface SearchService {
 
-    browseByQueryAndIndex(query: string): Observable<ElementSearchResult>;
+    browseByQueryAndIndex(query: string, index: number): Observable<ElementSearchResult>;
 
     browseByQueryAndFilter(filters: BaseSearchRequest): Observable<ElementSearchResult>;
 }

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'mlm-pagination',
   templateUrl: './pagination.component.html',
@@ -7,10 +9,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PaginationComponent implements OnInit {
 
   @Output()
-  onNextPageEvent: EventEmitter<number> = new EventEmitter();
+  onNextPageEvent: EventEmitter<{ nextIndex: number, nextPage: number }> = new EventEmitter();
 
   @Output()
-  onPreviousPageEvent: EventEmitter<number> = new EventEmitter();
+  onPreviousPageEvent: EventEmitter<{ nextIndex: number, nextPage: number }> = new EventEmitter();
 
   @Input()
   currentIndex!: number;
@@ -21,41 +23,70 @@ export class PaginationComponent implements OnInit {
   @Input()
   elementsPerPage!: number;
 
+  @Input()
+  paginationColor!: string;
+
+  @Input()
+  currentPage$!: Observable<number>;
+
   totalPages: number = 0;
 
+  constructor() { }
+
   ngOnInit(): void {
-    console.log("create new");
     this.totalPages = this.getTotalPages();
   }
 
-  getFromIndex(): number {
-    let fromIndex: number = this.currentIndex - this.elementsPerPage;
-    if (fromIndex === 0) {
-      fromIndex = 1;
-    }
-    return fromIndex
-  }
-
   getTotalPages(): number {
-    console.log(this.totalResults)
-    console.log(this.elementsPerPage);
-    console.log(Math.round(this.totalResults / this.elementsPerPage))
     return Math.round(this.totalResults / this.elementsPerPage);
   }
 
   generatePageArray(): number[] {
-    console.log(Array.from({ length: this.totalPages }, (_, index) => index + 1))
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }
 
-  onGetNextPage(): void {
-    this.onNextPageEvent.emit(this.currentIndex + this.elementsPerPage);
-    this.currentIndex += this.elementsPerPage; 
+  showAvailablePages(currentPage: number): number[] {
+    const pages = this.generatePageArray();
+
+    const previousAvailablePages = Math.max(1, currentPage - 2);
+
+    const endPage = Math.min(this.totalPages, currentPage + 2);
+
+    return pages.slice(previousAvailablePages - 1, endPage);
+
   }
 
-  onGetPreviousPage(): void {
-    this.onPreviousPageEvent.emit(this.currentIndex - this.elementsPerPage);
-    this.currentIndex -= this.elementsPerPage; 
+  onGetNextPage(nextPage: number): void {
+    if (this.currentIndex === 1) {
+      this.currentIndex = 0;
+    }
+
+    const nextIndex = this.currentIndex + this.elementsPerPage;
+
+    this.onNextPageEvent.emit({ nextIndex, nextPage });
+    this.currentIndex += this.elementsPerPage;
+
+  }
+
+  onGetPreviousPage(nextPage: number): void {
+
+    const nextIndex = this.currentIndex - this.elementsPerPage;
+
+    this.onPreviousPageEvent.emit({ nextIndex, nextPage });
+    this.currentIndex -= this.elementsPerPage;
+
+  }
+
+  onGetSpecificPage(specificPage: number, currentPage: number): void {
+
+    let nextIndex = 0;
+    if (specificPage > currentPage) {
+      nextIndex = this.currentIndex + this.elementsPerPage * (specificPage - currentPage);
+    } else {
+      nextIndex = this.currentIndex - this.elementsPerPage * (currentPage - specificPage);
+    }
+
+    this.onNextPageEvent.emit({ nextIndex, nextPage: specificPage });
   }
 
 }

@@ -7,6 +7,7 @@ import { AppModule } from 'src/app/app.module';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 describe('Testing search result album component', () => {
 
@@ -36,6 +37,8 @@ describe('Testing search result album component', () => {
   it('should redirect to album detail when click on album item', () => {
 
     const searchResults: AlbumSearchList = {
+      currentIndex: 1,
+      elementsPerPage: 25,
       totalResults: 1,
       searchResults: [
         {
@@ -51,7 +54,7 @@ describe('Testing search result album component', () => {
       ]
     };
 
-    component.searchResults = searchResults;
+    component.searchResults$ = of(searchResults);
 
     const navigateSpy = spyOn(router, 'navigate');
 
