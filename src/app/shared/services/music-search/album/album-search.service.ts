@@ -19,14 +19,16 @@ export class AlbumSearchService extends AbstractService implements SearchService
     super(ApiServiceConstants.SERVICE_MUSIC);
   }
 
-  public browseByQueryAndIndex(albumName: string, index:number = 0): Observable<AlbumSearchList> {
+  public browseByQueryAndIndex(albumName: string, index: number = 0): Observable<AlbumSearchList> {
     let params: HttpParams = new HttpParams().set('name', albumName).set('index', index);
     return this.http.get<AlbumSearchList>(`${this.getResourceUrl()}/deezerapi/albums`, { params });
   }
 
-  public browseByQueryAndFilter(filters: AlbumSearchRequest): Observable<AlbumSearchList> {
+  public browseByQueryAndFilter(query: string, index: number = 0, filters: AlbumSearchRequest): Observable<AlbumSearchList> {
 
-    const params: HttpParams = this.getHttpParamByQueryObject(filters);
+    let params: HttpParams = this.getHttpParamByQueryObject(filters);
+
+    params = params.append('name', query).append('index', index);
 
     return this.http.get<AlbumSearchList>(`${this.getResourceUrl()}/deezerapi/albums`, { params });
   }

@@ -27,8 +27,7 @@
         <div class="container mx-auto search__result__section">
             <div class="grid grid-cols-10">
                 <div class="col-span-3">
-                    <mlm-filter-form [type]="this.serviceId"
-                        (applyFilterEvent)="this.onApplyFilter($event)"></mlm-filter-form>
+                    <mlm-filter-form [type]="this.serviceId"></mlm-filter-form>
                 </div>
                 <div class="col-span-6 search__result">
                     <p class="search__result__label">{{this.getSearchResultLabel()}}</p>

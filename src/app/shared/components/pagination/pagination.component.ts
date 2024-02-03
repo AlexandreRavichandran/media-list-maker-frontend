@@ -38,7 +38,7 @@ export class PaginationComponent implements OnInit {
   }
 
   getTotalPages(): number {
-    return Math.round(this.totalResults / this.elementsPerPage);
+    return Math.ceil(this.totalResults / this.elementsPerPage);
   }
 
   generatePageArray(): number[] {
@@ -87,6 +87,17 @@ export class PaginationComponent implements OnInit {
     }
 
     this.onNextPageEvent.emit({ nextIndex, nextPage: specificPage });
+  }
+
+  public getMaxIndexDisplayed(): number
+  {
+    let maxIndexDisplayed = this.currentIndex + this.elementsPerPage;
+
+    if(maxIndexDisplayed > this.totalResults) {
+      maxIndexDisplayed = this.totalResults;
+    }
+
+    return maxIndexDisplayed;
   }
 
 }

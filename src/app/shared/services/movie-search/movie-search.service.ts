@@ -18,17 +18,19 @@ export class MovieSearchService extends AbstractService implements SearchService
     super(ApiServiceConstants.SERVICE_MOVIE);
   }
 
-  public browseByQueryAndIndex(movieName: string): Observable<MovieSearchList> {
+  public browseByQueryAndIndex(movieName: string, index: number = 0): Observable<MovieSearchList> {
 
-    const params: HttpParams = new HttpParams().set('name', movieName);
+    const params: HttpParams = new HttpParams().set('name', movieName).set('index', index);
 
     return this.http.get<MovieSearchList>(`${this.getResourceUrl()}/omdbapi`, { params });
 
   }
 
-  public browseByQueryAndFilter(filters: MovieSearchRequest): Observable<MovieSearchList> {
+  public browseByQueryAndFilter(movieName: string, index: number = 0, filters: MovieSearchRequest): Observable<MovieSearchList> {
 
-    const params: HttpParams = this.getHttpParamByQueryObject(filters);
+    let params: HttpParams = this.getHttpParamByQueryObject(filters);
+
+    params = params.append('name', movieName).append('index', index);
 
     return this.http.get<MovieSearchList>(`${this.getResourceUrl()}/omdbapi`, { params });
 

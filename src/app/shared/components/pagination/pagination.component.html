@@ -1,6 +1,6 @@
 <div class="pagination__section">
     <div class="flex justify-end">
-        <p class="result__number">{{this.currentIndex + 1}} - {{this.currentIndex + this.elementsPerPage}} on
+        <p class="result__number">{{this.currentIndex + 1}} - {{this.getMaxIndexDisplayed()}} on
             {{this.totalResults}} results</p>
     </div>
     <div class="search__result__display">
@@ -12,15 +12,14 @@
             <mat-icon>arrow_back</mat-icon>
             <p class="pagination__label">Previous page</p>
         </div>
-        <div 
-        [class.current__page]="this.currentPage === page"
-        *ngFor="let page of this.showAvailablePages(this.currentPage)"
-        class="flex justify-center items-center pagination__pages__number"
-        (click)="this.onGetSpecificPage(page, currentPage)"
-        >
+        <div [class.current__page]="this.currentPage === page"
+            *ngFor="let page of this.showAvailablePages(this.currentPage)"
+            class="flex justify-center items-center pagination__pages__number"
+            (click)="this.onGetSpecificPage(page, currentPage)">
             <p class="number__label">{{page}}</p>
         </div>
-        <div *ngIf="this.currentPage !== this.generatePageArray().length" class="flex justify-center button next__button" (click)="this.onGetNextPage(this.currentPage + 1)">
+        <div *ngIf="this.currentPage !== this.generatePageArray().length"
+            class="flex justify-center button next__button" (click)="this.onGetNextPage(this.currentPage + 1)">
             <p class="pagination__label">Next page</p>
             <mat-icon>arrow_forward</mat-icon>
         </div>

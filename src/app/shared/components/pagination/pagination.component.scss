@@ -1,3 +1,5 @@
+$pagination-color: #240089;
+
 .pagination__section {
     color: white;
 
@@ -21,7 +23,7 @@
             }
 
             &:hover {
-                background-color: #19005d;
+                background-color: darken($color: $pagination-color, $amount: 10%);
                 cursor: pointer;
             }
 

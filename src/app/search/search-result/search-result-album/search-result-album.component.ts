@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, of, switchMap, withLatestFrom } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AlbumSearchList } from 'src/app/shared/models/music/search/album/album-search-list';
-import { getCurrentIndex, getCurrentPage, getFilterForm, getIsLoading, getSearchElementDatas, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
+import { getCurrentPage, getIsLoading, getSearchElementDatas, getSearchResults, getSearchedQuery } from '../../state/selectors/search.selectors';
 import { SearchPageActions } from '../../state/actions';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 
@@ -39,13 +39,11 @@ export class SearchResultAlbumComponent implements OnInit {
 
   private getAlbums(): void {
     this.store.select(getSearchElementDatas).subscribe((element) => {
-      
+
       if (element.filter === null) {
-        console.log("ok1")
         this.store.dispatch(SearchPageActions.onSearchElement(
           { query: element.query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index: element.currentIndex }));
       } else {
-        console.log("ok2")
         this.store.dispatch(SearchPageActions.onSearchElementWithFilter(
           { query: element.query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index: element.currentIndex, filter: element.filter }
         ));
@@ -53,6 +51,16 @@ export class SearchResultAlbumComponent implements OnInit {
 
 
     }).unsubscribe();
+  }
+
+  addGenericPictureIfPictureIsNull(pictureUrl: string): string {
+
+    if (pictureUrl === 'N/A') {
+      return 'assets/movie_poster_not_found.png';
+    }
+
+    return pictureUrl;
+
   }
 
 }

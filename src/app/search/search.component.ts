@@ -3,11 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ElementSearchResult } from '../shared/models/element-search-result';
-import { AlbumSearchService } from '../shared/services/music-search/album/album-search.service';
-import { MovieSearchService } from '../shared/services/movie-search/movie-search.service';
-import { SearchService } from '../shared/services/search-service.services';
 import { SearchTypeConstants } from '../shared/constants/search-type.constants';
-import { BaseSearchRequest } from '../shared/models/base-search-request';
 import { Store } from '@ngrx/store';
 import { SearchState } from './state/search.state';
 import { getIsLoading, getIsSearchResultsDisplayed, getSearchResults } from './state/selectors/search.selectors';
@@ -31,9 +27,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private searchStore: Store<SearchState>,
-    private activatedRoute: ActivatedRoute,
-    private albumSearchService: AlbumSearchService,
-    private movieSearchService: MovieSearchService
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {

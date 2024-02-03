@@ -1,12 +1,17 @@
 <div *ngIf="this.searchResults$ | async as searchResults">
-    <mlm-pagination [currentIndex]="this.searchResults.currentIndex" [currentPage$]="this.currentPage$"
-        [elementsPerPage]="this.searchResults.elementsPerPage" [totalResults]="this.searchResults.totalResults"
-        (onNextPageEvent)="this.onChangePage($event)" (onPreviousPageEvent)="this.onChangePage($event)">
+    <mlm-pagination 
+    [currentIndex]="this.searchResults.currentIndex" 
+    [currentPage$]="this.currentPage$"
+    [elementsPerPage]="this.searchResults.elementsPerPage"
+    [totalResults]="this.searchResults.totalResults"
+    (onNextPageEvent)="this.onChangePage($event)" 
+    (onPreviousPageEvent)="this.onChangePage($event)"
+    >
         <div class="search__result__display">
             <div (click)="this.onClickAlbumDetails(this.album.apiCode)"
                 *ngFor="let album of this.searchResults.searchResults" class="album__element flex">
                 <div class="album__picture__section">
-                    <img class="album__picture" [src]="this.album.pictureUrl" alt="">
+                    <img class="album__picture" [src]="this.addGenericPictureIfPictureIsNull(this.album.pictureUrl)" alt="">
                 </div>
                 <div class="album__detail__section flex flex-col justify-around">
                     <p class="album__title">{{this.album.title}}</p>
