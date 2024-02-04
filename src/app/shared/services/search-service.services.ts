@@ -6,5 +6,5 @@ export interface SearchService {
 
     browseByQueryAndIndex(query: string, index: number): Observable<ElementSearchResult>;
 
-    browseByQueryAndFilter(filters: BaseSearchRequest): Observable<ElementSearchResult>;
+    browseByQueryAndFilter(query: string, index: number, filters: BaseSearchRequest): Observable<ElementSearchResult>;
 }
