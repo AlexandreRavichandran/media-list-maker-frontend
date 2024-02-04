@@ -10,6 +10,7 @@ import { TimestampToTimePipe } from './pipes/timestamp-to-time/timestamp-to-time
 import { AsyncLoadingPipe } from './pipes/async-loading/async-loading.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { FontSizeTextLenghtAdapterDirective } from './directives/font-size-text-lenght-adapter/font-size-text-lenght-adapter.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     TimestampToTimePipe,
     LoadingComponent,
     AsyncLoadingPipe,
-    PaginationComponent
+    PaginationComponent,
+    FontSizeTextLenghtAdapterDirective
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     TimestampToTimePipe,
     LoadingComponent,
     AsyncLoadingPipe,
-    PaginationComponent
+    PaginationComponent,
+    FontSizeTextLenghtAdapterDirective
   ]
 })
 export class SharedModule { }

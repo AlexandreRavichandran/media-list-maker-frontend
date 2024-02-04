@@ -13,13 +13,16 @@
     </div>
     <div class="grid grid-cols-12 music__section" *ngIf="this.albumDetail.value">
         <div class="col-span-4">
-            <img class="music__picture" [src]="this.albumDetail.value.pictureUrl" alt="">
+            <img class="music__picture" [src]="this.addGenericPictureIfPictureIsNull(this.albumDetail.value.pictureUrl)"
+                alt="">
         </div>
         <div class="col-span-8 music__details" *ngIf="this.trackList$ | asyncLoading | async as trackList">
             <div class="grid grid-cols-12">
                 <div class="col-span-8 flex justify-start">
                     <div>
-                        <p class="music__title">{{this.albumDetail.value.title}} ({{this.albumDetail.value.releasedAt}})
+                        <p fontSizeByTextLenght [minLength]="23" [text]="this.albumDetail.value.title"
+                            [defaultFontSize]="40">
+                            {{this.albumDetail.value.title}} ({{this.albumDetail.value.releasedAt}})
                         </p>
                         <div class="music__genres flex">
                             <p *ngFor="let genreItem of this.albumDetail.value.genreList" class="genres__item">
