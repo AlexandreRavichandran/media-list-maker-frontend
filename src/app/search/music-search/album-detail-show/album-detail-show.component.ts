@@ -98,4 +98,14 @@ export class AlbumDetailShowComponent implements OnInit {
     return "#950000";
   }
 
+  addGenericPictureIfPictureIsNull(pictureUrl: string): string {
+
+    if (pictureUrl === 'N/A') {
+      return 'assets/movie_poster_not_found.png';
+    }
+
+    return pictureUrl;
+
+  }
+
 }

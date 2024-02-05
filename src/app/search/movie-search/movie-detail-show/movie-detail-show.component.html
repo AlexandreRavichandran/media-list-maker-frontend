@@ -19,7 +19,9 @@
             <div class="grid grid-cols-12">
                 <div class="col-span-8 flex justify-start">
                     <div>
-                        <p class="movie__title">{{this.movieDetail.value.title}} ({{this.movieDetail.value.releasedAt}})
+                        <p fontSizeByTextLenght [minLength]="35" [text]="this.movieDetail.value.title"
+                            [defaultFontSize]="40">
+                            {{this.movieDetail.value.title}} ({{this.movieDetail.value.releasedAt}})
                         </p>
                         <div class="movie__genres flex">
                             <p *ngFor="let genreItem of this.movieDetail.value.genreList" class="genres__item">
