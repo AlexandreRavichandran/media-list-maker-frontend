@@ -1,0 +1,46 @@
+::ng-deep .mat-dialog-container {
+    background-color: #040714;
+}
+
+.element__section {
+    color: white;
+    border-radius: 10px;
+
+    .element__picture {
+        border-radius: 10px;
+        width: 320px;
+        height: 480px;
+    }
+
+    .element__details__section {
+
+        margin-top: 15px;
+
+        .element__title {
+            font-size: 23px;
+        }
+
+        .element__releasedAt {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}
+
+.button__section {
+    margin-top: 30px;
+    color: white;
+
+    .button__generate {
+        font-size: 18px;
+        padding: 10px 15px;
+        background-color: #240089;
+        border-radius: 9px;
+
+        &:hover {
+            font-weight: 500;
+            background-color: #19005d;
+            cursor: pointer;
+        }
+    }
+}

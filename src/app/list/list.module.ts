@@ -11,6 +11,8 @@ import { MusicListItemComponent } from './music-list/music-list-item/music-list-
 import { MovieListShowComponent } from './movie-list/movie-list-show/movie-list-show.component';
 import { MusicListShowComponent } from './music-list/music-list-show/music-list-show.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RandomMovieModalComponent } from './list-home/modal-random-element/random-movie-modal/random-movie-modal.component';
+import { RandomMusicModalComponent } from './list-home/modal-random-element/random-music-modal/random-music-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MusicListHomeComponent,
     MusicListItemComponent,
     MovieListShowComponent,
-    MusicListShowComponent
+    MusicListShowComponent,
+    RandomMovieModalComponent,
+    RandomMusicModalComponent
   ],
   imports: [
     ListRoutingModule,

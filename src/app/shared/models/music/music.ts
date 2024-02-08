@@ -1,10 +1,9 @@
-export interface Music {
+import { ListElement } from "../list/list-element";
+
+export interface Music extends ListElement {
 
     id: number;
-    title: string;
     artistName: string;
-    releasedAt: number;
-    pictureUrl: string;
     apiCode: string;
     type: number;
 

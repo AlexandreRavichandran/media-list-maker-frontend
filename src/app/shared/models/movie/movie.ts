@@ -1,9 +1,8 @@
-export interface Movie {
+import { ListElement } from "../list/list-element";
+
+export interface Movie extends ListElement {
 
     id: number;
-    title: string;
     apiCode: string;
-    pictureUrl: string;
-    releasedAt: number;
     
 }
