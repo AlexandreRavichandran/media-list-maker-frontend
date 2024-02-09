@@ -1,8 +1,10 @@
-<div *ngIf="this.randomElement$ | async as movie" [@flash] class="flex flex-col justify-center items-center element__section">
-    <img class="element__picture" [src]="this.movie.pictureUrl" alt="">
-    <div class="flex flex-col justify-center items-center element__details__section">
-        <p class="element__title">{{this.movie.title}}</p>
-        <p class="element__releasedAt">{{this.movie.releasedAt}}</p>
+<div class="flex flex-col justify-center items-center element__section">
+    <div [@flash] *ngIf="this.randomElement$ | async as movie">
+        <img class="element__picture" [src]="this.movie.pictureUrl" alt="">
+        <div class="flex flex-col justify-center items-center element__details__section">
+            <p class="element__title">{{this.movie.title}}</p>
+            <p class="element__releasedAt">{{this.movie.releasedAt}}</p>
+        </div>
     </div>
 </div>
 <div class="flex justify-center items-center button__section">

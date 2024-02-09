@@ -27,7 +27,7 @@ export class RandomMusicModalComponent extends AbstractRandomElementModalCompone
   constructor(
     private musicListService: MusicListService,
     private musicService: MusicService
-  ) {
+  ) { 
     super();
   }
 
