@@ -39,6 +39,26 @@
         }
     }
 
+    .list__error__section {
+        color: white;
+        margin-top: 40px;
+        height: 386px;
+
+        .error__label {
+            margin-bottom: 15px;
+        }
+
+        .error__replay__button {
+            font-size: 40px;
+            color: #890000;
+
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+        }
+    }
+
     .music__show__all__button {
 
         font-size: 15px;

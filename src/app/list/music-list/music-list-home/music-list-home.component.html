@@ -1,6 +1,6 @@
 <div class="list__musics">
     <p class="list__musics__title">Recently added musics</p>
-    <div *ngIf="(this.userMusicList$ | asyncLoading ) | async as musicList">
+    <div *ngIf="this.userMusicList$ | asyncLoading | async as musicList">
         <div *ngIf="musicList.value">
             <div *ngIf="musicList.value.length !== 0">
                 <div class="list__musics__section">
@@ -23,6 +23,12 @@
         </div>
         <div *ngIf="musicList.loading" class="list__musics__section flex justify-center items-center">
             <mlm-loading spinnerColor="#890000"></mlm-loading>
+        </div>
+        <div *ngIf="this.musicList.error">
+            <div class="list__error__section flex flex-col justify-center items-center">
+                <p>{{this.musicList.error.message.toString()}}</p>
+                <mat-icon (click)="this.getUserMusicList()" class="error__replay__button">replay</mat-icon>
+            </div>
         </div>
     </div>
 

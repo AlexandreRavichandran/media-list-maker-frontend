@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
 import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
@@ -8,13 +8,18 @@ import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.
   templateUrl: './movie-list-home.component.html',
   styleUrls: ['./movie-list-home.component.scss']
 })
-export class MovieListHomeComponent {
+export class MovieListHomeComponent implements OnInit {
 
-  userMovieList$: Observable<MovieListItem[]> = this.getUserMovieList();
+  userMovieList$!: Observable<MovieListItem[]>
 
   constructor(private movieListService: MovieListService) { }
 
-  private getUserMovieList(): Observable<MovieListItem[]> {
-    return this.movieListService.browseLatest();
+  ngOnInit(): void {
+    this.getUserMovieList();
   }
+
+  public getUserMovieList(): void {
+    this.userMovieList$ = this.movieListService.browseLatest();
+  }
+
 }

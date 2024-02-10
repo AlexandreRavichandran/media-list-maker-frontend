@@ -24,6 +24,12 @@
         <div *ngIf="movieList.loading" class="list__movies__section flex justify-center items-center">
             <mlm-loading spinnerColor="#240089"></mlm-loading>
         </div>
+        <div *ngIf="this.movieList.error">
+            <div class="list__error__section flex flex-col justify-center items-center">
+                <p class="error__label">{{this.movieList.error.message.toString()}}</p>
+                <mat-icon (click)="this.getUserMovieList()" class="error__replay__button">replay</mat-icon>
+            </div>
+        </div>
     </div>
 
 </div>

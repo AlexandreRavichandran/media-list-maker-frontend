@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
@@ -8,13 +8,17 @@ import { MusicListService } from 'src/app/shared/services/list/music/music-list.
   templateUrl: './music-list-home.component.html',
   styleUrls: ['./music-list-home.component.scss']
 })
-export class MusicListHomeComponent {
+export class MusicListHomeComponent implements OnInit {
 
-  userMusicList$: Observable<MusicListItem[]> = this.getUserMusicList();
+  userMusicList$!: Observable<MusicListItem[]>
 
   constructor(private musicListService: MusicListService) { }
 
-  private getUserMusicList(): Observable<MusicListItem[]> {
-    return this.musicListService.browseLatest();
+  ngOnInit(): void {
+    this.getUserMusicList();
+  }
+
+  getUserMusicList(): void {
+    this.userMusicList$ = this.musicListService.browseLatest();
   }
 }

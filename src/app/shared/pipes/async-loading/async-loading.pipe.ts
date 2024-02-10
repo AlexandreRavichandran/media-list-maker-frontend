@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable, catchError, isObservable, map, of, startWith } from 'rxjs';
+import { ApiError } from '../../error/api-error';
 
 export interface AsyncLoadingResult<T> {
 
   value?: T;
-  error?: string;
+  error?: ApiError;
   loading?: boolean
 
 }
@@ -19,7 +20,7 @@ export class AsyncLoadingPipe implements PipeTransform {
     if (!value) {
       return of({
         loading: true,
-        error: "",
+        error: undefined,
         value: undefined
       })
     }
@@ -28,12 +29,33 @@ export class AsyncLoadingPipe implements PipeTransform {
       map((value: any) => {
         return {
           loading: false,
-          error: value.type === "error" ? "" : "",
+          error: undefined,
           value: value.type ? value.value : value
         }
       }),
       startWith({ loading: true }),
-      catchError(error => of({ loading: false, error: typeof error === 'string' ? error : "error" })))
+      catchError((error: ApiError) => {
+        this.changeErrorIfInternal(error);
+        return of({ loading: false, error });
+      }))
   }
 
+
+  private changeErrorIfInternal(error: any) {
+
+    if (this.isErrorInternal(error.status)) {
+      error.message = "An error occured. Please try later";
+    }
+
+    return error;
+
+  }
+
+  private isErrorInternal(httpStatus: number) {
+
+    const firstNumber: number = parseInt(httpStatus.toString()[0]);
+
+    return firstNumber === 5;
+
+  }
 }
