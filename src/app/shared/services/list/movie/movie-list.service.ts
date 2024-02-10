@@ -23,7 +23,7 @@ export class MovieListService extends AbstractService {
           return of([]);
         }
 
-        return this.getMovieRelatedDetails(movieListItems);
+        return this.getMovieRelatedDetailsByMovieIds(movieListItems);
 
       })
     );
@@ -37,17 +37,21 @@ export class MovieListService extends AbstractService {
           return of([]);
         }
 
-        return this.getMovieRelatedDetails(movieListItems);
+        return this.getMovieRelatedDetailsByMovieIds(movieListItems);
 
       })
     );
+  }
+
+  public getRandom(): Observable<MovieListItem> {
+    return this.http.get<MovieListItem>(`${this.getResourceUrl()}/random`);
   }
 
   public editSortingOrder(listItemId: number, newSortingNumber: number): Observable<MovieListItem[]> {
     return this.http.put<MovieListItem[]>(`${this.getResourceUrl()}/${listItemId}`, newSortingNumber).pipe(
       switchMap((movieListItems: MovieListItem[]) => {
 
-        return this.getMovieRelatedDetails(movieListItems);
+        return this.getMovieRelatedDetailsByMovieIds(movieListItems);
 
       })
     );
@@ -66,7 +70,7 @@ export class MovieListService extends AbstractService {
     return this.http.delete<MovieListItem>(`${this.getResourceUrl()}/${movieId}`);
   }
 
-  private getMovieRelatedDetails(movieListItems: MovieListItem[]): Observable<MovieListItem[]> {
+  private getMovieRelatedDetailsByMovieIds(movieListItems: MovieListItem[]): Observable<MovieListItem[]> {
 
     const movieIds: number[] = movieListItems.map(movieListItem => movieListItem.movieId);
     return this.movieService.browseByIds(movieIds).pipe(
@@ -79,4 +83,5 @@ export class MovieListService extends AbstractService {
     );
 
   }
+
 }

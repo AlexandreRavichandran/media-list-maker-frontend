@@ -20,7 +20,6 @@ export abstract class AbstractService {
     }
 
     protected getHttpParamByQueryObject(queryObject: BaseSearchRequest): HttpParams {
-
         let httpParam: HttpParams = new HttpParams();
 
         for (const [key, value] of Object.entries(queryObject)) {

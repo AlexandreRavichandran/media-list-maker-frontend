@@ -53,6 +53,7 @@ export const getSearchElementDatas = createSelector(
     state => ({
         currentIndex: state.currentIndex,
         query: state.searchedQuery,
-        filter: state.appliedFilter
+        filter: state.appliedFilter,
+        searchElementType: state.searchElementType
     })
 );

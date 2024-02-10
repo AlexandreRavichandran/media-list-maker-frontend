@@ -26,7 +26,7 @@ export const initialState: SearchState = {
     elementPerPage: 1,
     currentIndex: 0,
     appliedFilter: null,
-    searchElementType: 0,
+    searchElementType: 1,
     error: null,
     isLoading: false,
     isSearchResultsDisplayed: false

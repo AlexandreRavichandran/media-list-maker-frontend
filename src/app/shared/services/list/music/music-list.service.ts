@@ -43,6 +43,10 @@ export class MusicListService extends AbstractService {
     );
   }
 
+  public getRandom(): Observable<MusicListItem> {
+    return this.http.get<MusicListItem>(`${this.getResourceUrl()}/random`);
+  }
+
   public editSortingOrder(listItemId: number, newSortingNumber: number): Observable<MusicListItem[]> {
     return this.http.put<MusicListItem[]>(`${this.getResourceUrl()}/${listItemId}`, newSortingNumber).pipe(
       switchMap((musicListItems: MusicListItem[]) => {

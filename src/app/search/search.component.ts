@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { ElementSearchResult } from '../shared/models/element-search-result';
 import { SearchTypeConstants } from '../shared/constants/search-type.constants';
 import { Store } from '@ngrx/store';
 import { SearchState } from './state/search.state';
-import { getIsLoading, getIsSearchResultsDisplayed, getSearchResults } from './state/selectors/search.selectors';
+import { getIsLoading, getIsSearchResultsDisplayed, getSearchElementDatas, getSearchResults } from './state/selectors/search.selectors';
 import { SearchPageActions } from './state/actions';
 
 @Component({
@@ -37,6 +37,12 @@ export class SearchComponent implements OnInit {
       }
     });
 
+    this.searchStore.select(getSearchElementDatas).pipe(map(data => {
+      this.searchForm.controls['type'].setValue(data.searchElementType);
+      this.serviceId = data.searchElementType;
+      this.searchForm.controls['query'].setValue(data.query);
+    })).subscribe().unsubscribe();
+
   }
 
   private generateSearchForm(): FormGroup {
@@ -64,6 +70,7 @@ export class SearchComponent implements OnInit {
       this.serviceId = SearchTypeConstants.TYPE_ALBUM_ID;
     }
 
+    this.searchStore.dispatch(SearchPageActions.onChangeSearchElementType({ elementType: this.serviceId }));
     this.searchStore.dispatch(SearchPageActions.onSetQuery({ query: this.searchForm.value.query }));
 
     this.searchStore.dispatch(SearchPageActions.onSetIsSearchResultsDisplayed({ isSearchResultsDisplayed: true }));
