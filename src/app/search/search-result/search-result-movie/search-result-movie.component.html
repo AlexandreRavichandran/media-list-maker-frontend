@@ -1,12 +1,18 @@
 <div *ngIf="this.searchResults$ | async as searchResults">
-    <mlm-pagination [currentIndex]="this.searchResults.currentIndex" [currentPage$]="this.currentPage$"
-        [elementsPerPage]="this.searchResults.elementsPerPage" [totalResults]="this.searchResults.totalResults"
-        (onNextPageEvent)="this.onChangePage($event)" (onPreviousPageEvent)="this.onChangePage($event)">
+    <mlm-pagination 
+    *ngIf="this.searchResults.totalResults > 0"
+    [currentIndex]="this.searchResults.currentIndex" 
+    [currentPage$]="this.currentPage$"
+    [elementsPerPage]="this.searchResults.elementsPerPage" 
+    [totalResults]="this.searchResults.totalResults"
+    (onNextPageEvent)="this.onChangePage($event)"
+    (onPreviousPageEvent)="this.onChangePage($event)">
         <div class="search__result__display">
             <div *ngFor="let movie of this.searchResults.searchResults"
                 (click)="this.onClickMovieDetails(this.movie.apiCode)" class="movie__element flex">
                 <div class="movie__picture__section">
-                    <img class="movie__picture" [src]="this.addGenericPictureIfPictureIsNull(this.movie.pictureUrl)" alt="">
+                    <img class="movie__picture" [src]="this.addGenericPictureIfPictureIsNull(this.movie.pictureUrl)"
+                        alt="">
                 </div>
                 <div class="movie__detail__section flex flex-col justify-around">
                     <p class="movie__title">{{this.movie.title}}</p>
@@ -15,6 +21,10 @@
             </div>
         </div>
     </mlm-pagination>
+    <div class="empty__search__result__section flex justify-center items-center"
+        *ngIf="this.searchResults.totalResults === 0">
+        <mlm-empty-search-result></mlm-empty-search-result>
+    </div>
 </div>
 <div *ngIf="(this.isSearchLoading$ | async) == true" style="height: 550px;z-index: 1;"
     class="col-span-6 search__result flex justify-center items-center">

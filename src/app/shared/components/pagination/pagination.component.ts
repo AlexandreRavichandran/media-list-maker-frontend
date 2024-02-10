@@ -79,6 +79,10 @@ export class PaginationComponent implements OnInit {
 
   onGetSpecificPage(specificPage: number, currentPage: number): void {
 
+    if (specificPage === currentPage) {
+      return;
+    }
+
     let nextIndex = 0;
     if (specificPage > currentPage) {
       nextIndex = this.currentIndex + this.elementsPerPage * (specificPage - currentPage);
@@ -89,11 +93,10 @@ export class PaginationComponent implements OnInit {
     this.onNextPageEvent.emit({ nextIndex, nextPage: specificPage });
   }
 
-  public getMaxIndexDisplayed(): number
-  {
+  public getMaxIndexDisplayed(): number {
     let maxIndexDisplayed = this.currentIndex + this.elementsPerPage;
 
-    if(maxIndexDisplayed > this.totalResults) {
+    if (maxIndexDisplayed > this.totalResults) {
       maxIndexDisplayed = this.totalResults;
     }
 

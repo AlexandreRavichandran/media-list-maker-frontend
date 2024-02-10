@@ -98,11 +98,11 @@ export class SearchComponent implements OnInit {
     const searchResultLabel: string = "Search results for ";
 
     if (this.serviceId === SearchTypeConstants.TYPE_MOVIE_ID) {
-      return searchResultLabel + "movie " + this.searchForm.value.query.toString().toUpperCase() + ": ";
+      return searchResultLabel + "movie " + this.searchForm.value.query.toString().toUpperCase() + " : ";
     }
 
     if (this.serviceId === SearchTypeConstants.TYPE_ALBUM_ID) {
-      return searchResultLabel + "music " + this.searchForm.value.query.toUpperCase() + ": ";
+      return searchResultLabel + "music " + this.searchForm.value.query.toUpperCase() + " : ";
     }
 
     return "";

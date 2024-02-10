@@ -12,6 +12,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FontSizeTextLenghtAdapterDirective } from './directives/font-size-text-lenght-adapter/font-size-text-lenght-adapter.directive';
 import { ErrorMessageComponent } from './components/error-message/error-message/error-message.component';
+import { EmptySearchResultComponent } from './components/empty-search-result/empty-search-result.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ErrorMessageComponent } from './components/error-message/error-message/
     AsyncLoadingPipe,
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    EmptySearchResultComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ErrorMessageComponent } from './components/error-message/error-message/
     AsyncLoadingPipe,
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    EmptySearchResultComponent
   ]
 })
 export class SharedModule { }
