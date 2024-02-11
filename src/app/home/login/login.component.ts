@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NotificationTypeConstant } from 'src/app/shared/constants/notification-type.constant';
 import { ApiError } from 'src/app/shared/error/api-error';
 import { AuthResponse } from 'src/app/shared/models/auth/auth-response';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MovieService } from 'src/app/shared/services/movie/movie.service';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'mlm-login',
@@ -22,7 +24,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private notificationService: NotificationService
   ) { }
 
   attemptAuth(): void {
@@ -38,7 +41,7 @@ export class LoginComponent {
       next: (token: AuthResponse) => {
         this.handleAuthSuccessful(token);
       },
-      error: (error: ApiError) => {
+      error: (error) => {
         this.handleAuthFailure(error);
       }
 
@@ -54,15 +57,16 @@ export class LoginComponent {
 
     sessionStorage.setItem('token', authResponse.token);
     this.isLoading = false;
+    this.notificationService.addNewNotification('Welcome back Alexandre', NotificationTypeConstant.SUCCESS.type);
     this.router.navigate(['me']);
 
   }
 
   private handleAuthFailure(error: ApiError): void {
 
-    this.apiError = error;
     sessionStorage.removeItem('token');
     this.isLoading = false;
+    this.notificationService.addNewNotification(error.message, NotificationTypeConstant.ERROR.type);
 
   }
 }

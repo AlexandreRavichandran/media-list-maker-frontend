@@ -1,2 +1,6 @@
-
+<div class="container mx-auto flex justify-center">
+    <div [@flash] *ngIf="this.notifications$ | async as message" class="">
+        <mlm-notification-message [notification]="this.message" class="message"></mlm-notification-message>
+    </div>
+</div>
 <router-outlet></router-outlet>

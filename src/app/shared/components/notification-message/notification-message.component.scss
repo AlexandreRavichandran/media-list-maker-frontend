@@ -1,0 +1,22 @@
+.notification__section {
+    min-width: 496px;
+    max-width: 1000px;
+    padding: 16px 16px;
+    border-radius: 9px;
+
+    .notification__message {
+        color: white;
+        font-size: 25px;
+        margin: 0;
+    }
+
+    .notification__close__icon {
+        color: white;
+        align-self: center;
+
+        &:hover {
+            cursor: pointer;
+            color: black;
+        }
+    }
+}

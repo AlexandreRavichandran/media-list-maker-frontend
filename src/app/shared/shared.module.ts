@@ -11,8 +11,8 @@ import { AsyncLoadingPipe } from './pipes/async-loading/async-loading.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FontSizeTextLenghtAdapterDirective } from './directives/font-size-text-lenght-adapter/font-size-text-lenght-adapter.directive';
-import { ErrorMessageComponent } from './components/error-message/error-message/error-message.component';
 import { EmptySearchResultComponent } from './components/empty-search-result/empty-search-result.component';
+import { NotificationMessageComponent } from './components/notification-message/notification-message.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { EmptySearchResultComponent } from './components/empty-search-result/emp
     AsyncLoadingPipe,
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
-    ErrorMessageComponent,
-    EmptySearchResultComponent
+    EmptySearchResultComponent,
+    NotificationMessageComponent
   ],
   imports: [
     CommonModule,
@@ -44,8 +44,8 @@ import { EmptySearchResultComponent } from './components/empty-search-result/emp
     AsyncLoadingPipe,
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
-    ErrorMessageComponent,
-    EmptySearchResultComponent
+    EmptySearchResultComponent,
+    NotificationMessageComponent
   ]
 })
 export class SharedModule { }

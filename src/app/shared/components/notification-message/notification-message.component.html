@@ -1,0 +1,6 @@
+<div class="notification__section flex justify-between items-center"
+    [ngStyle]="{'background-color': this.getBackgroundStyleByNotificationType()}">
+    <p></p>
+    <p class="notification__message" style="color:white;font-size:25px">{{this.notification.message}}</p>
+    <mat-icon (click)="this.deleteNotification()" class="notification__close__icon">close</mat-icon>
+</div>

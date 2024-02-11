@@ -27,12 +27,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
       const customRequest: HttpRequest<unknown> = request.clone({ headers });
 
-      console.log(customRequest);
       return next.handle(customRequest);
     }
 
-    console.log(request);
-    console.log("ddddddd")
     return next.handle(request);
 
   }

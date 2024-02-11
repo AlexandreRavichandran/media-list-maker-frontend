@@ -29,8 +29,6 @@ export class FontSizeTextLenghtAdapterDirective implements OnChanges {
   updateFontSize(): void {
     let definedSize;
     
-    console.log("Lorem ipsum dolor sit amet consectetur".length);
-
     if (this.text.length < this.minLength) {
       definedSize = this.defaultFontSize;
     } else {
