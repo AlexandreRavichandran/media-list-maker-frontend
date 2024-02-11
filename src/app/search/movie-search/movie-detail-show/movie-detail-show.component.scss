@@ -29,11 +29,11 @@
 
     .back__button {
         margin-bottom: 15px;
-        background-color: #240089;;
+        background-color: #240089;
         font-size: 18px;
         padding: 9px 13px;
         border-radius: 11px;
-        border: 1px solid #240089;;
+        border: 1px solid #240089;
         cursor: pointer;
 
         .back__button__label {
@@ -43,7 +43,7 @@
         }
 
         &:hover {
-            background-color:#19005d;
+            background-color: #19005d;
             border: 1px solid white;
         }
     }
@@ -102,8 +102,8 @@
                 padding: 15px 18px;
                 border-radius: 11px;
                 text-align: center;
-                background-color: rgb(51, 202, 17);
-                border: 1px solid rgb(51, 202, 17);
+                background-color: rgb(202, 165, 17);
+                border: 1px solid rgb(202, 165, 17);
             }
 
         }

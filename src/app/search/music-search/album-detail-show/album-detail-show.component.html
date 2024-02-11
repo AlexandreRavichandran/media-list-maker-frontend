@@ -76,28 +76,31 @@
 
         </div>
     </div>
-    <div class="artist__related__section mt-5"
-        *ngIf="this.artistRelatedAlbums$ | asyncLoading | async as relatedAlbums">
-        <p *ngIf="this.albumDetail.value" class="artist__related__title">Other releases of
-            {{this.albumDetail.value.artist.name}}</p>
-        <div class="list__section flex items-center">
-            <div *ngIf="this.relatedAlbums.value && this.albumDetail.value" class="flex artist__related__section__list">
-                <div *ngFor="let album of this.relatedAlbums.value.albumList">
-                    <div (click)="this.onChangeAlbumByApiCode(this.album.apiCode)"
-                        *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
-                        class="artist__related__item flex flex-col justify-between items-center">
-                        <div>
-                            <img class="item__picture" [src]="this.album.pictureUrl" alt="">
-                        </div>
-                        <div class="item__details flex flex-col justify-center items-center">
-                            <p class="item__title"> {{this.album.title}}</p>
-                            <p class="item__releasedAt">{{this.album.releasedAt}}</p>
+    <div class=" mt-5" *ngIf="this.artistRelatedAlbums$ | asyncLoading | async as relatedAlbums">
+        <div class="artist__related__section"
+            *ngIf="this.relatedAlbums.value && this.relatedAlbums.value.albumList.length > 0">
+            <p class="artist__related__title" *ngIf="this.albumDetail.value">Other releases of
+                {{this.albumDetail.value.artist.name}}</p>
+            <div class="list__section flex items-center">
+                <div *ngIf="this.relatedAlbums.value && this.albumDetail.value"
+                    class="flex artist__related__section__list">
+                    <div *ngFor="let album of this.relatedAlbums.value.albumList">
+                        <div (click)="this.onChangeAlbumByApiCode(this.album.apiCode)"
+                            *ngIf="this.albumDetail.value.apiCode !== this.album.apiCode"
+                            class="artist__related__item flex flex-col justify-between items-center">
+                            <div>
+                                <img class="item__picture" [src]="this.album.pictureUrl" alt="">
+                            </div>
+                            <div class="item__details flex flex-col justify-center items-center">
+                                <p class="item__title"> {{this.album.title}}</p>
+                                <p class="item__releasedAt">{{this.album.releasedAt}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="flex justify-center items-center list__section" *ngIf="this.relatedAlbums.loading">
-                <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
+                <div class="flex justify-center items-center list__section" *ngIf="this.relatedAlbums.loading">
+                    <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
+                </div>
             </div>
         </div>
     </div>

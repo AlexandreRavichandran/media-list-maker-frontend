@@ -59,7 +59,6 @@ export class MovieDetailShowComponent implements OnInit {
           return response;
         }),
         catchError(error => {
-          console.log(error);
           this.displayAddLoadingButton = false;
           return of(null);
         })

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, of, shareReplay, switchMap } from 'rxjs';
 import { MusicTypeConstants } from 'src/app/shared/constants/music-type-constants';
+import { NotificationTypeConstant } from 'src/app/shared/constants/notification-type.constant';
 import { ArtistRelatedAlbum } from 'src/app/shared/models/artist/artist-related-albums';
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
@@ -10,6 +11,7 @@ import { SongDetails } from 'src/app/shared/models/music/search/song/song-detail
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
 import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album-search.service';
 import { ArtistService } from 'src/app/shared/services/music-search/artist/artist.service';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'mlm-album-detail-show',
@@ -31,7 +33,8 @@ export class AlbumDetailShowComponent implements OnInit {
     private musicListService: MusicListService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +60,9 @@ export class AlbumDetailShowComponent implements OnInit {
           return response;
         }),
         catchError(error => {
-          console.log(error);
+          this.displayAddLoadingButton = false;
+          this.isAlreadyInList$ = of(false);
+          this.notificationService.addNewNotification(error.message, NotificationTypeConstant.ERROR.type);
           return of(null);
         })
       )

@@ -38,7 +38,7 @@
                             <p class="movie__already__in__list">Already in your list</p>
                         </div>
                         <div *ngIf="this.displayAddLoadingButton">
-                            <p class="music__adding__to__list">Adding to list...</p>
+                            <p class="movie__adding__to__list">Adding to list...</p>
                         </div>
                         <div *ngIf="(this.isAlreadyInList$ | async) === false && !this.displayAddLoadingButton">
                             <button class="movie__add__button"
