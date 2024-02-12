@@ -8,10 +8,16 @@ import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { SearchState } from 'src/app/search/state/search.state';
+import { of } from 'rxjs';
+import { SearchPageActions } from 'src/app/search/state/actions';
+import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 
 describe('Testing movie filter form component', () => {
   let component: MovieFilterFormComponent;
   let fixture: ComponentFixture<MovieFilterFormComponent>;
+  let store: MockStore<SearchState>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +26,9 @@ describe('Testing movie filter form component', () => {
         SearchModule,
         StoreModule.forRoot({}, {}),
         EffectsModule.forRoot([])
+      ],
+      providers: [
+        provideMockStore()
       ]
     })
       .compileComponents();
@@ -30,10 +39,10 @@ describe('Testing movie filter form component', () => {
     component = fixture.componentInstance;
 
     component.movieForm = new FormGroup({
-      'name': new FormControl('name'),
       'year': new FormControl('2010'),
     });
 
+    store = TestBed.inject(MockStore);
     fixture.detectChanges();
   });
 
@@ -43,10 +52,16 @@ describe('Testing movie filter form component', () => {
 
   it('should emit when clicking on apply filter button', () => {
 
-    spyOn(component.applyFilterEvent, 'emit');
+    const spy = spyOn(store, 'dispatch');
+
+    const selectorSpy = spyOn(store, 'select').and.returnValue(of({
+      currentIndex: 0,
+      query: "test",
+      filter: null,
+      searchElementType: 1
+    }));
 
     const filter: MovieSearchRequest = {
-      name: 'name',
       year: '2010'
     };
 
@@ -55,7 +70,14 @@ describe('Testing movie filter form component', () => {
 
     applyFilterButton.click();
 
-    expect(component.applyFilterEvent.emit).toHaveBeenCalledWith(filter);
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onResetPagination());
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onClearSearchResults());
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onSetFilterForm({ filterForm: filter }));
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onSearchElementWithFilter(
+      { query: "test", elementType: SearchTypeConstants.TYPE_MOVIE.value, index: 0, filter }
+    ));
+
+    expect(spy).toHaveBeenCalledTimes(4);
 
   });
 
@@ -66,7 +88,6 @@ describe('Testing movie filter form component', () => {
 
     resetFilterButton.click();
 
-    expect(component.movieForm.get('name')?.value).toBeNull();
     expect(component.movieForm.get('year')?.value).toBeNull();
 
   });

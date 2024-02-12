@@ -135,7 +135,6 @@ describe('Testing Login component', () => {
     component.attemptAuth();
 
     expect(loginSpy).toHaveBeenCalled();
-    expect(component.apiError).toEqual(apiError);
     expect(component.isLoading).toBeFalse();
 
   });

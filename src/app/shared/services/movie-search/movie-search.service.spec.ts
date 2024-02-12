@@ -61,7 +61,7 @@ describe('Testing Movie search service', () => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test');
+    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test&index=0');
 
     expect(request.request.method).toEqual('GET');
 
@@ -92,16 +92,15 @@ describe('Testing Movie search service', () => {
     };
 
     const filters: MovieSearchRequest = {
-      name: 'test',
       year: '2010',
     }
 
-    service.browseByQueryAndFilter(filters)
+    service.browseByQueryAndFilter("test", 1, filters)
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?name=test&year=2010');
+    const request = httpTestingController.expectOne(environmentUrl + '/movies/omdbapi?year=2010&name=test&index=1');
 
     expect(request.request.method).toEqual('GET');
 

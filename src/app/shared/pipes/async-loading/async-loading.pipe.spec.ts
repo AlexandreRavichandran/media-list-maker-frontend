@@ -1,5 +1,6 @@
 import { Observable, catchError, of, skip, throwError } from 'rxjs';
 import { AsyncLoadingPipe, AsyncLoadingResult } from './async-loading.pipe';
+import { ApiError } from '../../error/api-error';
 
 describe('Testing async loading pipe', () => {
 
@@ -23,14 +24,14 @@ describe('Testing async loading pipe', () => {
     result.pipe(skip(1)).subscribe(result => {
       expect(result.loading).toBeFalse();
       expect(result.value).toEqual("test");
-      expect(result.error).toEqual("");
+      expect(result.error).toEqual(undefined);
     })
 
   });
 
   it('should return async result with error when observable is completed', () => {
 
-    const testObservable: Observable<string> = throwError(()=> new Error('Error'));
+    const testObservable: Observable<string> = throwError(() => apiError);
 
     const pipe = new AsyncLoadingPipe();
 
@@ -40,10 +41,15 @@ describe('Testing async loading pipe', () => {
       expect(result.loading).toBeTrue();
     })
 
+    const apiError: ApiError = {
+      message: "Error",
+      errorList: []
+    };
+
     result.pipe(skip(1)).subscribe(result => {
       expect(result.loading).toBeFalse();
       expect(result.value).toEqual(undefined);
-      expect(result.error).toEqual("error");
+      expect(result.error).toEqual(apiError);
     })
 
   });

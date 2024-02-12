@@ -8,10 +8,16 @@ import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { SearchState } from 'src/app/search/state/search.state';
+import { of } from 'rxjs';
+import { SearchPageActions } from 'src/app/search/state/actions';
+import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 
 describe('Testing album filter form component', () => {
   let component: AlbumFilterFormComponent;
   let fixture: ComponentFixture<AlbumFilterFormComponent>;
+  let store: MockStore<SearchState>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +26,9 @@ describe('Testing album filter form component', () => {
         SearchModule,
         StoreModule.forRoot({}, {}),
         EffectsModule.forRoot([])
+      ],
+      providers: [
+        provideMockStore()
       ]
     })
       .compileComponents();
@@ -30,11 +39,11 @@ describe('Testing album filter form component', () => {
     component = fixture.componentInstance;
 
     component.albumForm = new FormGroup({
-      'name': new FormControl('name'),
       'artist': new FormControl('artist'),
       'label': new FormControl('label')
     });
 
+    store = TestBed.inject(MockStore);
     fixture.detectChanges();
   });
 
@@ -44,10 +53,16 @@ describe('Testing album filter form component', () => {
 
   it('should emit when clicking on apply filter button', () => {
 
-    spyOn(component.applyFilterEvent, 'emit');
+    const spy = spyOn(store, 'dispatch');
+
+    const selectorSpy = spyOn(store, 'select').and.returnValue(of({
+      currentIndex: 0,
+      query: "test",
+      filter: null,
+      searchElementType: 2
+    }));
 
     const filter: AlbumSearchRequest = {
-      name: 'name',
       artist: 'artist',
       label: 'label'
     };
@@ -57,7 +72,14 @@ describe('Testing album filter form component', () => {
 
     applyFilterButton.click();
 
-    expect(component.applyFilterEvent.emit).toHaveBeenCalledWith(filter);
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onResetPagination());
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onClearSearchResults());
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onSetFilterForm({ filterForm: filter }));
+    expect(spy).toHaveBeenCalledWith(SearchPageActions.onSearchElementWithFilter(
+      { query: "test", elementType: SearchTypeConstants.TYPE_ALBUM.value, index: 0, filter }
+    ));
+
+    expect(spy).toHaveBeenCalledTimes(4);
 
   });
 
@@ -68,7 +90,6 @@ describe('Testing album filter form component', () => {
 
     resetFilterButton.click();
 
-    expect(component.albumForm.get('name')?.value).toBeNull();
     expect(component.albumForm.get('artist')?.value).toBeNull();
     expect(component.albumForm.get('label')?.value).toBeNull();
 

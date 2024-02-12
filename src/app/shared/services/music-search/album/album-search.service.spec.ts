@@ -109,17 +109,16 @@ describe('Testing Album search service', () => {
     };
 
     const filters: AlbumSearchRequest = {
-      name: 'test',
       artist: 'test',
       label: 'test'
     };
 
-    service.browseByQueryAndFilter(filters)
+    service.browseByQueryAndFilter("test", 1, filters)
       .subscribe(datas => {
         expect(datas).toEqual(datas);
       })
 
-    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?name=test&artist=test&label=test');
+    const request = httpTestingController.expectOne(environmentUrl + '/musics/deezerapi/albums?artist=test&label=test&name=test&index=1');
 
     expect(request.request.method).toEqual('GET');
 

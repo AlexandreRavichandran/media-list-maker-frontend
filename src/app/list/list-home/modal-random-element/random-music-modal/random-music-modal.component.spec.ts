@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RandomMusicModalComponent } from './random-music-modal.component';
+import { ListModule } from 'src/app/list/list.module';
 
-describe('RandomMusicModalComponent', () => {
+describe('Testing random music modal component', () => {
   let component: RandomMusicModalComponent;
   let fixture: ComponentFixture<RandomMusicModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RandomMusicModalComponent ]
+      declarations: [RandomMusicModalComponent],
+      imports: [ListModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
