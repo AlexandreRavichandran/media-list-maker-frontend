@@ -1,8 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { SearchState, initialState } from "../search.state";
 import { SearchApiActions, SearchPageActions } from "../actions";
-import { ElementSearchResult } from "src/app/shared/models/element-search-result";
-import { act } from "@ngrx/effects";
 
 export const searchReducer = createReducer(
     initialState,
