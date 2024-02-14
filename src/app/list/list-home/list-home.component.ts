@@ -34,10 +34,10 @@ export class ListHomeComponent {
   private getModalComponentByElementId(elementId: number): ComponentType<AbstractRandomElementModalComponent> {
 
     switch (elementId) {
-      case SearchTypeConstants.TYPE_ALBUM_ID:
+      case SearchTypeConstants.TYPE_ALBUM.value:
         return RandomMusicModalComponent;
 
-      case SearchTypeConstants.TYPE_MOVIE_ID:
+      case SearchTypeConstants.TYPE_MOVIE.value:
         return RandomMovieModalComponent;
     }
 
