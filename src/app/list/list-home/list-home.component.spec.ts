@@ -4,10 +4,11 @@ import { ListHomeComponent } from './list-home.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RandomMovieModalComponent } from './modal-random-element/random-movie-modal/random-movie-modal.component';
 import { RandomMusicModalComponent } from './modal-random-element/random-music-modal/random-music-modal.component';
+import { ListModule } from '../list.module';
+import { AppModule } from 'src/app/app.module';
 
 describe('Testing List home component', () => {
   let component: ListHomeComponent;
@@ -19,7 +20,7 @@ describe('Testing List home component', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ListHomeComponent],
-      imports: [MatDialogModule, BrowserAnimationsModule, HttpClientModule],
+      imports: [MatDialogModule, BrowserAnimationsModule, HttpClientModule, ListModule, AppModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },

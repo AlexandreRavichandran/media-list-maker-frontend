@@ -61,6 +61,36 @@
         .music__item {
             width: 430px;
         }
+
+        .empty__section__container {
+            width: 550px;
+            padding: 20px 6px;
+            border-radius: 11px;
+            color: white;
+            background-color: #03030c;
+
+            .empty__section__label {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+
+            .empty__section__button {
+
+                font-size: 15px;
+                background-color: #890000;
+                padding: 6px 26px;
+                color: white;
+                border-radius: 7px;
+                border: 1px solid #890000;
+
+                &:hover {
+                    background-color: #5c0101;
+                    border: 1px solid white;
+                }
+
+            }
+        }
     }
 }
 

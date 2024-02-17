@@ -5,10 +5,10 @@
             <li routerLink="/me" class="menu__list__item">My lists</li>
         </ul>
     </div>
-    <div *ngIf="this.userMusicList$ | async as musicList" class="grid grid-cols-12">
-        <div class="col-start-12 col-end-6 flex flex-col music__list" cdkDropList [cdkDropListData]="this.musicList"
-            (cdkDropListDropped)="this.onItemDragnDropped($event)">
-            <div class="grid grid-cols-12" *ngFor="let musicItem of this.musicList" cdkDrag>
+    <div *ngIf="this.userMusicList$ | asyncLoading | async as musicList" class="grid grid-cols-12">
+        <div *ngIf="this.musicList.value" class="col-start-12 col-end-6 flex flex-col music__list" cdkDropList
+            [cdkDropListData]="this.musicList.value" (cdkDropListDropped)="this.onItemDragnDropped($event)">
+            <div class="grid grid-cols-12" *ngFor="let musicItem of this.musicList.value" cdkDrag>
                 <div class="col-start-7 col-end-5 flex justify-center items-center">
                     <div class="sorting__order__section flex justify-center items-center">
                         <p class="music__sorting__order">{{musicItem.sortingOrder}}</p>
@@ -17,6 +17,15 @@
                 <mlm-music-list-item (onDeleteItemEvent)="this.onRefreshList()" class="col-span-5 music__item"
                     [isDeletable]="true" [musicItem]="musicItem">
                 </mlm-music-list-item>
+            </div>
+            <div *ngIf="this.musicList.value.length === 0" class="list__music__empty__section flex justify-end">
+                <div class="empty__section__container">
+                    <p class="empty__section__label">It seems like you don't have any music in your list !</p>
+                    <div class="flex flex justify-center">
+                        <button class="empty__section__button" [routerLink]="['/search']"
+                            [queryParams]="{type: 'album'}">Add musics</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

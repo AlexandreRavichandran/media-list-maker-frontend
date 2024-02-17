@@ -17,6 +17,15 @@
                 <mlm-movie-list-item (onDeleteItemEvent)="this.onRefreshList()" class="col-span-5 movie__item"
                     [isDeletable]="true" [movieItem]="movieItem"></mlm-movie-list-item>
             </div>
+            <div *ngIf="movieList.value.length === 0" class="list__movie__empty__section flex justify-center">
+                <div class="empty__section__container">
+                    <p class="empty__section__label">It seems like you don't have any movie in your list !</p>
+                    <div class="flex flex justify-center">
+                        <button class="empty__section__button" [routerLink]="['/search']"
+                            [queryParams]="{type: 'movie'}">Add movies</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
