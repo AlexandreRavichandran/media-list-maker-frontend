@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmptySearchResultComponent } from './empty-search-result.component';
 
-describe('EmptySearchResultComponent', () => {
+describe('Testing empty search result component', () => {
   let component: EmptySearchResultComponent;
   let fixture: ComponentFixture<EmptySearchResultComponent>;
 

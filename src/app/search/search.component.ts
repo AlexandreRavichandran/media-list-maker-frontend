@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(param => {
       if (!!param['type']) {
         this.searchForm.controls['type'].setValue(param['type']);
+        this.searchStore.dispatch(SearchPageActions.onChangeSearchElementType({ elementType: SearchTypeConstants.getByLabel(param['type']) }));
       }
     });
 
@@ -65,9 +66,9 @@ export class SearchComponent implements OnInit {
     }
 
     if (this.searchForm.controls['type'].value == 1) {
-      this.serviceId = SearchTypeConstants.TYPE_MOVIE_ID;
+      this.serviceId = SearchTypeConstants.TYPE_MOVIE.value;
     } else {
-      this.serviceId = SearchTypeConstants.TYPE_ALBUM_ID;
+      this.serviceId = SearchTypeConstants.TYPE_ALBUM.value;
     }
 
     this.searchStore.dispatch(SearchPageActions.onChangeSearchElementType({ elementType: this.serviceId }));
@@ -83,7 +84,7 @@ export class SearchComponent implements OnInit {
 
   onTypeChange(): void {
 
-    if (this.searchForm.controls['type'].value === SearchTypeConstants.TYPE_MOVIE_ID) {
+    if (this.searchForm.controls['type'].value === SearchTypeConstants.TYPE_MOVIE.value) {
       this.searchButtonStyle = 'search__movie__button';
     } else {
       this.searchButtonStyle = 'search__music__button';
@@ -96,16 +97,17 @@ export class SearchComponent implements OnInit {
   public getSearchResultLabel(): string {
 
     const searchResultLabel: string = "Search results for ";
+    const query: string = this.searchForm.value.query.toString().toUpperCase()
 
-    if (this.serviceId === SearchTypeConstants.TYPE_MOVIE_ID) {
-      return searchResultLabel + "movie " + this.searchForm.value.query.toString().toUpperCase() + " : ";
+    if (this.serviceId === SearchTypeConstants.TYPE_MOVIE.value) {
+      return searchResultLabel + "movie " + query + " : ";
     }
 
-    if (this.serviceId === SearchTypeConstants.TYPE_ALBUM_ID) {
-      return searchResultLabel + "music " + this.searchForm.value.query.toUpperCase() + " : ";
+    if (this.serviceId === SearchTypeConstants.TYPE_ALBUM.value) {
+      return searchResultLabel + "music " + query + " : ";
     }
 
-    return "";
+    return searchResultLabel + "element " + query + " : ";
   }
 
   private resetSearchResults(): void {
