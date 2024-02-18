@@ -37,14 +37,15 @@ export class SearchResultMovieComponent implements OnInit {
   }
 
   private getMovies(): void {
+    this.store.dispatch(SearchPageActions.onToggleLoading());
     this.store.select(getSearchElementDatas).subscribe((element) => {
 
       if (element.filter === null) {
         this.store.dispatch(SearchPageActions.onSearchElement(
-          { query: element.query, elementType: SearchTypeConstants.TYPE_MOVIE_ID, index: element.currentIndex }));
+          { query: element.query, elementType: SearchTypeConstants.TYPE_MOVIE.value, index: element.currentIndex }));
       } else {
         this.store.dispatch(SearchPageActions.onSearchElementWithFilter(
-          { query: element.query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index: element.currentIndex, filter: element.filter }
+          { query: element.query, elementType: SearchTypeConstants.TYPE_MOVIE.value, index: element.currentIndex, filter: element.filter }
         ));
       }
 

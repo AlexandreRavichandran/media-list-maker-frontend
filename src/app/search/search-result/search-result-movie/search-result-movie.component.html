@@ -1,12 +1,8 @@
 <div *ngIf="this.searchResults$ | async as searchResults">
-    <mlm-pagination 
-    *ngIf="this.searchResults.totalResults > 0"
-    [currentIndex]="this.searchResults.currentIndex" 
-    [currentPage$]="this.currentPage$"
-    [elementsPerPage]="this.searchResults.elementsPerPage" 
-    [totalResults]="this.searchResults.totalResults"
-    (onNextPageEvent)="this.onChangePage($event)"
-    (onPreviousPageEvent)="this.onChangePage($event)">
+    <mlm-pagination *ngIf="this.searchResults.totalResults > 0" [currentIndex]="this.searchResults.currentIndex"
+        [currentPage$]="this.currentPage$" [elementsPerPage]="this.searchResults.elementsPerPage"
+        [totalResults]="this.searchResults.totalResults" (onNextPageEvent)="this.onChangePage($event)"
+        (onPreviousPageEvent)="this.onChangePage($event)">
         <div class="search__result__display">
             <div *ngFor="let movie of this.searchResults.searchResults"
                 (click)="this.onClickMovieDetails(this.movie.apiCode)" class="movie__element flex">
@@ -28,5 +24,5 @@
 </div>
 <div *ngIf="(this.isSearchLoading$ | async) == true" style="height: 550px;z-index: 1;"
     class="col-span-6 search__result flex justify-center items-center">
-    <mlm-loading [spinnerColor]="'#950000'"></mlm-loading>
+    <mlm-loading [spinnerColor]="'#240089'"></mlm-loading>
 </div>

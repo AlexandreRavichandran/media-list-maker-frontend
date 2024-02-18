@@ -106,7 +106,7 @@ export class AlbumDetailShowComponent implements OnInit {
   addGenericPictureIfPictureIsNull(pictureUrl: string): string {
 
     if (pictureUrl === 'N/A') {
-      return 'assets/movie_poster_not_found.png';
+      return 'assets/music_poster_not_found.png';
     }
 
     return pictureUrl;
