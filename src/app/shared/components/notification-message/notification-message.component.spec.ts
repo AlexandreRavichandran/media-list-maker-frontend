@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationMessageComponent } from './notification-message.component';
+import { NotificationService } from '../../services/notification/notification.service';
 
 describe('Testing notification message component', () => {
   let component: NotificationMessageComponent;
   let fixture: ComponentFixture<NotificationMessageComponent>;
+  let mockNotificationService: jasmine.SpyObj<NotificationService>;
 
   beforeEach(async () => {
+
+    mockNotificationService = jasmine.createSpyObj('NotificationService', ['clearNotification']);
+
     await TestBed.configureTestingModule({
-      declarations: [NotificationMessageComponent]
+      declarations: [NotificationMessageComponent],
+      providers: [{ provide: NotificationService, useValue: mockNotificationService }],
     })
       .compileComponents();
   });
@@ -26,4 +32,13 @@ describe('Testing notification message component', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should delete notification', () => {
+
+    component.deleteNotification();
+
+    expect(mockNotificationService.clearNotification).toHaveBeenCalled();
+
+  });
+
 });

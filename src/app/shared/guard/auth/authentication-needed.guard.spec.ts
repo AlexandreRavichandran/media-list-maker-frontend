@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthCanLoadGuard } from './auth.can-load.guard';
+import { AuthenticationNeededGuard } from './authentication-needed.guard';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,7 @@ describe('Testing auth can load guard', () => {
   let mockAuthService: jasmine.SpyObj<AuthService>;
   let mockRouter: jasmine.SpyObj<Router>;
 
-  let guard: AuthCanLoadGuard;
+  let guard: AuthenticationNeededGuard;
 
   beforeEach(() => {
 
@@ -22,7 +22,7 @@ describe('Testing auth can load guard', () => {
       providers: [{ provide: Router, useValue: mockRouter }, { provide: AuthService, useValue: mockAuthService }]
     });
 
-    guard = TestBed.inject(AuthCanLoadGuard);
+    guard = TestBed.inject(AuthenticationNeededGuard);
 
   });
 
