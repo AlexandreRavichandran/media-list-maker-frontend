@@ -56,7 +56,7 @@ export class AlbumDetailShowComponent implements OnInit {
         map(response => {
           this.displayAddLoadingButton = false;
           this.isAlreadyInList$ = of(true);
-
+          this.notificationService.addNewNotification('Album added in list !', NotificationTypeConstant.SUCCESS.type);
           return response;
         }),
         catchError(error => {

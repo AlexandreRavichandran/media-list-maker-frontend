@@ -33,6 +33,18 @@ export class AuthService extends AbstractService {
     return sessionStorage.removeItem('token');
   }
 
+  public getUsername():string {
+    
+    const username:string | null = sessionStorage.getItem('username');
+
+    if(username === null) {
+      return '';
+    }
+
+    return username;
+
+  }
+
   public generateLoginForm(): FormGroup {
 
     return new FormGroup({

@@ -5,6 +5,7 @@ import { AbstractRandomElementModalComponent } from './modal-random-element/abst
 import { ComponentType } from '@angular/cdk/portal';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 import { RandomMusicModalComponent } from './modal-random-element/random-music-modal/random-music-modal.component';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'mlm-list-home',
@@ -14,7 +15,9 @@ import { RandomMusicModalComponent } from './modal-random-element/random-music-m
 export class ListHomeComponent {
 
   constructor(
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, 
+    private authService: AuthService
+    ) { }
 
 
   openRandomElementModal(elementId: number): void {
@@ -44,4 +47,9 @@ export class ListHomeComponent {
     return RandomMovieModalComponent;
 
   }
+
+  public getUsername(): string {
+    return this.authService.getUsername();
+  }
+
 }

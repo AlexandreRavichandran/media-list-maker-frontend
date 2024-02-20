@@ -36,7 +36,7 @@ export class MovieFilterFormComponent {
     this.searchStore.select(getSearchElementDatas).subscribe((element) => {
 
       this.searchStore.dispatch(SearchPageActions.onSearchElementWithFilter(
-        { query: element.query, elementType: SearchTypeConstants.TYPE_MOVIE_ID, index: element.currentIndex, filter: movieForm }
+        { query: element.query, elementType: SearchTypeConstants.TYPE_MOVIE.value, index: element.currentIndex, filter: movieForm }
       ));
 
 

@@ -40,7 +40,7 @@ export class AlbumFilterFormComponent {
     this.searchStore.select(getSearchElementDatas).subscribe((element) => {
 
       this.searchStore.dispatch(SearchPageActions.onSearchElementWithFilter(
-        { query: element.query, elementType: SearchTypeConstants.TYPE_ALBUM_ID, index: element.currentIndex, filter: albumForm }
+        { query: element.query, elementType: SearchTypeConstants.TYPE_ALBUM.value, index: element.currentIndex, filter: albumForm }
       ));
 
 

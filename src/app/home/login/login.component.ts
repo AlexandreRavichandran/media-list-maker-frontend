@@ -56,8 +56,9 @@ export class LoginComponent {
   private handleAuthSuccessful(authResponse: AuthResponse): void {
 
     sessionStorage.setItem('token', authResponse.token);
+    sessionStorage.setItem('username', authResponse.username);
     this.isLoading = false;
-    this.notificationService.addNewNotification('Welcome back Alexandre', NotificationTypeConstant.SUCCESS.type);
+    this.notificationService.addNewNotification(`Welcome back ${authResponse.username}`, NotificationTypeConstant.SUCCESS.type);
     this.router.navigate(['me']);
 
   }
