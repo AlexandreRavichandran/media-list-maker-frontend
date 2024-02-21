@@ -70,4 +70,5 @@ export class LoginComponent {
     this.notificationService.addNewNotification(error.message, NotificationTypeConstant.ERROR.type);
 
   }
+
 }

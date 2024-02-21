@@ -1,9 +1,10 @@
 <div class="flex">
-    <div (click)="this.onClickDetails()" class="item__movie__section container mx-auto">
+    <div class="item__movie__section container mx-auto">
         <div class="flex flex justify-end">
-            <p matTooltip="{{this.movieItem.addedAt | date:'dd/MM/yyyy'}}" class="item__movie__addedAt">Added {{this.movieItem.addedAt | timeAgo }}</p>
+            <p matTooltip="{{this.movieItem.addedAt | date:'dd/MM/yyyy'}}" class="item__movie__addedAt">Added
+                {{this.movieItem.addedAt | timeAgo }}</p>
         </div>
-        <div class="item__movie__card grid grid-cols-12">
+        <div (click)="this.onClickDetails()" class="item__movie__card grid grid-cols-12">
             <div class="col-span-2">
                 <img class="movie__picture" [src]="this.movieItem.movieDetail?.pictureUrl" alt="">
             </div>

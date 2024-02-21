@@ -1,10 +1,10 @@
 <div class="flex">
-    <div (click)="this.onClickDetails()" class="item__music__section container mx-auto">
+    <div class="item__music__section container mx-auto">
         <div class="flex flex justify-end">
             <p matTooltip="{{this.musicItem.addedAt | date:'dd/MM/yyyy'}}" class="item__music__addedAt">Added
                 {{this.musicItem.addedAt | timeAgo }}</p>
         </div>
-        <div class="item__music__card grid grid-cols-12">
+        <div (click)="this.onClickDetails()" class="item__music__card grid grid-cols-12">
             <div class="col-span-3">
                 <img class="music__picture" [src]="this.musicItem.musicDetail?.pictureUrl" alt="">
             </div>

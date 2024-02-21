@@ -6,6 +6,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { SearchTypeConstants } from 'src/app/shared/constants/search-type.constants';
 import { RandomMusicModalComponent } from './modal-random-element/random-music-modal/random-music-modal.component';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mlm-list-home',
@@ -15,9 +16,10 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 export class ListHomeComponent {
 
   constructor(
-    private dialog: MatDialog, 
-    private authService: AuthService
-    ) { }
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
 
   openRandomElementModal(elementId: number): void {
@@ -50,6 +52,11 @@ export class ListHomeComponent {
 
   public getUsername(): string {
     return this.authService.getUsername();
+  }
+
+  public onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['login']);
   }
 
 }
