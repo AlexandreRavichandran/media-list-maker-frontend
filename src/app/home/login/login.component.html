@@ -1,9 +1,9 @@
 <div class="grid grid-cols-12">
-    <div class="col-span-5 flex flex-col justify-around items-center">
+    <div class="col-span-12 xl:col-span-5 mt-7 lg:mt-0 flex flex-col justify-around items-center">
         <div>
             <img src="https://place-hold.it/200x200" alt="">
         </div>
-        <form class="flex flex-col login__form" [formGroup]="loginForm" (ngSubmit)="this.attemptAuth()">
+        <form class="flex flex-col login__form mt-7 lg:mt-0" [formGroup]="loginForm" (ngSubmit)="this.attemptAuth()">
             <mat-form-field>
                 <mat-label class="login__form__label">Username</mat-label>
                 <input matInput formControlName="username">
@@ -18,7 +18,7 @@
         </form>
         <div></div>
     </div>
-    <div class="col-span-7 flex justify-end">
+    <div class="hidden xl:block xl:col-span-7 flex justify-end">
         <img class="login__form__illustration" [src]="this.randomMoviePictureUrl$ | async" alt="Movie illustration">
     </div>
 
