@@ -13,4 +13,6 @@ export abstract class AbstractRandomElementModalComponent {
 
     }
 
+    public abstract onCloseModal(): void;
+
 }

@@ -2,6 +2,18 @@
     background-color: #200707;
 }
 
+.modal__close__icon {
+    color: white;
+    font-size: 30px;
+
+    &:hover {
+        color: #890000;
+        cursor: pointer;
+    }
+
+}
+
+
 .element__section {
     color: white;
     border-radius: 10px;

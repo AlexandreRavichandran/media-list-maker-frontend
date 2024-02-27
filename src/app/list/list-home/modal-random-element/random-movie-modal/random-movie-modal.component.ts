@@ -6,6 +6,7 @@ import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.
 import { MovieService } from 'src/app/shared/services/movie/movie.service';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'mlm-random-movie-modal',
@@ -26,7 +27,8 @@ export class RandomMovieModalComponent extends AbstractRandomElementModalCompone
 
   constructor(
     private movieListService: MovieListService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private dialogRef: MatDialogRef<RandomMovieModalComponent>
   ) {
     super();
   }
@@ -38,4 +40,9 @@ export class RandomMovieModalComponent extends AbstractRandomElementModalCompone
       })
     );
   }
+
+  public override onCloseModal(): void {
+    this.dialogRef.close();
+  }
+  
 }

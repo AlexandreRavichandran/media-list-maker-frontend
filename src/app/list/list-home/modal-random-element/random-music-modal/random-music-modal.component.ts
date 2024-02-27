@@ -6,6 +6,7 @@ import { MusicListService } from 'src/app/shared/services/list/music/music-list.
 import { MusicService } from 'src/app/shared/services/music/music.service';
 import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'mlm-random-music-modal',
@@ -26,7 +27,8 @@ export class RandomMusicModalComponent extends AbstractRandomElementModalCompone
 
   constructor(
     private musicListService: MusicListService,
-    private musicService: MusicService
+    private musicService: MusicService,
+    private dialogRef: MatDialogRef<RandomMusicModalComponent>
   ) { 
     super();
   }
@@ -39,4 +41,8 @@ export class RandomMusicModalComponent extends AbstractRandomElementModalCompone
     );
   }
 
+  public override onCloseModal(): void {
+    this.dialogRef.close();
+  }
+  
 }

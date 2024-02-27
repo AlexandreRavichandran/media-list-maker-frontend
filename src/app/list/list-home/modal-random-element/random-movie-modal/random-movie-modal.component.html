@@ -1,12 +1,17 @@
-<div class="flex flex-col justify-center items-center element__section">
-    <div [@flash] *ngIf="this.randomElement$ | async as movie">
-        <img class="element__picture" [src]="this.movie.pictureUrl" alt="">
-        <div class="flex flex-col justify-center items-center element__details__section">
-            <p class="element__title">{{this.movie.title}}</p>
-            <p class="element__releasedAt">{{this.movie.releasedAt}}</p>
+<div class="flex flex-col">
+    <div class="flex justify-end">
+        <mat-icon (click)="this.onCloseModal()" class="modal__close__icon">close</mat-icon>
+    </div>
+    <div class="flex flex-col justify-center items-center element__section">
+        <div [@flash] *ngIf="this.randomElement$ | async as movie">
+            <img class="element__picture" [src]="this.movie.pictureUrl" alt="">
+            <div class="flex flex-col justify-center items-center element__details__section">
+                <p class="element__title">{{this.movie.title}}</p>
+                <p class="element__releasedAt">{{this.movie.releasedAt}}</p>
+            </div>
         </div>
     </div>
-</div>
-<div class="flex justify-center items-center button__section">
-    <button (click)="this.generateNewRandomElement()" class="button__generate">Generate again</button>
+    <div class="flex justify-center items-center button__section">
+        <button (click)="this.generateNewRandomElement()" class="button__generate">Generate again</button>
+    </div>
 </div>
