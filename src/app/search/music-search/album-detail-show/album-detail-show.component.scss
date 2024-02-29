@@ -232,3 +232,13 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #890000;
 }
+
+@media (max-width: 1200px) {
+
+    .music__album__section {
+        .music__section {
+            height: 1200px;
+        }
+    }
+
+}

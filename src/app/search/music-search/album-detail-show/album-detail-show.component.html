@@ -12,13 +12,13 @@
         </div>
     </div>
     <div class="grid grid-cols-12 music__section" *ngIf="this.albumDetail.value">
-        <div class="col-span-4">
+        <div class="col-span-12 xl:col-span-4">
             <img class="music__picture" [src]="this.addGenericPictureIfPictureIsNull(this.albumDetail.value.pictureUrl)"
                 alt="">
         </div>
-        <div class="col-span-8 music__details" *ngIf="this.trackList$ | asyncLoading | async as trackList">
+        <div class="col-span-12 xl:col-span-8 music__details" *ngIf="this.trackList$ | asyncLoading | async as trackList">
             <div class="grid grid-cols-12">
-                <div class="col-span-8 flex justify-start">
+                <div class="col-span-12 xl:col-span-8 flex justify-start">
                     <div>
                         <p fontSizeByTextLenght [minLength]="23" [text]="this.albumDetail.value.title"
                             [defaultFontSize]="40">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-4 flex justify-center">
+                <div class="col-span-12 xl:col-span-4 flex justify-center">
                     <div class="music__in__list"
                         *ngIf="this.isAlreadyInList$ | asyncLoading | async as isAlreadyInList">
                         <div *ngIf="(this.isAlreadyInList$ | async) === true && !this.displayAddLoadingButton">
