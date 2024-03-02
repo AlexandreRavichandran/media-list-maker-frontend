@@ -19,14 +19,14 @@
 
 .register__button {
     font-size: 20px;
-    background-color: #240089;
+    background-color: #890000;
     padding: 9px 33px;
     color: white;
     border-radius: 11px;
-    border: 1px solid #240089;
+    border: 1px solid #890000;
 
     &:hover {
-        background-color: #18015c;
+        background-color: #5c0101;
         border: 1px solid white;
     }
 
@@ -41,4 +41,23 @@
     border: 2px solid #000;
     height: 940px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width : 1279px) {
+
+    .registration__section {
+        height: 100%;
+        background-image: url("http://localhost:8080/api/musics/pictures/random");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        .registration__form {
+            padding: 20px;
+            border-radius: 9px;
+            background-color: rgba(210, 48, 48, 0.4);
+
+        }
+    }
+
 }
