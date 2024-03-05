@@ -102,3 +102,73 @@
         margin-left: 14px;
     }
 }
+
+@media (max-width : 700px) {
+
+    .search__form__section {
+        margin-top: 25px;
+        font-size: 20px;
+
+        .field__query__input {
+            width: 400px;
+            border-radius: 12px;
+            margin-right: 0;
+        }
+
+        .field__type__select {
+            width: 145px;
+            height: 45px;
+            border-radius: 12px;
+            text-align: center;
+            margin-right: 0;
+        }
+
+        .search__button {
+            font-size: 20px;
+            padding: 9px 33px;
+            color: white;
+            border-radius: 11px;
+
+            &:disabled {
+                background-color: gray !important;
+                border: 1px solid gray !important;
+            }
+
+            &.search__movie__button {
+                background-color: #240089;
+                border: 1px solid #240089;
+
+                &:hover {
+                    background-color: #19005d;
+                }
+            }
+
+            &.search__music__button {
+                background-color: #890000;
+                border: 1px solid #890000;
+
+                &:hover {
+                    background-color: #5c0101;
+                }
+            }
+
+
+            &:hover {
+                border: 1px solid white;
+            }
+
+
+        }
+    }
+
+    .search__result__section {
+        .search__result {
+            .search__result__label {
+                margin-bottom: 20px;
+            }
+
+            margin-right: 14px;
+        }
+    }
+
+}
