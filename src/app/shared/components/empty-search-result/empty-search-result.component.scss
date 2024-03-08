@@ -7,3 +7,16 @@
         margin-bottom: 24px;
     }
 }
+
+@media (max-width : 1279px) {
+    .empty__results__section {
+
+        font-size: 18px;
+    
+        .empty__results__label {
+            color: white;
+            margin-bottom: 24px;
+        }
+    }
+    
+}

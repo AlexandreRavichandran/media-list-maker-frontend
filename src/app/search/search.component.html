@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-    <ul class="menu__list flex flex-row justify-end">
+    <ul class="menu__list flex flex-row justify-center xl:justify-end">
         <li routerLink="/search" class="menu__list__item">Search</li>
         <li routerLink="/me" class="menu__list__item">My lists</li>
     </ul>
@@ -10,13 +10,14 @@
         <p class="search__title">Search your favorite movie/music</p>
     </div>
     <div class="search__form__section">
-        <form [formGroup]="this.searchForm" class="flex justify-center" (ngSubmit)="this.onSearch()">
+        <form [formGroup]="this.searchForm" class="flex flex-col md:flex-row items-center xl:justify-center"
+            (ngSubmit)="this.onSearch()">
             <select (change)="this.onTypeChange()" formControlName="type" class="field__type__select">
                 <option *ngFor="let type of this.searchTypeConstants.SEARCH_TYPE_LIST" [value]="type.value">{{type.label
                     |
                     titlecase}}</option>
             </select>
-            <input (keypress)="this.onQueryChange()" formControlName="query" class="field__query__input"
+            <input (keypress)="this.onQueryChange()" formControlName="query" class="my-7 xl:my-0 field__query__input"
                 placeholder="Type your query here" type="text">
             <button [disabled]="!this.isFormValid()" class="search__button"
                 [ngClass]="this.searchButtonStyle">Search</button>
@@ -26,10 +27,10 @@
     <div *ngIf="(this.isSearchDisplayed$ | async) === true">
         <div class="container mx-auto search__result__section">
             <div class="grid grid-cols-10">
-                <div class="col-span-3">
+                <div class="col-span-12 xl:col-span-3">
                     <mlm-filter-form [type]="this.serviceId"></mlm-filter-form>
                 </div>
-                <div class="col-span-6 search__result">
+                <div class="col-span-12 xl:col-span-6 mb-7 xl:mb-0 search__result">
                     <p class="search__result__label">{{this.getSearchResultLabel()}}</p>
                     <div [ngSwitch]="this.serviceId">
                         <mlm-search-result-movie *ngSwitchCase="1"

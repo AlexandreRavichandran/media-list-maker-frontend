@@ -42,3 +42,19 @@
     height: 940px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
 }
+
+@media (max-width : 1279px) {
+    .login__section {
+        height: 100%;
+        background-image: url("http://localhost:8080/api/movies/pictures/random");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        .login__form {
+            padding: 20px;
+            border-radius: 9px;
+            background-color: rgba(57, 33, 194, 0.4)
+        }
+    }
+}

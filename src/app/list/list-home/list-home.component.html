@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-    <ul class="menu__list flex flex-row justify-end">
+    <ul class="menu__list flex flex-row justify-center lg:justify-end">
         <li routerLink="/search" class="menu__list__item">Search</li>
         <li routerLink="/me" class="menu__list__item">My lists</li>
         <li (click)="this.onLogout()" class="menu__list__item">Logout</li>
@@ -11,11 +11,11 @@
 </div>
 
 <div class="list__section grid grid-cols-12 m-auto">
-    <div class="col-span-4 mr-4">
+    <div class="col-span-12 lg:col-span-4 ml-4 xl:ml-0 mr-4 list__movies">
         <mlm-movie-list-home></mlm-movie-list-home>
     </div>
 
-    <div class="col-span-4 section__recommandation flex flex-col justify-around">
+    <div class="col-span-12 lg:col-span-4 section__recommandation flex flex-col justify-around">
         <div class="recommand__movie flex flex-col justify-center">
             <p class="recommand__movie__label">No ideas of movies to watch ?..</p>
             <div class="flex justify-center">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="col-span-4 list__musics ml-4">
+    <div class="col-span-12 lg:col-span-4 list__musics mr-4 xl:mr-0 ml-4">
         <mlm-music-list-home></mlm-music-list-home>
     </div>
 </div>

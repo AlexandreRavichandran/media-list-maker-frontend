@@ -37,6 +37,7 @@ export class SearchResultMovieComponent implements OnInit {
   }
 
   private getMovies(): void {
+    this.store.dispatch(SearchPageActions.onClearSearchResults());
     this.store.dispatch(SearchPageActions.onToggleLoading());
     this.store.select(getSearchElementDatas).subscribe((element) => {
 

@@ -73,3 +73,27 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #200089;
 }
+
+@media (max-width : 1279px) {
+    .search__result__display {
+        .movie__element {
+            width: 100%;
+
+            .movie__detail__section {
+                padding: 15px;
+                margin: 0;
+
+                .movie__title {
+                    margin: 0;
+                    font-size: 18px;
+                }
+
+                .movie__releasedAt {
+                    margin: 0;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+}
