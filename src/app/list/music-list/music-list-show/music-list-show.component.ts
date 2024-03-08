@@ -13,9 +13,12 @@ import { MusicService } from 'src/app/shared/services/music/music.service';
 export class MusicListShowComponent {
 
   userMusicList$: Observable<MusicListItem[]> = this.getAllUserMusicList();
+  musicIllustrationPicture$: Observable<string> = this.getRandomMusicPicture();
 
   constructor(
-    private musicListService: MusicListService) { }
+    private musicListService: MusicListService,
+    private musicService: MusicService
+    ) { }
 
   getAllUserMusicList(): Observable<MusicListItem[]> {
     return this.musicListService.browse();
@@ -35,4 +38,9 @@ export class MusicListShowComponent {
     this.userMusicList$ = this.musicListService.editSortingOrder(itemDragnDropped.id, $event.currentIndex + 1);
 
   }
+
+  getRandomMusicPicture(): Observable<string> {
+    return this.musicService.getRandomIllustrationPictureUrl();
+  }
+  
 }

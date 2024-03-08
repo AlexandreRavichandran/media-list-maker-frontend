@@ -28,7 +28,6 @@
     border: 2px solid #000;
     height: 950px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
-    background-image: url('http://localhost:8080/api/musics/pictures/random');
     background-repeat: no-repeat;
     background-position: left;
     background-size: 1096px 950px;
@@ -109,4 +108,17 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #890000;
+}
+
+@media (max-width : 1279px) {
+
+    .music__list__section {
+        min-width: 0px;
+        border: 2px solid #000;
+        height: 950px;
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
 }
