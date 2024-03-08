@@ -12,18 +12,20 @@
         </div>
     </div>
     <div class="grid grid-cols-12" *ngIf="this.movieDetail$ | asyncLoading | async as movieDetail">
-        <div class="col-span-3" *ngIf="this.movieDetail.value">
+        <div class="col-span-12 xl:col-span-3 flex justify-center" *ngIf="this.movieDetail.value">
             <img class="movie__picture" [src]="this.movieDetail.value.pictureUrl" alt="">
         </div>
-        <div class="col-span-9 movie__details" *ngIf="this.movieDetail.value">
+        <div class="col-span-12 xl:col-span-9 movie__details" *ngIf="this.movieDetail.value">
             <div class="grid grid-cols-12">
-                <div class="col-span-8 flex justify-start">
+                <div class="col-span-12 xl:col-span-8">
                     <div>
-                        <p fontSizeByTextLenght [minLength]="35" [text]="this.movieDetail.value.title"
-                            [defaultFontSize]="40">
-                            {{this.movieDetail.value.title}} ({{this.movieDetail.value.releasedAt}})
-                        </p>
-                        <div class="movie__genres flex">
+                        <div class="flex justify-center xl:justify-start">
+                            <p class="movie__title" fontSizeByTextLenght [minLength]="35"
+                                [text]="this.movieDetail.value.title" [defaultFontSize]="40">
+                                {{this.movieDetail.value.title}} ({{this.movieDetail.value.releasedAt}})
+                            </p>
+                        </div>
+                        <div class="movie__genres flex justify-center xl:justify-start">
                             <p *ngFor="let genreItem of this.movieDetail.value.genreList" class="genres__item">
                                 {{this.genreItem}}
                             </p>
@@ -31,7 +33,7 @@
                         <p class="movie__director">Directed by {{this.movieDetail.value.director}}</p>
                     </div>
                 </div>
-                <div class="col-span-4 flex justify-center">
+                <div class="col-span-12 xl:col-span-4 flex justify-center">
                     <div class="movie__in__list"
                         *ngIf="this.isAlreadyInList$ | asyncLoading | async as isAlreadyInList">
                         <div *ngIf="(this.isAlreadyInList$ | async) === true && !this.displayAddLoadingButton">
@@ -59,13 +61,13 @@
             <div>
                 <p class="movie__synopsis">{{this.movieDetail.value.synopsis}}</p>
                 <div class="movie__ratings">
-                    <mlm-movie-rating class="flex justify-around"
+                    <mlm-movie-rating class="flex flex-col xl:flex-row xl:justify-around"
                         [movieRatingList]="this.movieDetail.value.ratings"></mlm-movie-rating>
                 </div>
             </div>
         </div>
-        <div class="col-span-12 loading_section flex justify-center items-center">
-            <div class="flex justify-center items-center" *ngIf="this.movieDetail.loading">
+        <div *ngIf="this.movieDetail.loading" class="col-span-12 loading_section flex justify-center items-center">
+            <div class="flex justify-center items-center">
                 <mlm-loading [spinnerColor]="this.getLoadingColor()"></mlm-loading>
             </div>
         </div>

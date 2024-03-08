@@ -50,7 +50,7 @@
 
     .movie__picture {
         width: 384px;
-        width: 534px;
+        height: 534px;
         border-radius: 5px;
     }
 
@@ -59,7 +59,7 @@
         padding-top: 20px;
 
         .movie__title {
-            font-size: 40px;
+            line-height: 32px;
         }
 
         .movie__genres {
@@ -165,4 +165,28 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #240089;
+}
+
+@media (max-width : 1500px) {
+
+    .movie__section {
+
+        .movie__details {
+
+            .movie__synopsis {
+                margin-top: 30px;
+                padding-right: 15px;
+                line-height: 30px;
+                font-size: 18px;
+                width: 100%;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .movie__ratings {
+                margin-top: 35px;
+                width: 100%;
+            }
+        }
+    }
 }

@@ -27,7 +27,9 @@ export class MetacriticRatingTemplateComponent implements AbstractMovieRatingTem
 
   public formatRate(): string {
 
-    return eval(this.rating.value) * 100 + '%';
+    const rate: number = eval(this.rating.value) * 100;
+
+    return Math.round(rate) + '%';
 
   }
 
