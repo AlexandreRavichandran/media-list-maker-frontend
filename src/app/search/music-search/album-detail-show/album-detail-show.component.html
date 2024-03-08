@@ -12,24 +12,27 @@
         </div>
     </div>
     <div class="grid grid-cols-12 music__section" *ngIf="this.albumDetail.value">
-        <div class="col-span-12 xl:col-span-4">
+        <div class="col-span-12 xl:col-span-4 flex justify-center xl:justify-start">
             <img class="music__picture" [src]="this.addGenericPictureIfPictureIsNull(this.albumDetail.value.pictureUrl)"
                 alt="">
         </div>
-        <div class="col-span-12 xl:col-span-8 music__details" *ngIf="this.trackList$ | asyncLoading | async as trackList">
+        <div class="col-span-12 xl:col-span-8 music__details"
+            *ngIf="this.trackList$ | asyncLoading | async as trackList">
             <div class="grid grid-cols-12">
-                <div class="col-span-12 xl:col-span-8 flex justify-start">
+                <div class="col-span-12 xl:col-span-8 flex flex-col items-center xl:block">
                     <div>
-                        <p fontSizeByTextLenght [minLength]="23" [text]="this.albumDetail.value.title"
-                            [defaultFontSize]="40">
-                            {{this.albumDetail.value.title}} ({{this.albumDetail.value.releasedAt}})
-                        </p>
-                        <div class="music__genres flex">
+                        <div class="flex justify-center xl:justify-start">
+                            <p fontSizeByTextLenght [minLength]="23" [text]="this.albumDetail.value.title"
+                                [defaultFontSize]="40">
+                                {{this.albumDetail.value.title}} ({{this.albumDetail.value.releasedAt}})
+                            </p>
+                        </div>
+                        <div class="music__genres flex justify-center xl:justify-start">
                             <p *ngFor="let genreItem of this.albumDetail.value.genreList" class="genres__item">
                                 {{this.genreItem.name}}
                             </p>
                         </div>
-                        <div class="flex music__artist__section">
+                        <div class="flex music__artist__section justify-around xl:justify-start">
                             <img class="music__artist__picture" src="{{this.albumDetail.value.artist.pictureUrl}}"
                                 alt="">
                             <p class="music__artist__name">{{this.albumDetail.value.artist.name}}</p>
