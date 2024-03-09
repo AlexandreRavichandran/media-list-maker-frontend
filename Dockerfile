@@ -1,15 +1,12 @@
-FROM node:14-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-
+FROM node:14-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
 RUN npm install
-
 COPY . .
-
 RUN npm run build
 
-EXPOSE 4200
+FROM nginx:1.17.1-alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/src/app/dist/media-list-maker-frontend /usr/share/nginx/html
 
-CMD ["npm", "start"]
+EXPOSE 4200

@@ -29,8 +29,7 @@ import { ErrorInterceptor } from './shared/interceptor/error/error.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    EffectsModule.forRoot([])
   ],
   providers: [
     {
