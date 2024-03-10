@@ -5,9 +5,10 @@ import { LoginComponent } from './home/login/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
 import { NoAuthNeededGuard } from './shared/guard/auth/no-auth-needed.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthNeededGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthNeededGuard] },
   { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) },

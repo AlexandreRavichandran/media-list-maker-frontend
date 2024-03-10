@@ -39,7 +39,14 @@ export class MovieService extends AbstractService {
 
   public getRandomIllustrationPictureUrl(): Observable<string> {
 
-    return of(`${this.getResourceUrl()}/pictures/random`);
+    return of(`${this.getResourceUrl()}/pictures/illustrations/random`);
 
   }
+
+  public getRandomMoviePosterUrl(): Observable<string> {
+
+    return of(`${this.getResourceUrl()}/pictures/posters/random`);
+
+  }
+  
 }

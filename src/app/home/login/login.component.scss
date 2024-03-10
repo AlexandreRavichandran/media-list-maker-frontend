@@ -70,6 +70,7 @@
     min-width: 1096px;
     border: 2px solid #000;
     height: 940px;
+    mask-image: linear-gradient(to right, transparent 10%, black 100%);
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
 }
 

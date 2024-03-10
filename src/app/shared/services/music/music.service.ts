@@ -44,6 +44,11 @@ export class MusicService extends AbstractService {
   }
 
   public getRandomIllustrationPictureUrl(): Observable<string> {
-    return of(`${this.getResourceUrl()}/pictures/random`);
+    return of(`${this.getResourceUrl()}/pictures/illustrations/random`);
   }
+
+  public getRandomMusicPosterUrl(): Observable<string> {
+    return of(`${this.getResourceUrl()}/pictures/posters/random`);
+  }
+
 }

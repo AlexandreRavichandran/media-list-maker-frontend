@@ -1,0 +1,87 @@
+.menu__list {
+    margin-top: 40px;
+    font-size: 25px;
+    color: white;
+
+    .menu__list__item {
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}
+
+.picture__section {
+
+
+    .picture {
+        border-radius: 9px;
+    }
+
+    .random__movie__picture {
+        position: absolute;
+        width: 550px;
+        mask-image: linear-gradient(to top, transparent 25%, black 100%);
+        height: 750px;
+    }
+
+    .random__music__picture {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        top: 225px;
+        mask-image: linear-gradient(to top, transparent 10%, black 100%);
+
+    }
+
+}
+
+.jumbotron__section {
+    color: white;
+    height: 700px;
+
+    .jumbotron {
+        margin-top: 100px;
+
+        .jumbotron__intro {
+            .intro__title {
+                font-size: 50px;
+                margin-bottom: 45px;
+            }
+
+            .intro__description {
+                font-size: 30px;
+                line-height: 50px;
+            }
+
+            margin-left: 125px;
+        }
+    }
+
+    .start__button {
+        color: white;
+        border-radius: 11px;
+        padding: 13px 20px;
+        background-color: #240089;
+        border: 1px solid #240089;
+        font-size: 20px;
+
+        &:hover {
+            background-color: #18015c;
+            border: 1px solid #18015c;
+        }
+
+    }
+}

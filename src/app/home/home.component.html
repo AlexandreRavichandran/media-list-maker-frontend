@@ -1,0 +1,25 @@
+<div class="container mx-auto">
+    <ul class="menu__list flex flex-row justify-center xl:justify-end">
+        <li routerLink="/search" class="menu__list__item">Discover</li>
+        <li routerLink="/login" class="menu__list__item">Join</li>
+    </ul>
+</div>
+<div class="grid grid-cols-12 container mx-auto flex justify-end items-center jumbotron__section">
+    <div class="col-span-4 picture__section flex justify-center items-center">
+        <ng-container *ngIf="this.randomMoviePosterUrl$ | async as posterUrl">
+            <img class="picture random__movie__picture" [src]="this.posterUrl" alt="">
+        </ng-container>
+        <ng-container *ngIf="this.randomMusicPosterUrl$ | async as posterUrl">
+            <img class="picture random__music__picture" [src]="this.posterUrl" alt="">
+        </ng-container>
+    </div>
+    <div class="col-span-8 jumbotron container">
+        <div class="jumbotron__intro">
+            <p class="intro__title">Media list maker</p>
+            <p class="intro__description">Find and create a list of your favorite movies & musics</p>
+            <div class="flex justify-start">
+                <button routerLink="/login" class="start__button">Start now</button>
+            </div>
+        </div>
+    </div>
+</div>
