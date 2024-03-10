@@ -17,6 +17,35 @@
     background-color: white !important;
 }
 
+.switch__register__section {
+
+    .switch__section__label {
+        font-size: 18px;
+        color: white;
+        text-align: center;
+    }
+
+    .switch__login__button {
+        font-size: 20px;
+        background-color: #240089;
+        padding: 9px 33px;
+        color: white;
+        border-radius: 11px;
+        border: 1px solid #240089;
+
+        &:hover {
+            background-color: #18015c;
+            border: 1px solid white;
+        }
+
+        &:disabled {
+            background-color: gray;
+            border: 1px solid gray;
+        }
+    }
+
+}
+
 .register__button {
     font-size: 20px;
     background-color: #890000;

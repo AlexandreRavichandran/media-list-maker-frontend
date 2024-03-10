@@ -1,4 +1,4 @@
-<div class="grid grid-cols-12 login__section" >
+<div class="grid grid-cols-12 login__section">
     <div class="col-span-12 xl:col-span-5 mt-7 xl:mt-0 flex flex-col justify-around items-center">
         <div>
             <img src="https://place-hold.it/200x200" alt="">
@@ -16,7 +16,11 @@
                 <button [disabled]="!this.isFormValid()" class="login__button">LOGIN</button>
             </div>
         </form>
-        <div></div>
+        <div class="switch__register__section">
+            <p class="switch__section__label">No account ?</p>
+            <button routerLink="/register" class="switch__register__button">Switch to Registration</button>
+        </div>
+
     </div>
     <div class="hidden xl:block xl:col-span-7 flex justify-end">
         <img class="login__form__illustration" [src]="this.randomMoviePictureUrl$ | async" alt="Movie illustration">
