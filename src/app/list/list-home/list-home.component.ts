@@ -56,7 +56,7 @@ export class ListHomeComponent {
 
   public onLogout(): void {
     this.authService.logout();
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
 }
