@@ -42,13 +42,14 @@
                 <div class="col-span-12 xl:col-span-4 flex justify-center">
                     <div class="music__in__list"
                         *ngIf="this.isAlreadyInList$ | asyncLoading | async as isAlreadyInList">
-                        <div *ngIf="(this.isAlreadyInList$ | async) === true && !this.displayAddLoadingButton">
+                        <div *ngIf="this.isAlreadyInList.value === true && !this.displayAddLoadingButton">
                             <p class="music__already__in__list">Already in your list</p>
                         </div>
                         <div *ngIf="this.displayAddLoadingButton">
                             <p class="music__adding__to__list">Adding to list...</p>
                         </div>
-                        <div *ngIf="(this.isAlreadyInList$ | async) === false && !this.displayAddLoadingButton">
+                        <div
+                            *ngIf="this.isAlreadyInList.error || (this.isAlreadyInList.value === false && !this.displayAddLoadingButton)">
                             <button class="music__add__button"
                                 (click)="this.onAddToList(this.albumDetail.value.apiCode)">Add
                                 to list</button>

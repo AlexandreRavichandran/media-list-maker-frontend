@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, of, shareReplay } from 'rxjs';
 import { NotificationTypeConstant } from 'src/app/shared/constants/notification-type.constant';
 import { MovieDetails } from 'src/app/shared/models/movie/search/movie-details';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
 import { MovieSearchService } from 'src/app/shared/services/movie-search/movie-search.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
@@ -25,7 +26,9 @@ export class MovieDetailShowComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     const apiCode: string | null = this.activatedRoute.snapshot.paramMap.get('apicode');
@@ -50,6 +53,11 @@ export class MovieDetailShowComponent implements OnInit {
   }
 
   onAddToList(apiCode: string): void {
+
+    if (!this.authService.isUserLogged()) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
     this.displayAddLoadingButton = true;
 

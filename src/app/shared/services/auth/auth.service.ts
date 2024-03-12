@@ -33,11 +33,15 @@ export class AuthService extends AbstractService {
     return sessionStorage.removeItem('token');
   }
 
-  public getUsername():string {
-    
-    const username:string | null = sessionStorage.getItem('username');
+  public isUserLogged(): boolean {
+    return this.getAuthenticatedUserToken() !== null;
+  }
 
-    if(username === null) {
+  public getUsername(): string {
+
+    const username: string | null = sessionStorage.getItem('username');
+
+    if (username === null) {
       return '';
     }
 

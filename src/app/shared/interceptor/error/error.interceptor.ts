@@ -12,7 +12,7 @@ import { NotificationTypeConstant } from '../../constants/notification-type.cons
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private notificationService:NotificationService) { }
+  constructor(private notificationService: NotificationService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(catchError(error => {
@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
       }
 
-      return throwError(() => error.error);
+      return throwError(() => error);
 
     }));
   }

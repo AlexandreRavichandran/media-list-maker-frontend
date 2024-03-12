@@ -8,6 +8,7 @@ import { ArtistRelatedAlbum } from 'src/app/shared/models/artist/artist-related-
 import { AlbumDetails } from 'src/app/shared/models/music/search/album/album-details';
 import { TrackList } from 'src/app/shared/models/music/search/album/track-list';
 import { SongDetails } from 'src/app/shared/models/music/search/song/song-details';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MusicListService } from 'src/app/shared/services/list/music/music-list.service';
 import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album-search.service';
 import { ArtistService } from 'src/app/shared/services/music-search/artist/artist.service';
@@ -34,7 +35,8 @@ export class AlbumDetailShowComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,12 @@ export class AlbumDetailShowComponent implements OnInit {
   }
 
   onAddToList(apiCode: string): void {
+
+    if (!this.authService.isUserLogged()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.displayAddLoadingButton = true;
     this.musicListService.add(apiCode, MusicTypeConstants.MUSIC_TYPE_ALBUM)
       .pipe(
