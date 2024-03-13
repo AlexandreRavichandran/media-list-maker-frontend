@@ -13,6 +13,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { FontSizeTextLenghtAdapterDirective } from './directives/font-size-text-lenght-adapter/font-size-text-lenght-adapter.directive';
 import { EmptySearchResultComponent } from './components/empty-search-result/empty-search-result.component';
 import { NotificationMessageComponent } from './components/notification-message/notification-message.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,14 @@ import { NotificationMessageComponent } from './components/notification-message/
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
     EmptySearchResultComponent,
-    NotificationMessageComponent
+    NotificationMessageComponent,
+    NavMenuComponent
   ],
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     CustomDateFormatPipe,
@@ -45,7 +49,8 @@ import { NotificationMessageComponent } from './components/notification-message/
     PaginationComponent,
     FontSizeTextLenghtAdapterDirective,
     EmptySearchResultComponent,
-    NotificationMessageComponent
+    NotificationMessageComponent,
+    NavMenuComponent
   ]
 })
 export class SharedModule { }

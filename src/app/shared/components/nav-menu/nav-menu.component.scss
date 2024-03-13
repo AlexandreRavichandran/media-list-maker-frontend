@@ -1,0 +1,27 @@
+* {
+    color: white;
+}
+
+.menu__list {
+    margin-top: 40px;
+    font-size: 25px;
+
+    .menu__list__item {
+
+        &:first-child {
+            margin-left: 0px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+
+        margin-left: 50px;
+        margin-right: 50px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}
