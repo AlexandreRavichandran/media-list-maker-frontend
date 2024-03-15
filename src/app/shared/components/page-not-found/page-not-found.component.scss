@@ -1,0 +1,79 @@
+.not__found__background {
+
+    background-image: url('./../../../../assets/page_not_found_illustration.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    .not__found__section {
+
+        color: white;
+        height: 100vh;
+
+        .not__found__intro {
+            font-size: 45px;
+            margin-bottom: 30px;
+        }
+
+        .not__found__sub__intro {
+            font-size: 25px;
+            margin-bottom: 0;
+        }
+
+        .not__found__link__section {
+            margin-top: 50px;
+
+            .not__found__link {
+                color: white;
+                font-size: 20px;
+                text-align: center;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+
+            }
+
+        }
+
+    }
+}
+
+
+@media (max-width:600px) {
+    .not__found__background {
+        background-position: right;
+
+        .not__found__section {
+
+            .not__found__intro {
+                font-size: 30px;
+                margin-bottom: 30px;
+            }
+
+            .not__found__sub__intro {
+                font-size: 20px;
+                margin-bottom: 0;
+            }
+
+            .not__found__link__section {
+                margin-top: 50px;
+
+                .not__found__link {
+                    color: white;
+                    font-size: 18px;
+                    text-align: center;
+
+                    &:hover {
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+}

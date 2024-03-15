@@ -1,0 +1,16 @@
+<div class=" not__found__background">
+    <div class="not__found__section flex flex-col justify-center items-center">
+        <p class="not__found__intro">Oops ! Seems like you're lost !</p>
+        <p class="not__found__sub__intro">Here are some links to help you for redirection:</p>
+        <div class="flex flex-col justify-center items-center not__found__link__section">
+            <mat-list>
+                <mat-list-item class="not__found__link" routerLink="/">Home</mat-list-item>
+                <mat-list-item class="not__found__link" routerLink="/login"
+                    *ngIf="!this.isUserLogged()">Login</mat-list-item>
+                <mat-list-item class="not__found__link" routerLink="/search">Search a movie/music</mat-list-item>
+                <mat-list-item class="not__found__link" routerLink="/me" *ngIf="this.isUserLogged()">My
+                    lists</mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

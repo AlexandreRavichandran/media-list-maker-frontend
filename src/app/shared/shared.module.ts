@@ -15,7 +15,8 @@ import { EmptySearchResultComponent } from './components/empty-search-result/emp
 import { NotificationMessageComponent } from './components/notification-message/notification-message.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CommonModule,
     MatFormFieldModule,
     MatIconModule,
+    MatListModule,
     RouterModule
   ],
   exports: [
@@ -53,7 +55,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     EmptySearchResultComponent,
     NotificationMessageComponent,
     NavMenuComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MatListModule
   ]
 })
 export class SharedModule { }
