@@ -1,14 +1,10 @@
 <div *ngIf="this.musicIllustrationPicture$ | async as pictureUrl">
     <div class="music__list__section" [ngStyle]="{'background-image': 'url('+ pictureUrl +')' }">
-        <div class="container mx-auto">
-            <ul class="menu__list flex flex-row justify-end ">
-                <li routerLink="/search" class="menu__list__item">Search</li>
-                <li routerLink="/me" class="menu__list__item">My lists</li>
-            </ul>
-        </div>
+        <mlm-nav-menu></mlm-nav-menu>
         <div *ngIf="this.userMusicList$ | asyncLoading | async as musicList" class="grid grid-cols-12">
-            <div *ngIf="this.musicList.value" class="col-span-12 xl:col-start-12 xl:col-end-6 flex flex-col music__list" cdkDropList
-                [cdkDropListData]="this.musicList.value" (cdkDropListDropped)="this.onItemDragnDropped($event)">
+            <div *ngIf="this.musicList.value" class="col-span-12 xl:col-start-12 xl:col-end-6 flex flex-col music__list"
+                cdkDropList [cdkDropListData]="this.musicList.value"
+                (cdkDropListDropped)="this.onItemDragnDropped($event)">
                 <div class="grid grid-cols-12" *ngFor="let musicItem of this.musicList.value" cdkDrag>
                     <div class=" xl:col-start-7 xl:col-end-5 flex justify-center items-center">
                         <div class="sorting__order__section flex justify-center items-center">

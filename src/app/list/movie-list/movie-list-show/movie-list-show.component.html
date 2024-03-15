@@ -1,11 +1,6 @@
 <div *ngIf="this.movieIllustrationPicture$ | async as pictureUrl">
     <div class="movie__list__section" [ngStyle]="{'background-image': 'url('+pictureUrl+')'}">
-        <div class="container mx-auto">
-            <ul class="menu__list flex flex-row justify-end ">
-                <li routerLink="/search" class="menu__list__item">Search</li>
-                <li routerLink="/me" class="menu__list__item">My lists</li>
-            </ul>
-        </div>
+        <mlm-nav-menu></mlm-nav-menu>
         <div *ngIf="this.userMovieList$ | asyncLoading | async as movieList" class="grid grid-cols-12">
             <div *ngIf="this.movieList.value"
                 class="col-span-12 xl:col-span-9 flex items-center flex-col xl:items-start movie__list" cdkDropList

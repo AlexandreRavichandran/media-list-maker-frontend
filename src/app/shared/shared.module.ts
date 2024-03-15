@@ -15,6 +15,7 @@ import { EmptySearchResultComponent } from './components/empty-search-result/emp
 import { NotificationMessageComponent } from './components/notification-message/notification-message.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     FontSizeTextLenghtAdapterDirective,
     EmptySearchResultComponent,
     NotificationMessageComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { RouterModule } from '@angular/router';
     FontSizeTextLenghtAdapterDirective,
     EmptySearchResultComponent,
     NotificationMessageComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    PageNotFoundComponent
   ]
 })
 export class SharedModule { }
