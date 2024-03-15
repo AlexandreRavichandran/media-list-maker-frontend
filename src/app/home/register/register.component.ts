@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,7 +11,15 @@ import { MusicService } from 'src/app/shared/services/music/music.service';
 @Component({
   selector: 'mlm-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [
+    trigger('flash', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter', [
+        animate('1s', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class RegisterComponent {
 

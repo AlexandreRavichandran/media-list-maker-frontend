@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +13,15 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 @Component({
   selector: 'mlm-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger('flash', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter', [
+        animate('1s', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class LoginComponent {
 

@@ -23,7 +23,8 @@
 
     </div>
     <div class="hidden xl:block xl:col-span-7 flex justify-end">
-        <img class="login__form__illustration" [src]="this.randomMoviePictureUrl$ | async" alt="Movie illustration">
+        <img [@flash] class="login__form__illustration" [src]="this.randomMoviePictureUrl$ | async"
+            alt="Movie illustration">
     </div>
 
 </div>

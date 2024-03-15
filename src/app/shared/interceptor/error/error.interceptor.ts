@@ -59,6 +59,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private isErrorFunctional(httpStatus: number): boolean {
 
+    if (httpStatus === 401) {
+      return false;
+    }
+
     const firstNumber: number = parseInt(httpStatus.toString()[0]);
 
     return firstNumber === 4;

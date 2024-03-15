@@ -1,8 +1,8 @@
 <div class="container mx-auto">
     <ul class="menu__list flex flex-row justify-center lg:justify-end">
         <li routerLink="/search" class="menu__list__item">Search</li>
-        <li *ngIf="this.isUserLogged" routerLink="/me" class="menu__list__item">My lists</li>
-        <li *ngIf="!this.isUserLogged" routerLink="/login" class="menu__list__item">Join</li>
-        <li *ngIf="this.isUserLogged" (click)="this.onLogout()" class="menu__list__item">Logout</li>
+        <li *ngIf="this.isUserLogged()" routerLink="/me" class="menu__list__item">My lists</li>
+        <li *ngIf="!this.isUserLogged()" routerLink="/login" class="menu__list__item">Join</li>
+        <li *ngIf="this.isUserLogged()" (click)="this.onLogout()" class="menu__list__item">Logout</li>
     </ul>
 </div>

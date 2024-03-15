@@ -1,4 +1,4 @@
-import { Observable, catchError, of, skip, throwError } from 'rxjs';
+import { Observable, of, skip, throwError } from 'rxjs';
 import { AsyncLoadingPipe, AsyncLoadingResult } from './async-loading.pipe';
 import { ApiError } from '../../error/api-error';
 
