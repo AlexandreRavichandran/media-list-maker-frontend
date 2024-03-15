@@ -5,7 +5,7 @@
     </ul>
 </div>
 <div class="grid grid-cols-12 container mx-auto flex justify-end items-center jumbotron__section">
-    <div class="col-span-4 picture__section flex justify-center items-center">
+    <div class="col-span-12 xl:col-span-4 picture__section flex justify-center xl:items-center">
         <ng-container *ngIf="this.randomMoviePosterUrl$ | async as posterUrl">
             <img [@flash] class="picture random__movie__picture" [src]="this.posterUrl" alt="">
         </ng-container>
@@ -13,7 +13,7 @@
             <img [@flash] class="picture random__music__picture" [src]="this.posterUrl" alt="">
         </ng-container>
     </div>
-    <div class="col-span-8 jumbotron container">
+    <div class="col-span-12 xl:col-span-8 jumbotron container">
         <div [@flash] class="jumbotron__intro">
             <p class="intro__title">Media list maker</p>
             <p class="intro__description">Find and create a list of your favorite movies & musics</p>
