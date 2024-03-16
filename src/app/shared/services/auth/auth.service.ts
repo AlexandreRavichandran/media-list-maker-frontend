@@ -30,7 +30,8 @@ export class AuthService extends AbstractService {
   }
 
   public logout(): void {
-    return sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
   }
 
   public isUserLogged(): boolean {

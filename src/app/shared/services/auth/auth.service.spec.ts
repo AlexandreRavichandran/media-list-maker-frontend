@@ -104,6 +104,22 @@ describe('Testing Auth service', () => {
 
   });
 
+  it('should return username when exists', () => {
+    
+    sessionStorage.setItem('username', 'testusername');
+
+    expect(service.getUsername()).toEqual('testusername');
+
+  });
+
+  it('should return empty string when username not exists', () => {
+
+    sessionStorage.clear();
+
+    expect(service.getUsername()).toEqual('');
+
+  });
+
   it('should return login form group with valid fields', () => {
 
     const formGroup: FormGroup = service.generateLoginForm();

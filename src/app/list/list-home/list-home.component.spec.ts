@@ -9,14 +9,19 @@ import { RandomMovieModalComponent } from './modal-random-element/random-movie-m
 import { RandomMusicModalComponent } from './modal-random-element/random-music-modal/random-music-modal.component';
 import { ListModule } from '../list.module';
 import { AppModule } from 'src/app/app.module';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 describe('Testing List home component', () => {
   let component: ListHomeComponent;
   let fixture: ComponentFixture<ListHomeComponent>;
   let dialog: MatDialog;
+  let mockAuthService: jasmine.SpyObj<AuthService>;
+  let router: Router;
 
   beforeEach(async () => {
 
+    mockAuthService = jasmine.createSpyObj('AuthService', ['getUsername', 'logout', 'isUserLogged']);
 
     await TestBed.configureTestingModule({
       declarations: [ListHomeComponent],
@@ -24,6 +29,7 @@ describe('Testing List home component', () => {
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
+        { provide: AuthService, useValue: mockAuthService }
       ]
     })
       .compileComponents();
@@ -32,6 +38,7 @@ describe('Testing List home component', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListHomeComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });
@@ -91,6 +98,18 @@ describe('Testing List home component', () => {
         elementId: 3
       }
     });
+
+  });
+
+  it('should logout and redirect to home', () => {
+
+    const navigateSpy = spyOn(router, 'navigate');
+
+    component.onLogout();
+
+    expect(mockAuthService.logout).toHaveBeenCalled();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['']);
 
   });
 

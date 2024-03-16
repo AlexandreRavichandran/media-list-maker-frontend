@@ -198,15 +198,6 @@ describe('Testing Movie detail show component', () => {
       pictureUrl: 'http://url.com'
     };
 
-    const movieListItem: MovieListItem = {
-      id: 1,
-      movieId: 1,
-      appUserId: 1,
-      addedAt: new Date(),
-      sortingOrder: 1,
-      movieDetail: undefined
-    };
-
     const addToListSpy = mockMovieListService.add.and.returnValue(throwError(() => 'error'));
 
     component.movieDetail$ = of(movieDetail);
