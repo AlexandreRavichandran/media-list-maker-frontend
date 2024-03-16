@@ -182,6 +182,8 @@ describe('Testing Album detail show component', () => {
 
   it('should call add to list service and change isAlreadyInList property to true when click on add to list button', () => {
 
+    sessionStorage.setItem("token", "testtoken");
+
     const albumDetail: AlbumDetails = {
       apiCode: 'code',
       title: 'title',
@@ -239,10 +241,13 @@ describe('Testing Album detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
+    sessionStorage.clear();
 
   });
 
   it('should call add to list service and put isAlreadyInList to false when click on add to list button and api error', () => {
+
+    sessionStorage.setItem("token", "testtoken");
 
     const albumDetail: AlbumDetails = {
       apiCode: 'code',
@@ -291,6 +296,7 @@ describe('Testing Album detail show component', () => {
 
     expect(addToListSpy).toHaveBeenCalled();
 
+    sessionStorage.clear();
 
   });
 

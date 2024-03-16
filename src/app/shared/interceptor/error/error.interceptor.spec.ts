@@ -24,7 +24,6 @@ describe('Testing Error interceptor', () => {
       ]
     });
 
-    interceptor = TestBed.inject(ErrorInterceptor);
     httpMock = TestBed.inject(HttpTestingController);
     httpClient = TestBed.inject(HttpClient);
 
@@ -57,7 +56,7 @@ describe('Testing Error interceptor', () => {
   it('should change error label when error status is internal', () => {
 
     httpClient.get("/test").pipe(catchError(error => {
-      expect(error).toEqual("Test")
+      expect(error.message).toEqual("An error occured. Please try later")
       return of(error);
     })).subscribe();
 

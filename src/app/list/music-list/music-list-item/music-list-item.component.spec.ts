@@ -12,7 +12,7 @@ import { MusicListService } from 'src/app/shared/services/list/music/music-list.
 import { of } from 'rxjs';
 
 describe('Testing Music list item component', () => {
-  
+
   let component: MusicListItemComponent;
   let fixture: ComponentFixture<MusicListItemComponent>;
   let router: Router;
@@ -71,7 +71,7 @@ describe('Testing Music list item component', () => {
     fixture.detectChanges();
 
     const element: DebugElement = fixture.debugElement;
-    const musicItemDivElement: HTMLDivElement = element.query(By.css('.item__music__section')).nativeElement;
+    const musicItemDivElement: HTMLDivElement = element.query(By.css('.item__music__section .item__music__card')).nativeElement;
 
     musicItemDivElement.click();
 

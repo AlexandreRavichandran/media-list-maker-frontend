@@ -8,6 +8,7 @@ import { MusicListItem } from 'src/app/shared/models/list/music/music-list-item'
 import { Music } from 'src/app/shared/models/music/music';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('Testing random music modal component', () => {
   let component: RandomMusicModalComponent;
@@ -28,7 +29,8 @@ describe('Testing random music modal component', () => {
       imports: [ListModule, BrowserAnimationsModule],
       providers: [
         { provide: MusicService, useValue: mockMusicService },
-        { provide: MusicListService, useValue: mockMusicListService }
+        { provide: MusicListService, useValue: mockMusicListService },
+        { provide: MatDialogRef, useValue: {} },
       ],
     })
       .compileComponents();

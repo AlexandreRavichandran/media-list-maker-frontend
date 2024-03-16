@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StateInitializerService } from './state-initializer.service';
+import { AppModule } from 'src/app/app.module';
 
-describe('StateInitializerService', () => {
+describe('Testing state initializer service', () => {
+
   let service: StateInitializerService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+
+    TestBed.configureTestingModule({
+      imports: [
+        AppModule
+      ]
+    });
+
     service = TestBed.inject(StateInitializerService);
   });
 

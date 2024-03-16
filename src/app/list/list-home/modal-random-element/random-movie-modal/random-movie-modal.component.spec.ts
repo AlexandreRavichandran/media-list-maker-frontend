@@ -7,8 +7,8 @@ import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.
 import { Movie } from 'src/app/shared/models/movie/movie';
 import { of } from 'rxjs';
 import { MovieListItem } from 'src/app/shared/models/list/movie/movie-list-item';
-import { AppModule } from 'src/app/app.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('Testing random movie modal component', () => {
   let component: RandomMovieModalComponent;
@@ -28,7 +28,8 @@ describe('Testing random movie modal component', () => {
       imports: [ListModule, BrowserAnimationsModule],
       providers: [
         { provide: MovieService, useValue: mockMovieService },
-        { provide: MovieListService, useValue: mockMovieListService }
+        { provide: MovieListService, useValue: mockMovieListService },
+        { provide: MatDialogRef, useValue: {} }
       ],
     })
       .compileComponents();

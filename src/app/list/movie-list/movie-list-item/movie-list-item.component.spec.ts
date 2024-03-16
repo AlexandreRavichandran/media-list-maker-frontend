@@ -67,7 +67,7 @@ describe('Testing Movie list item component', () => {
     fixture.detectChanges();
 
     const element: DebugElement = fixture.debugElement;
-    const movieItemDivElement: HTMLDivElement = element.query(By.css('.item__movie__section')).nativeElement;
+    const movieItemDivElement: HTMLDivElement = element.query(By.css('.item__movie__section .item__movie__card')).nativeElement;
 
     movieItemDivElement.click();
 

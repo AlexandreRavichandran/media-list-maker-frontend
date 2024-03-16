@@ -10,7 +10,6 @@ export class NoAuthNeededGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) { }
 
   canActivate(): boolean {
-    console.log("okokoko");
     if (this.isUserAuthenticated()) {
       this.router.navigate(['/me']);
       return false;
