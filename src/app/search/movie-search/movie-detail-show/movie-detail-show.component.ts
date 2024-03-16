@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MovieListService } from 'src/app/shared/services/list/movie/movie-list.service';
 import { MovieSearchService } from 'src/app/shared/services/movie-search/movie-search.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { StateInitializerService } from 'src/app/shared/services/state-initializer/state-initializer.service';
 
 @Component({
   selector: 'mlm-movie-detail-show',
@@ -27,7 +28,8 @@ export class MovieDetailShowComponent implements OnInit {
     private router: Router,
     private location: Location,
     private notificationService: NotificationService,
-    private authService: AuthService
+    private authService: AuthService, 
+    private stateInitializer: StateInitializerService
   ) { }
 
   ngOnInit(): void {

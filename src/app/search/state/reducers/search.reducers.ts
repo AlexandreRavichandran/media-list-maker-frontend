@@ -135,6 +135,9 @@ export const searchReducer = createReducer(
             isSearchResultsDisplayed: actions.isSearchResultsDisplayed
         }
 
+    }),
+    on(SearchPageActions.onClearState, () => {
+        return initialState;
     })
 
 )

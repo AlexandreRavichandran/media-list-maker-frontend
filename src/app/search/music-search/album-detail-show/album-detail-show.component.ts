@@ -13,6 +13,7 @@ import { MusicListService } from 'src/app/shared/services/list/music/music-list.
 import { AlbumSearchService } from 'src/app/shared/services/music-search/album/album-search.service';
 import { ArtistService } from 'src/app/shared/services/music-search/artist/artist.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { StateInitializerService } from 'src/app/shared/services/state-initializer/state-initializer.service';
 
 @Component({
   selector: 'mlm-album-detail-show',
@@ -36,7 +37,8 @@ export class AlbumDetailShowComponent implements OnInit {
     private router: Router,
     private location: Location,
     private notificationService: NotificationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private stateInitializer: StateInitializerService
   ) { }
 
   ngOnInit(): void {

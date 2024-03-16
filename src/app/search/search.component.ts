@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { SearchState } from './state/search.state';
 import { getIsLoading, getIsSearchResultsDisplayed, getSearchElementDatas, getSearchResults } from './state/selectors/search.selectors';
 import { SearchPageActions } from './state/actions';
+import { StateInitializerService } from '../shared/services/state-initializer/state-initializer.service';
 
 @Component({
   selector: 'mlm-search',
@@ -27,7 +28,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private searchStore: Store<SearchState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute, 
+    private stateInitializer: StateInitializerService
   ) { }
 
   ngOnInit(): void {

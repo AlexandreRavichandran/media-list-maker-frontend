@@ -59,3 +59,7 @@ export const onSetIsSearchResultsDisplayed = createAction(
     "[Search] Display search results",
     props<{ isSearchResultsDisplayed: boolean }>()
 );
+
+export const onClearState = createAction(
+    "[Search] Reset state"
+);
