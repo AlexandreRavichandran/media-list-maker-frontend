@@ -25,6 +25,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 
       }
 
+      
+      if(error.status === 401) {
+        return throwError(() => error.error);
+      }
+
       if (this.isErrorFunctional(error.status)) {
 
         const apiError: ApiError = error.error;
@@ -58,10 +63,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 
   private isErrorFunctional(httpStatus: number): boolean {
-
-    if (httpStatus === 401) {
-      return false;
-    }
 
     const firstNumber: number = parseInt(httpStatus.toString()[0]);
 
