@@ -3,6 +3,8 @@
     font-weight: 400;
 }
 
+
+
 .mat-form-field {
     width: 400px;
     font-size: 20px;
@@ -64,12 +66,14 @@
     }
 }
 
-
+.website__logo {
+    width: 480px;
+}
 
 .login__form__illustration {
     min-width: 1096px;
     border: 2px solid #000;
-    height: 940px;
+    height: 957px;
     mask-image: linear-gradient(to right, transparent 10%, black 100%);
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
 }

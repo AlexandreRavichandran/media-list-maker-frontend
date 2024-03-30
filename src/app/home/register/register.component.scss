@@ -17,6 +17,10 @@
     background-color: white !important;
 }
 
+.website__logo {
+    width: 480px;
+}
+
 .switch__register__section {
 
     .switch__section__label {
@@ -68,7 +72,7 @@
 .registration__form__illustration {
     min-width: 1096px;
     border: 2px solid #000;
-    height: 940px;
+    height: 957px;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.8);
     mask-image: linear-gradient(to left, transparent 10%, black 100%);
 }
